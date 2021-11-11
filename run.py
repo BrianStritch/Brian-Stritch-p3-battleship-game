@@ -1,5 +1,21 @@
 from random import randint
+# import only system from os
+from os import system, name
+# import sleep to show output for some time period
+from time import sleep
 
+
+game_board = []
+computers_game_board = []
+used_rows = []
+used_cols = []
+ship = []
+shipA = []
+shipA1 = []
+shipA2 = []
+shipB = []
+shipC = []
+shipD = []
 
 def welcome():
     """
@@ -10,43 +26,41 @@ def welcome():
     print("Welcome to Brian's battleship game.")
     print('------------------------------')
     user = input('Enter your name here:\n')
-    print(f"Welcome {user}, good luck, you'll need it")
+    print(f"Welcome {user}, good luck, you'll need it")    
     return user
 
 
-game_board = []
-computers_game_board = []
+def game_rules():
+    print("                      BRIANS BATTLESHIP GAME\n")    
+    print('player and computer get 4 boats each.')
+    print('Each boat is 2 charachters wide.')
+    print('Each Player gets 20 torpidoes.')
+    print('Player goes first, then its the computers turn.')
+    print('                         GAME INSTRUCTIONS')
+    print('Guess the co-ordinates of your oponents ship')
+    print('Enter the co-ordinates and press Enter key to fire')
+    accept = input('When you are ready to start, press the Enter key to continue')
+    print("Great, it's time to obliterate your enemy")
+    sleep(2)
 
-def player_game_board(user):
-    """
-    Function to create game board 10 units by 10 units for player.
-    """
+
+def init_game_boards(user):
     for rowcol in range(0, 10):
         game_board.append([' . '] * 10)
-    print()
-    player_ships(game_board)
-    for row in game_board:
-        print(''.join(row))
-    print(f"{user}'s game board")
-
-    return game_board
-
-
-
-
-def computer_game_board():
-    """
-    Function to create game board 10 units by 10 units for computer.
-    """
-    
-    for rowcol in range(0, 10):
         computers_game_board.append([' . '] * 10)
-    print()
-    computers_ships(computers_game_board)
-    for row in computers_game_board:
-        print(''.join(row))
-    print("Computer's game board")
-    return computers_game_board
+
+    init_ships(game_board)
+    init_ships(computers_game_board)
+    print_game_board(user)
+    return user
+
+
+def print_game_board(user):
+    print("                       BRIANS BATTLESHIP GAME\n")
+    for rowcol in range(0, 10):
+        print(''.join(game_board[rowcol]) + '\t\t' + ''.join(computers_game_board[rowcol]))
+    print(f"{user}'s game board" + '\t\t\t\t' + "Computer's game board \n")    
+    users_guess(user)
 
 
 def random_row(game_board):
@@ -65,148 +79,80 @@ def random_col(game_board):
     return randint(0, len(game_board[0]) - 1)
 
 
-def player_ships(game_board):
+def init_ships(a_game_board):
     """
-    Function to randomly place players ships on game board
+    Function to randomly place players ships on a given game board
     """
-    used_row = []
-    used_col = []
-#ship1
-    ship1_row = random_row(game_board)
-    used_row.append(ship1_row)
-    ship1_col = random_col(game_board)
-    used_col.append(ship1_col)
-    ship1_col2 = ship1_col + 1
-    if ship1_col2 > 8:
-        ship1_col2 = ship1_col - 1
-        used_col.append(ship1_col2)
+    if a_game_board == game_board:
+        place_ship('-XX', a_game_board, used_rows, used_cols, ship)
+        place_ship('-OO', a_game_board, used_rows, used_cols, ship)
+        place_ship('-88', a_game_board, used_rows, used_cols, ship)
+        place_ship('-00', a_game_board, used_rows, used_cols, ship)
     else:
-        used_col.append(ship1_col2)
-    game_board[ship1_row][ship1_col] = " X "
-    game_board[ship1_row][ship1_col2] = " X "
-
-#ship2
-    ship2_row = random_row(game_board)
-    if ship2_row not in used_row:
-        used_row.append(ship2_row)
-    ship2_col = random_col(game_board)
-    if ship2_col not in used_col:
-        used_col.append(ship2_col)
-    ship2_row2 = ship2_row + 1
-    if ship2_row2 not in used_row:
-        if ship2_row2 > 8:
-            ship2_row2 = ship2_row - 1
-            used_col.append(ship2_row2)
-        else:
-            used_col.append(ship2_row2)
-    game_board[ship2_row][ship2_col] = " X "
-    game_board[ship2_row2][ship2_col] = " X "
-
-#ship3
-    ship3_row = random_row(game_board)
-    if ship3_row not in used_row:
-        used_row.append(ship3_row)
-    ship3_col = random_col(game_board)
-    if ship3_col not in used_col:
-        used_col.append(ship3_col)
-    ship3_row2 = ship3_row + 1
-    if ship3_row2 not in used_row:
-        if ship3_row2 > 8:
-            ship3_row2 = ship2_row - 1
-            used_col.append(ship3_row2)
-        else:
-            used_col.append(ship3_row2)
-    game_board[ship3_row][ship3_col] = " X "
-    game_board[ship3_row2][ship3_col] = " X "
-
-#ship4
-    ship4_row = random_row(game_board)
-    if ship4_row not in used_row:
-        used_row.append(ship4_row)
-    ship4_col = random_col(game_board)
-    if ship4_col not in used_col:
-        used_col.append(ship4_col)
-    ship4_col2 = ship4_col + 1
-    if ship4_col2 not in used_col:
-        if ship4_col2 > 8:
-            ship4_col2 = ship4_col - 1
-            used_col.append(ship4_col2)
-        else:
-            used_col.append(ship4_col2)
-    game_board[ship4_row][ship4_col] = " X "
-    game_board[ship4_row][ship4_col2] = " X "
+        place_ship(' 1 ', a_game_board, used_rows, used_cols, shipA)
+        place_ship(' 2 ', a_game_board, used_rows, used_cols, shipB)
+        place_ship(' 3 ', a_game_board, used_rows, used_cols, shipC)
+        place_ship(' 4 ', a_game_board, used_rows, used_cols, shipD)
 
 
-def computers_ships(computers_game_board):
-    """
-    Function to randomly place computers ships on game board
-    """
-    computer_used_row = []
-    computer_used_col = []
-#ship1
-    ship1_row = random_row(game_board)
-    computer_used_row.append(ship1_row)    
-    ship1_col = random_col(game_board)
-    computer_used_col.append(ship1_col)
+def place_ship(char, a_game_board, used_rows, used_cols, ship):
+    ship_row = random_row(a_game_board)  
+    if ship_row not in used_rows:
+        used_rows.append(ship_row)
+    ship1_col = random_col(a_game_board)
+    if ship1_col not in used_cols:
+        used_cols.append(ship1_col) 
     ship1_col2 = ship1_col + 1
-    if ship1_col2 > 8:
-        ship1_col2 = ship1_col - 1
-        computer_used_col.append(ship1_col2)
+    if ship1_col2 not in used_cols:
+        if ship1_col2 > 8:
+            ship1_col2 = ship1_col - 1
+            used_cols.append(ship1_col2)
+        else:
+            used_cols.append(ship1_col2)
+    if a_game_board == game_board:         
+        a_game_board[ship_row][ship1_col] = char
+        a_game_board[ship_row][ship1_col2] = char
+    if a_game_board == computers_game_board:         
+        a_game_board[ship_row][ship1_col] = char
+        a_game_board[ship_row][ship1_col2] = char
+    
+    
+    
+
+
+
+
+
+
+def users_guess(user):
+    print(shipA1)
+    print(shipA2)
+    bullets = 20    
+    while bullets > 0:
+        print('bullets:', bullets)
+        guess_row = int(input("Guess Row: "))
+        guess_col = int(input("Guess Col: "))
+        guess = [guess_row, guess_col]
+        
+        #     print('hit')
+        # else:
+        #     print('miss')
+        bullets -= 1
+        
+
+
+
+
+
+#from geeks for geeks to clear console on execution of this function 
+
+def clear():
+    if name == 'nt':
+        _ = system('cls')
     else:
-        computer_used_col.append(ship1_col2)    
-    computers_game_board[ship1_row][ship1_col] = " X "    
-    computers_game_board[ship1_row][ship1_col2] = " X "
+        _ = system('clear')  
 
-#ship2
-    ship2_row = random_row(game_board)
-    if ship2_row not in computer_used_row:
-        computer_used_row.append(ship2_row)
-    ship2_col = random_col(game_board)
-    if ship2_col not in computer_used_col:
-        computer_used_col.append(ship2_col)
-    ship2_row2 = ship2_row + 1
-    if ship2_row2 not in computer_used_row:
-        if ship2_row2 > 8:
-            ship2_row2 = ship2_row - 1            
-            computer_used_col.append(ship2_row2)
-        else:
-            computer_used_col.append(ship2_row2)
-    computers_game_board[ship2_row][ship2_col] = " X "
-    computers_game_board[ship2_row2][ship2_col] = " X "
-
-#ship3
-    ship3_row = random_row(game_board)
-    if ship3_row not in computer_used_row:
-        computer_used_row.append(ship3_row)
-    ship3_col = random_col(game_board)
-    if ship3_col not in computer_used_col:
-        computer_used_col.append(ship3_col)
-    ship3_row2 = ship3_row + 1
-    if ship3_row2 not in computer_used_row:
-        if ship3_row2 > 8:
-            ship3_row2 = ship2_row - 1
-            computer_used_col.append(ship3_row2)
-        else:
-            computer_used_col.append(ship3_row2)
-    computers_game_board[ship3_row][ship3_col] = " X "
-    computers_game_board[ship3_row2][ship3_col] = " X "
-
-#ship4
-    ship4_row = random_row(game_board)
-    if ship4_row not in computer_used_row:
-        computer_used_row.append(ship4_row)
-    ship4_col = random_col(game_board)
-    if ship4_col not in computer_used_col:
-        computer_used_col.append(ship4_col)
-    ship4_col2 = ship4_col + 1
-    if ship4_col2 not in computer_used_col:
-        if ship4_col2 > 8:
-            ship4_col2 = ship4_col - 1
-            computer_used_col.append(ship4_col2)
-        else:
-            computer_used_col.append(ship4_col2)
-    computers_game_board[ship4_row][ship4_col] = " X "
-    computers_game_board[ship4_row][ship4_col2] = " X "
+  
 
 
 
@@ -216,8 +162,18 @@ def main():
     Function to run all game functions
     """
     username = welcome()
-    player_game_board(username)
-    computer_game_board()
+    sleep(2)
+    clear()
+    game_rules()
+    clear()
+    user = init_game_boards(username)
+    
+   
+    # print_game_board(user)     
+         
+    # print_game_board(user)  
+
 
 
 main()
+
