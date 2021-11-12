@@ -86,7 +86,7 @@ def print_game_board(user):
     print("-----------------------BRIANS BATTLESHIP GAME-------------------\n")
     for rowcol in range(0, 10):
         print(''.join(game_board[rowcol]) + '\t\t' + ''.join(computers_game_board[rowcol]))
-    print(f"{user}'s game board" + '\t\t\t\t' + "Computer's game board \n")
+    print(f" {user}'s game board" + '\t\t\t\t' + "Computer's game board \n")
     users_guess(user)
 
 
@@ -158,8 +158,8 @@ def place_ship(char, a_game_board, used_rows, used_cols):
         return ship, ship_
 
     if a_game_board == computers_game_board:
-        a_game_board[ship_row][ship_col] = char
-        a_game_board[ship_row][ship_col2] = char
+        a_game_board[ship_row][ship_col] = " . "
+        a_game_board[ship_row][ship_col2] = " . "
         ship = ship_row, ship_col
         ship_ = ship_row, ship_col2
         return ship, ship_
@@ -197,7 +197,6 @@ def location_of_ship(ship, place):
 def users_guess(user):
     global bullets
     while bullets > 0:
-        print(ship_E, ship_F, ship_G, ship_H)
         print("Torpedo's remaining:", bullets)
         print(f"Players ships remaining:{users_ships_remaining}                 Computers ships remaining: {computers_ships_remaining}")
         guess_row = int(input("Guess Row: "))-1
