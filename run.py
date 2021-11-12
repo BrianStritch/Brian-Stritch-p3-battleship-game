@@ -191,6 +191,7 @@ def location_of_ship(ship, place):
 def users_guess(user):
     global bullets
     while bullets > 0:
+        print(ship_E)
         print("bullet's remaining:", bullets)
         guess_row = int(input("Guess Row: ")) - 1
         while guess_row > 10:
@@ -214,28 +215,28 @@ def shots_fired(guess):
         ship_E.remove(guess)
         if not ship_E:
             computers_ships_remaining -= 1
-            print(f'Direct hit, computer only has {computers_ships_remaining} battleships remaining')
+            print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
         else:
             print('Direct hit, computers ship defenses are down')
     elif guess in ship_F:
         ship_F.remove(guess)
         if not ship_F:
             computers_ships_remaining -= 1
-            print(f'Direct hit, computer only has {computers_ships_remaining} battleships remaining')
+            print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
         else:
             print('Direct hit, computers ship defenses are down')
     elif guess in ship_G:
         ship_G.remove(guess)
         if not ship_G:
             computers_ships_remaining -= 1
-            print(f'Direct hit, computer only has {computers_ships_remaining} battleships remaining')
+            print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
         else:
             print('Direct hit, computers ship defenses are down')
     elif guess in ship_H:
         ship_H.remove(guess)
         if not ship_H:
             computers_ships_remaining -= 1
-            print(f'Direct hit, computer only has {computers_ships_remaining} battleships remaining')
+            print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
         else:
             print('Direct hit, computers ship defenses are down')
 
@@ -243,7 +244,7 @@ def shots_fired(guess):
 #from geeks for geeks to clear console on execution of this function
 def clear():
     """
-    Function to clear the terminal to keep playing 
+    Function to clear the terminal to keep playing
     area free from unused code.
     """
     if name == 'nt':
