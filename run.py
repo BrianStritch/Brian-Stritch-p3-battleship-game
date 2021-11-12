@@ -152,8 +152,8 @@ def place_ship(char, a_game_board, used_rows, used_cols):
         return ship, ship_
 
     if a_game_board == computers_game_board:
-        a_game_board[ship_row][ship_col] = char
-        a_game_board[ship_row][ship_col2] = char
+        # a_game_board[ship_row][ship_col] = char
+        # a_game_board[ship_row][ship_col2] = char
         ship = ship_row, ship_col
         ship_ = ship_row, ship_col2
         return ship, ship_
@@ -192,7 +192,8 @@ def users_guess(user):
     global bullets
     while bullets > 0:
         print(ship_E)
-        print("bullet's remaining:", bullets)
+        print("Torpedo's remaining:", bullets)
+        print("Computers ships remaining: ", computers_ships_remaining)
         guess_row = int(input("Guess Row: ")) - 1
         while guess_row > 10:
             print('Please enter a number from 1 to 10')
@@ -202,43 +203,71 @@ def users_guess(user):
             print('Please enter a number from 1 to 10')
             guess_col = int(input("Guess column: ")) - 1
         guess = (guess_row, guess_col)
-        users_used_guess.append(guess)
+        if guess in users_used_guess:
+            print('you fired here before! Please try again:')
+            guess_row = int(input("Guess Row: ")) - 1
+            guess_col = int(input("Guess column: ")) - 1      
+        hit_or_miss = users_used_guess.append(guess)
+        print_board_char(hit_or_miss, guess_row, guess_col)
         print(f"{user} guessed row: {guess_row + 1}, column: {guess_col + 1}")
         shots_fired(guess)
         bullets -= 1
+        sleep(2)
+        clear()
         print_game_board(user)
 
 
 def shots_fired(guess):
     global computers_ships_remaining
+    hit = 'hit'
+    miss = 'miss'
     if guess in ship_E:
         ship_E.remove(guess)
         if not ship_E:
             computers_ships_remaining -= 1
             print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
+            return hit
         else:
             print('Direct hit, computers ship defenses are down')
+        return hit
     elif guess in ship_F:
         ship_F.remove(guess)
         if not ship_F:
             computers_ships_remaining -= 1
             print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
+            return 'hit'
         else:
             print('Direct hit, computers ship defenses are down')
+        return hit
     elif guess in ship_G:
         ship_G.remove(guess)
         if not ship_G:
             computers_ships_remaining -= 1
             print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
+            return hit
         else:
             print('Direct hit, computers ship defenses are down')
+        return hit
     elif guess in ship_H:
         ship_H.remove(guess)
         if not ship_H:
             computers_ships_remaining -= 1
             print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
+            return hit
         else:
             print('Direct hit, computers ship defenses are down')
+        return hit
+    else:
+        print('You Missed')
+        return miss
+
+
+def print_board_char(hit, guess_row, guess_col):    
+    if hit == 'hit':
+        computers_game_board[guess_row][guess_col] = ' @ '
+    elif hit == 'miss':
+        computers_game_board[guess_row][guess_col] = ' X '
+
 
 
 #from geeks for geeks to clear console on execution of this function
