@@ -5,6 +5,8 @@ from os import system, name
 from time import sleep
 
 
+users_score = 0
+computers_score = 0
 game_board = []
 computers_game_board = []
 used_rows = []
@@ -12,6 +14,7 @@ used_cols = []
 users_used_guess = []
 computers_used_guess = []
 bullets = 20
+computers_bullets = 20
 users_ships_remaining = 4
 computers_ships_remaining = 4
 ship_A = []
@@ -83,7 +86,10 @@ def print_game_board(user):
     also prints the two game boards inline for the user to visually see
     both boards simultaniously throughout the game.
     """
+    global users_score
+    global computers_score
     print("-----------------------BRIANS BATTLESHIP GAME-------------------\n")
+    print(f' Players score: {users_score}                        Computers score: {computers_score}')
     for rowcol in range(0, 10):
         print(''.join(game_board[rowcol]) + '\t\t' + ''.join(computers_game_board[rowcol]))
     print(f" {user}'s game board" + '\t\t\t\t' + "Computer's game board \n")
@@ -196,8 +202,9 @@ def location_of_ship(ship, place):
 
 def users_guess(user):
     global bullets
+    global computers_bullets
     while bullets > 0:
-        print("Torpedo's remaining:", bullets)
+        print(f"Users torpedo's remaining: {bullets}          Computers remaining torpedos: {computers_bullets}")
         print(f"Players ships remaining:{users_ships_remaining}                 Computers ships remaining: {computers_ships_remaining}")
         guess_row = int(input("Guess Row: "))-1
         while guess_row > 10:
@@ -217,10 +224,21 @@ def users_guess(user):
         hit_or_miss = shots_fired(guess)
         print_board_char(hit_or_miss, guess_row, guess_col)
         bullets -= 1
+        computers_guess()
+        computers_bullets -= 1
         sleep(2)
         clear()
         print_game_board(user)
 
+
+def computers_guess():    
+    guess_row = random_row(game_board)
+    guess_col = random_col(game_board)
+    computers_guess = guess_row, guess_col
+    print(f'Computer guessed: {computers_guess}')
+    hits = computers_shots_fired(computers_guess)
+    print_board_char(hits, guess_row, guess_col)
+    sleep(1)
 
 def shots_fired(guess):
     global computers_ships_remaining
@@ -266,12 +284,59 @@ def shots_fired(guess):
         print('You Missed')
         return miss
 
+def computers_shots_fired(guess):
+    global users_ships_remaining
+    hit = 'hit_c'
+    miss = 'miss_c'
+    if guess in ship_A:
+        ship_A.remove(guess)
+        if not ship_A:
+            users_ships_remaining -= 1
+            print(f'Direct hit, ship sinking, player only has {users_ships_remaining} battleships remaining')
+            return hit
+        else:
+            print('Direct hit, players ship defenses are down')
+            return hit
+    elif guess in ship_B:
+        ship_B.remove(guess)
+        if not ship_B:
+            users_ships_remaining -= 1
+            print(f'Direct hit, ship sinking, player only has {users_ships_remaining} battleships remaining')
+            return hit
+        else:
+            print('Direct hit, players ship defenses are down')
+            return hit
+    elif guess in ship_C:
+        ship_C.remove(guess)
+        if not ship_C:
+            users_ships_remaining -= 1
+            print(f'Direct hit, ship sinking, player only has {users_ships_remaining} battleships remaining')
+            return hit
+        else:
+            print('Direct hit, players ship defenses are down')
+            return hit
+    elif guess in ship_D:
+        ship_D.remove(guess)
+        if not ship_D:
+            users_ships_remaining -= 1
+            print(f'Direct hit, ship sinking, player only has {users_ships_remaining} battleships remaining')
+            return hit
+        else:
+            print('Direct hit, players ship defenses are down')
+            return hit
+    else:
+        print('Computer Missed')
+        return miss
 
 def print_board_char(hit, guess_row, guess_col):
     if hit == 'hit':
         computers_game_board[guess_row][guess_col] = ' @ '
     elif hit == 'miss':
         computers_game_board[guess_row][guess_col] = ' X '
+    elif hit == 'hit_c':
+        game_board[guess_row][guess_col] = ' @ '
+    elif hit == 'miss_c':
+        game_board[guess_row][guess_col] = ' X '
 
 
 def clear():
