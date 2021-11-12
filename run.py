@@ -44,7 +44,7 @@ def welcome():
 
 def game_rules():
     """
-    Function to display the game instructions prior to the game starting.
+    Function to display the game description and instructions prior to the game starting.
     """
     sleep(1)
     clear()
@@ -52,7 +52,9 @@ def game_rules():
     print('Players get 4 ships each.')
     print('Each ship is 2 characters wide.')
     print('Each Player gets 20 torpedos.')
-    print('Player goes first, then its the computers turn.\n')
+    print('Player goes first, then its the computers turn.')
+    print('Each player gets 300 points per target hit.')
+    print('Additional 150 points bonus awarded for sinking a ship.\n')
     print('-------------------------GAME INSTRUCTIONS---------------------\n')
     print('Guess the co-ordinates of your opponents ship.')
     print('Top left corner is row: 1, column: 1.')
@@ -204,6 +206,7 @@ def users_guess(user):
     global bullets
     global computers_bullets
     while bullets > 0:
+        print(ship_D, ship_E, ship_F)
         print(f"Users torpedo's remaining: {bullets}          Computers remaining torpedos: {computers_bullets}")
         print(f"Players ships remaining:{users_ships_remaining}                 Computers ships remaining: {computers_ships_remaining}")
         guess_row = int(input("Guess Row: "))-1
@@ -224,6 +227,7 @@ def users_guess(user):
         hit_or_miss = shots_fired(guess)
         print_board_char(hit_or_miss, guess_row, guess_col)
         bullets -= 1
+        sleep(1)
         computers_guess()
         computers_bullets -= 1
         sleep(2)
@@ -242,6 +246,7 @@ def computers_guess():
 
 def shots_fired(guess):
     global computers_ships_remaining
+    global users_score
     hit = 'hit'
     miss = 'miss'
     if guess in ship_E:
@@ -249,6 +254,9 @@ def shots_fired(guess):
         if not ship_E:
             computers_ships_remaining -= 1
             print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
+            users_score += 150
+            print(f"Bonus of 150 points awarded for sinking ship")
+            sleep(1) 
             return hit
         else:
             print('Direct hit, computers ship defenses are down')
@@ -258,6 +266,9 @@ def shots_fired(guess):
         if not ship_F:
             computers_ships_remaining -= 1
             print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
+            users_score += 150
+            print(f"Bonus of 150 points awarded for sinking ship")
+            sleep(1)
             return hit
         else:
             print('Direct hit, computers ship defenses are down')
@@ -267,6 +278,9 @@ def shots_fired(guess):
         if not ship_G:
             computers_ships_remaining -= 1
             print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
+            users_score += 150
+            print(f"Bonus of 150 points awarded for sinking ship")
+            sleep(1)
             return hit
         else:
             print('Direct hit, computers ship defenses are down')
@@ -276,6 +290,9 @@ def shots_fired(guess):
         if not ship_H:
             computers_ships_remaining -= 1
             print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
+            users_score += 150
+            print(f"Bonus of 150 points awarded for sinking ship")
+            sleep(1)
             return hit
         else:
             print('Direct hit, computers ship defenses are down')
@@ -286,6 +303,7 @@ def shots_fired(guess):
 
 def computers_shots_fired(guess):
     global users_ships_remaining
+    global computers_score
     hit = 'hit_c'
     miss = 'miss_c'
     if guess in ship_A:
@@ -293,6 +311,9 @@ def computers_shots_fired(guess):
         if not ship_A:
             users_ships_remaining -= 1
             print(f'Direct hit, ship sinking, player only has {users_ships_remaining} battleships remaining')
+            computers_score += 150
+            print(f"Bonus of 150 points awarded for sinking ship")
+            sleep(1)
             return hit
         else:
             print('Direct hit, players ship defenses are down')
@@ -302,6 +323,9 @@ def computers_shots_fired(guess):
         if not ship_B:
             users_ships_remaining -= 1
             print(f'Direct hit, ship sinking, player only has {users_ships_remaining} battleships remaining')
+            computers_score += 150
+            print(f"Bonus of 150 points awarded for sinking ship")
+            sleep(1)            
             return hit
         else:
             print('Direct hit, players ship defenses are down')
@@ -311,6 +335,9 @@ def computers_shots_fired(guess):
         if not ship_C:
             users_ships_remaining -= 1
             print(f'Direct hit, ship sinking, player only has {users_ships_remaining} battleships remaining')
+            computers_score += 150
+            print(f"Bonus of 150 points awarded for sinking ship")
+            sleep(1)            
             return hit
         else:
             print('Direct hit, players ship defenses are down')
@@ -320,6 +347,9 @@ def computers_shots_fired(guess):
         if not ship_D:
             users_ships_remaining -= 1
             print(f'Direct hit, ship sinking, player only has {users_ships_remaining} battleships remaining')
+            computers_score += 150
+            print(f"Bonus of 150 points awarded for sinking ship")
+            sleep(1) 
             return hit
         else:
             print('Direct hit, players ship defenses are down')
@@ -329,11 +359,15 @@ def computers_shots_fired(guess):
         return miss
 
 def print_board_char(hit, guess_row, guess_col):
+    global users_score
+    global computers_score
     if hit == 'hit':
+        users_score += 300
         computers_game_board[guess_row][guess_col] = ' @ '
     elif hit == 'miss':
         computers_game_board[guess_row][guess_col] = ' X '
     elif hit == 'hit_c':
+        computers_score += 300
         game_board[guess_row][guess_col] = ' @ '
     elif hit == 'miss_c':
         game_board[guess_row][guess_col] = ' X '
