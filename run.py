@@ -31,8 +31,8 @@ def welcome():
     """
     clear()
     print()
-    print('-----------------------------------')
-    print("Welcome to Brian's battleship game.")
+    print('-----------------------------------\n')
+    print("Welcome to Brian's battleship game.\n")
     print('-----------------------------------')
     user = input('Enter your name here:\n')
     print(f"Welcome {user}, good luck, you'll need it")
@@ -43,15 +43,20 @@ def game_rules():
     """
     Function to display the game instructions prior to the game starting.
     """
+    sleep(1)
+    clear()
     print("-----------------------BRIANS BATTLESHIP GAME-----------------\n")
-    print('player and computer get 4 boats each.')
-    print('Each boat is 2 charachters wide.')
-    print('Each Player gets 20 torpidoes.')
-    print('Player goes first, then its the computers turn.')
-    print('-------------------------GAME INSTRUCTIONS---------------------')
-    print('Guess the co-ordinates of your oponents ship')
-    print('Enter the co-ordinates and press Enter key to fire')
-    accept = input('When you are ready, press the Enter key to continue')
+    print('Players get 4 ships each.')
+    print('Each ship is 2 characters wide.')
+    print('Each Player gets 20 torpedos.')
+    print('Player goes first, then its the computers turn.\n')
+    print('-------------------------GAME INSTRUCTIONS---------------------\n')
+    print('Guess the co-ordinates of your opponents ship.')
+    print('Top left corner is row: 1, column: 1.')
+    print('Enter the co-ordinates and press Enter key to fire.')
+    print('Each torpedo fired on target is marked with " @ ".')
+    print('Each torpedo that is a miss is marked with " X ".')
+    input('When you are ready, press the enter key to continue')
     print("Great, it's time to obliterate your enemy")
     sleep(1)
 
@@ -62,6 +67,7 @@ def init_game_boards(user):
     functions to place the users and computers ships at
     random locations throughout the boards.
     """
+    clear()
     for rowcol in range(0, 10):
         game_board.append([' . '] * 10)
         computers_game_board.append([' . '] * 10)
@@ -78,7 +84,7 @@ def print_game_board(user):
     both boards simultaniously throughout the game.
     """
     print("-----------------------BRIANS BATTLESHIP GAME-------------------\n")
-    for rowcol in range(1, 10):
+    for rowcol in range(0, 10):
         print(''.join(game_board[rowcol]) + '\t\t' + ''.join(computers_game_board[rowcol]))
     print(f"{user}'s game board" + '\t\t\t\t' + "Computer's game board \n")
     users_guess(user)
@@ -152,8 +158,8 @@ def place_ship(char, a_game_board, used_rows, used_cols):
         return ship, ship_
 
     if a_game_board == computers_game_board:
-        # a_game_board[ship_row][ship_col] = char
-        # a_game_board[ship_row][ship_col2] = char
+        a_game_board[ship_row][ship_col] = char
+        a_game_board[ship_row][ship_col2] = char
         ship = ship_row, ship_col
         ship_ = ship_row, ship_col2
         return ship, ship_
@@ -184,33 +190,33 @@ def location_of_ship(ship, place):
         ship_F = ships
     elif ship == 'G':
         ship_G = ships
-    elif ship == 'G':
+    elif ship == 'H':
         ship_H = ships
 
 
 def users_guess(user):
     global bullets
     while bullets > 0:
-        print(ship_E)
+        print(ship_E, ship_F, ship_G, ship_H)
         print("Torpedo's remaining:", bullets)
-        print("Computers ships remaining: ", computers_ships_remaining)
-        guess_row = int(input("Guess Row: ")) - 1
+        print(f"Players ships remaining:{users_ships_remaining}                 Computers ships remaining: {computers_ships_remaining}")
+        guess_row = int(input("Guess Row: "))-1
         while guess_row > 10:
             print('Please enter a number from 1 to 10')
-            guess_row = int(input("Guess Row: ")) - 1
-        guess_col = int(input("Guess column: ")) - 1
+            guess_row = int(input("Guess Row: "))-1
+        guess_col = int(input("Guess column: "))-1
         while guess_col > 10:
             print('Please enter a number from 1 to 10')
-            guess_col = int(input("Guess column: ")) - 1
+            guess_col = int(input("Guess column: "))-1
         guess = (guess_row, guess_col)
         if guess in users_used_guess:
             print('you fired here before! Please try again:')
-            guess_row = int(input("Guess Row: ")) - 1
-            guess_col = int(input("Guess column: ")) - 1      
-        hit_or_miss = users_used_guess.append(guess)
+            guess_row = int(input("Guess Row: "))-1
+            guess_col = int(input("Guess column: "))-1
+        users_used_guess.append(guess)
+        print(f"{user} guessed row: {guess_row}, column: {guess_col}")
+        hit_or_miss = shots_fired(guess)
         print_board_char(hit_or_miss, guess_row, guess_col)
-        print(f"{user} guessed row: {guess_row + 1}, column: {guess_col + 1}")
-        shots_fired(guess)
         bullets -= 1
         sleep(2)
         clear()
@@ -229,16 +235,16 @@ def shots_fired(guess):
             return hit
         else:
             print('Direct hit, computers ship defenses are down')
-        return hit
+            return hit
     elif guess in ship_F:
         ship_F.remove(guess)
         if not ship_F:
             computers_ships_remaining -= 1
             print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
-            return 'hit'
+            return hit
         else:
             print('Direct hit, computers ship defenses are down')
-        return hit
+            return hit
     elif guess in ship_G:
         ship_G.remove(guess)
         if not ship_G:
@@ -247,7 +253,7 @@ def shots_fired(guess):
             return hit
         else:
             print('Direct hit, computers ship defenses are down')
-        return hit
+            return hit
     elif guess in ship_H:
         ship_H.remove(guess)
         if not ship_H:
@@ -256,25 +262,23 @@ def shots_fired(guess):
             return hit
         else:
             print('Direct hit, computers ship defenses are down')
-        return hit
+            return hit
     else:
         print('You Missed')
         return miss
 
 
-def print_board_char(hit, guess_row, guess_col):    
+def print_board_char(hit, guess_row, guess_col):
     if hit == 'hit':
         computers_game_board[guess_row][guess_col] = ' @ '
     elif hit == 'miss':
         computers_game_board[guess_row][guess_col] = ' X '
 
 
-
-#from geeks for geeks to clear console on execution of this function
 def clear():
     """
     Function to clear the terminal to keep playing
-    area free from unused code.
+    area free from unused code,obtained from geeks for geeks.
     """
     if name == 'nt':
         _ = system('cls')
@@ -287,10 +291,7 @@ def main():
     Function to run all game functions
     """
     username = welcome()
-    sleep(1)
-    clear()
     game_rules()
-    clear()
     user = init_game_boards(username)
     print_game_board(user)
 
