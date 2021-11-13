@@ -35,14 +35,14 @@ def welcome():
     global user
     clear()
     print()
-    print('-----------------------------------\n')
-    print("Welcome to Brian's battleship game.\n")
-    print('-----------------------------------')
-    user_name = input('Enter your name here:\n')
+    print('---------------------------------------------\n')
+    print("     Welcome to Brian's battleship game.\n")
+    print('---------------------------------------------')
+    user_name = input('     Enter your name here:\n')
     user = user_name.capitalize() 
     if user == 'exit':
         end_game()       
-    print(f"Welcome {user}, good luck, you'll need it")
+    print(     f"Welcome {user}, good luck, you'll need it")
     return user
 
 
@@ -53,23 +53,23 @@ def game_rules():
     sleep(1)
     clear()
     print("-----------------------BRIANS BATTLESHIP GAME-----------------\n")
-    print('Players get 4 ships each.')
-    print('Each ship is 2 characters wide.')
-    print('Each Player gets 20 torpedos.')
-    print('Player goes first, then its the computers turn.')
-    print('Each player gets 300 points per target hit.')
-    print('Additional 150 points bonus awarded for sinking a ship.\n')
+    print('     Players get 4 ships each.')
+    print('     Each ship is 2 characters wide.')
+    print('     Each Player gets 20 torpedos.')
+    print('     Player goes first, then its the computers turn.')
+    print('     Each player gets 300 points per target hit.')
+    print('     Additional 150 points bonus awarded for sinking a ship.\n')
     print('-------------------------GAME INSTRUCTIONS---------------------\n')
-    print('Guess the co-ordinates of your opponents ship.')
-    print('Top left corner is row: 1, column: 1.')
-    print('Enter the co-ordinates and press Enter key to fire.')
-    print('Each torpedo fired on target is marked with " @ ".')
-    print('Each torpedo that is a miss is marked with " X ".')
-    print('To exit the game simply type exit into the input areas.')    
-    accept = input('When you are ready, press the enter key to continue ')
+    print('     Guess the co-ordinates of your opponents ship.')
+    print('     Top left corner is row: 1, column: 1.')
+    print('     Enter the co-ordinates and press Enter key to fire.')
+    print('     Each torpedo fired on target is marked with " @ ".')
+    print('     Each torpedo that is a miss is marked with " X ".')
+    print('     To exit the game simply type exit into the input areas.')    
+    accept = input('     When you are ready, press the enter key to continue ')
     if accept == 'exit':
         end_game()
-    print("Great, it's time to obliterate your enemy")
+    print("     Great, it's time to obliterate your enemy")
     sleep(1)
 
 
@@ -97,11 +97,12 @@ def print_game_board(user):
     """
     global users_score
     global computers_score
-    print("-----------------------BRIANS BATTLESHIP GAME-------------------\n")
+    print("-----------------------BRIANS BATTLESHIP GAME------------------------\n")
     print(f' Players score: {users_score}                        Computers score: {computers_score}')
     for rowcol in range(0, 10):
-        print(''.join(game_board[rowcol]) + '\t\t' + ''.join(computers_game_board[rowcol]))
-    print(f" {user}'s game board" + '\t\t\t\t' + "Computer's game board \n")
+        print(''.join(game_board[rowcol]) + '\t\t' + ''.join(computers_game_board[rowcol]))    
+    print(f" {user}'s game board" + '\t\t\t\t' + "Computer's game board")
+    print()
     users_guess(user)
 
 
@@ -476,24 +477,24 @@ def end_game():
     global computers_ships_remaining
     global user
     print(
-        f'Congratulations {user} you have finnished Brians Battleship Game '
+             f'Congratulations {user} you have finnished Brians Battleship Game '
     )
     print()
     print(
-        f'You had {users_ships_remaining} ships remaining and the computer had {computers_ships_remaining} ships remaining.'
+             f'You had {users_ships_remaining} ships remaining and the computer had {computers_ships_remaining} ships remaining.'
     )
     print()
     print(
-        f'You had {users_score} points and the computer had {computers_score} points at the end of the game.'
+             f'You had {users_score} points and the computer had {computers_score} points at the end of the game.'
     )
     if users_score > computers_score:
-        print(f'Congratulations {user} you won the game with {users_score} points.')
-        print(f'Thanks {user} for playing my game, hope to see you again soon.')
+        print(     f'Congratulations {user} you won the game with {users_score} points.')
+        print(     f'Thanks {user} for playing my game, hope to see you again soon.')
 
     elif users_score < computers_score:
-        print(f'Computer wins this time with {computers_score} points.')
-        print(f'Thanks {user} for playing my game, better luck next time.')
-    play_again = input('Would you like to play again? Y/N :  \n')
+        print(     f'Computer wins this time with {computers_score} points.')
+        print(     f'Thanks {user} for playing my game, better luck next time.')
+    play_again = input(     'Would you like to play again? Y/N :  \n')
     if play_again.lower() == 'y':
         reset_var_data()
         main()
