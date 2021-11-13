@@ -95,25 +95,25 @@ def print_game_board(user):
     also prints the two game boards inline for the user to visually see
     both boards simultaniously throughout the game.
     """
-    nums = ('Columns: 1  2  3  4  5  6  7  8  9  10           1  2  3  4  5  6  7  8  9  10')
+    nums = ('Columns: 1  2  3  4  5  6  7  8  9  10  |  1  2  3  4  5  6  7  8  9  10')
     space = ('     ')
     spaces = ('    ')
     spaced = ('')
     global users_score
     global computers_score
     print("-----------------------BRIANS BATTLESHIP GAME------------------------\n")
-    print(f'         Players score: {users_score}                        Computers score: {computers_score}')
+    print(f'         Players score: {users_score}                  Computers score: {computers_score}')
     print(nums)
-    print('Rows                                                                         Rows')
+    print('Rows                                    |                              Rows')
     for num, rowcol in zip(range(0,10), range(0, 10)):
         if num < 9:
             print(
-                num + 1, space, ''.join(game_board[rowcol]) + '\t\t' +''.join(computers_game_board[rowcol]) , num +1
+                num + 1, space, ''.join(game_board[rowcol]) + '  | ' +''.join(computers_game_board[rowcol]) , num +1
                 )
             num + 1
         else:
             print(
-                num + 1, spaces, ''.join(game_board[rowcol]) + '\t\t' +''.join(computers_game_board[rowcol]) , num +1
+                num + 1, spaces, ''.join(game_board[rowcol]) + '  | ' +''.join(computers_game_board[rowcol]) , num +1
                 )
     print(f"         {user}'s game board" + '\t\t\t ' + "Computer's game board")
     print()
