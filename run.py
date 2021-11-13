@@ -37,7 +37,9 @@ def welcome():
     print('-----------------------------------\n')
     print("Welcome to Brian's battleship game.\n")
     print('-----------------------------------')
-    user = input('Enter your name here:\n')
+    user = input('Enter your name here:\n') 
+    if user == 'exit':
+        end_game()       
     print(f"Welcome {user}, good luck, you'll need it")
     return user
 
@@ -61,7 +63,10 @@ def game_rules():
     print('Enter the co-ordinates and press Enter key to fire.')
     print('Each torpedo fired on target is marked with " @ ".')
     print('Each torpedo that is a miss is marked with " X ".')
-    input('When you are ready, press the enter key to continue')
+    print('To exit the game simply type exit into the input areas.')
+    accept = input('When you are ready, press the enter key to continue ')
+    if accept == 'exit':
+        end_game()
     print("Great, it's time to obliterate your enemy")
     sleep(1)
 
@@ -209,19 +214,61 @@ def users_guess(user):
         print(ship_D, ship_E, ship_F)
         print(f"Users torpedo's remaining: {bullets}          Computers remaining torpedos: {computers_bullets}")
         print(f"Players ships remaining:{users_ships_remaining}                 Computers ships remaining: {computers_ships_remaining}")
-        guess_row = int(input("Guess Row: "))-1
+        while True:
+            row = input("Guess Row: ")
+            guess_row = row
+            num = check_num_input(guess_row)            
+            if num == True:
+                guess_row = int(row) 
+                break
+
+        while True:
+            col = input("Guess column: ")
+            guess_col = col
+            num = check_num_input(guess_col)
+            if num == True:
+                guess_col = int(col) 
+                break
+
         while guess_row > 10:
             print('Please enter a number from 1 to 10')
-            guess_row = int(input("Guess Row: "))-1
-        guess_col = int(input("Guess column: "))-1
+            while True:
+                row = input("Guess Row: ") 
+                guess_row = row
+                num = check_num_input(guess_row)            
+                if num == True:
+                    guess_row = int(row) 
+                    break      
+            
         while guess_col > 10:
-            print('Please enter a number from 1 to 10')
-            guess_col = int(input("Guess column: "))-1
-        guess = (guess_row, guess_col)
+            print('Please enter a number from 1 to 10')            
+            while True:
+                col = input("Guess column: ")
+                guess_col = col
+                num = check_num_input(guess_col)
+                if num == True:
+                    guess_col = int(col) 
+                    break
+            
+        guess = (guess_row , guess_col)
         if guess in users_used_guess:
-            print('you fired here before! Please try again:')
-            guess_row = int(input("Guess Row: "))-1
-            guess_col = int(input("Guess column: "))-1
+            print('you fired here before! Please try again:')            
+            while True:
+                row = input("Guess Row: ")
+                guess_row = row
+                num = check_num_input(guess_row)            
+                if num == True:
+                    guess_row = int(row) 
+                    break            
+            
+            while True:
+                col = input("Guess column: ")
+                guess_col = col
+                num = check_num_input(guess_col)
+                if num == True:
+                    guess_col = int(col) 
+                    break
+        
         users_used_guess.append(guess)
         print(f"{user} guessed row: {guess_row}, column: {guess_col}")
         hit_or_miss = shots_fired(guess)
@@ -230,9 +277,36 @@ def users_guess(user):
         sleep(1)
         computers_guess()
         computers_bullets -= 1
-        sleep(2)
-        clear()
-        print_game_board(user)
+        if bullets == 0:
+            end_game()
+        elif users_ships_remaining == 0:
+            end_game()
+        elif computers_ships_remaining == 0:
+            end_game()
+        else:
+            sleep(2)
+            clear()
+            print_game_board(user)
+
+
+def check_num_input(num_input):
+    """
+    Function to verify that the user input an 
+    integer as a value for targeting the computer
+    and displays a message to the user displaying 
+    the charachter they input if not an integer
+    """
+    if num_input == 'exit':
+            clear()
+            end_game()
+            
+    try:
+        num = int(num_input)
+        return True
+        
+    except ValueError:
+        print(f"please enter a number value, you entered {num_input}")
+        return False
 
 
 def computers_guess():    
@@ -243,6 +317,7 @@ def computers_guess():
     hits = computers_shots_fired(computers_guess)
     print_board_char(hits, guess_row, guess_col)
     sleep(1)
+
 
 def shots_fired(guess):
     global computers_ships_remaining
@@ -301,6 +376,7 @@ def shots_fired(guess):
         print('You Missed')
         return miss
 
+
 def computers_shots_fired(guess):
     global users_ships_remaining
     global computers_score
@@ -358,14 +434,15 @@ def computers_shots_fired(guess):
         print('Computer Missed')
         return miss
 
+
 def print_board_char(hit, guess_row, guess_col):
     global users_score
     global computers_score
     if hit == 'hit':
         users_score += 300
-        computers_game_board[guess_row][guess_col] = ' @ '
+        computers_game_board[guess_row -1][guess_col -1] = ' @ '
     elif hit == 'miss':
-        computers_game_board[guess_row][guess_col] = ' X '
+        computers_game_board[guess_row -1][guess_col -1] = ' X '
     elif hit == 'hit_c':
         computers_score += 300
         game_board[guess_row][guess_col] = ' @ '
@@ -384,6 +461,40 @@ def clear():
         _ = system('clear')
 
 
+def end_game():
+    global users_score
+    global computers_score
+    global users_ships_remaining
+    global computers_ships_remaining
+    global user
+    print(
+        f'Congratulations {user} you have finnished Brians Battleship Game'
+    )
+    print(
+        f'You had {users_ships_remaining} remaining and the computer had {computers_ships_remaining} remaining.'
+    )
+    print(
+        f'You had {users_score} points and the computer had {computers_score} points at the end of the game.'
+    )
+    if users_score > computers_score:
+        print(f'Congratulations {user} you won the game with {users_score} points.')
+        print(f'Thanks {user} for playing my game, hope to see you again soon.')
+
+    elif users_score < computers_score:
+        print(f'Computer wins this time with {computers_score} points.')
+        print(f'Thanks {user} for playing my game, better luck next time.')
+    play_again = input('Would you like to play again? Y/N :  \n')
+    if play_again.lower() == 'y':
+        print_game_board(user)
+    else:
+        exit()
+
+    #user,users_score,computers_score,users_ships_remaining,computers_ships_remaining
+
+
+
+
+
 def main():
     """
     Function to run all game functions
@@ -392,6 +503,7 @@ def main():
     game_rules()
     user = init_game_boards(username)
     print_game_board(user)
+
 
 
 main()
