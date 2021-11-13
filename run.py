@@ -4,7 +4,7 @@ from os import system, name
 # import sleep to show output for some time period
 from time import sleep
 
-
+user = ''
 users_score = 0
 computers_score = 0
 game_board = []
@@ -32,12 +32,14 @@ def welcome():
     function to clear the console, then to get the Username from the
     user and issue welcome message.
     """
+    global user
     clear()
     print()
     print('-----------------------------------\n')
     print("Welcome to Brian's battleship game.\n")
     print('-----------------------------------')
-    user = input('Enter your name here:\n') 
+    user_name = input('Enter your name here:\n')
+    user = user_name.capitalize() 
     if user == 'exit':
         end_game()       
     print(f"Welcome {user}, good luck, you'll need it")
@@ -63,7 +65,7 @@ def game_rules():
     print('Enter the co-ordinates and press Enter key to fire.')
     print('Each torpedo fired on target is marked with " @ ".')
     print('Each torpedo that is a miss is marked with " X ".')
-    print('To exit the game simply type exit into the input areas.')
+    print('To exit the game simply type exit into the input areas.')    
     accept = input('When you are ready, press the enter key to continue ')
     if accept == 'exit':
         end_game()
@@ -212,8 +214,8 @@ def users_guess(user):
     global computers_bullets
     while bullets > 0:
         print(ship_D, ship_E, ship_F)
-        print(f"Users torpedo's remaining: {bullets}          Computers remaining torpedos: {computers_bullets}")
-        print(f"Players ships remaining:{users_ships_remaining}                 Computers ships remaining: {computers_ships_remaining}")
+        print(f"{user}'s torpedo's remaining: {bullets}          Computers remaining torpedos: {computers_bullets}")
+        print(f"{user}'s ships remaining:{users_ships_remaining}                 Computers ships remaining: {computers_ships_remaining}")
         while True:
             row = input("Guess Row: ")
             guess_row = row
@@ -297,8 +299,8 @@ def check_num_input(num_input):
     the charachter they input if not an integer
     """
     if num_input == 'exit':
-            clear()
-            end_game()
+        clear()
+        end_game()
             
     try:
         num = int(num_input)
@@ -462,6 +464,10 @@ def clear():
 
 
 def end_game():
+    """
+    Function to display scores and user message at 
+    end of game or on exiting, also prompting the user to play again.
+    """
     global users_score
     global computers_score
     global users_ships_remaining
@@ -471,7 +477,7 @@ def end_game():
         f'Congratulations {user} you have finnished Brians Battleship Game'
     )
     print(
-        f'You had {users_ships_remaining} remaining and the computer had {computers_ships_remaining} remaining.'
+        f'You had {users_ships_remaining} ships remaining and the computer had {computers_ships_remaining} ships remaining.'
     )
     print(
         f'You had {users_score} points and the computer had {computers_score} points at the end of the game.'
@@ -485,15 +491,56 @@ def end_game():
         print(f'Thanks {user} for playing my game, better luck next time.')
     play_again = input('Would you like to play again? Y/N :  \n')
     if play_again.lower() == 'y':
-        print_game_board(user)
+        reset_var_data()
+        main()
     else:
         exit()
 
-    #user,users_score,computers_score,users_ships_remaining,computers_ships_remaining
 
-
-
-
+def reset_var_data():
+    """
+    Function to reset all variable values at the end of each game
+    """
+    global users_score
+    users_score = 0
+    global computers_score
+    computers_score = 0
+    global game_board
+    game_board = []
+    global computers_game_board
+    computers_game_board = []
+    global used_rows
+    used_rows = []
+    global used_cols
+    used_cols = []
+    global users_used_guess
+    users_used_guess = []
+    global computers_used_guess
+    computers_used_guess = []
+    global bullets
+    bullets = 20
+    global computers_bullets
+    computers_bullets = 20
+    global users_ships_remaining
+    users_ships_remaining = 4
+    global computers_ships_remaining
+    computers_ships_remaining = 4
+    global ship_A
+    ship_A = []
+    global ship_B
+    ship_B = []
+    global ship_C
+    ship_C = []
+    global ship_D
+    ship_D = []
+    global ship_E
+    ship_E = []
+    global ship_F
+    ship_F = []
+    global ship_G
+    ship_G = []
+    global ship_H
+    ship_H = []
 
 def main():
     """
@@ -503,7 +550,6 @@ def main():
     game_rules()
     user = init_game_boards(username)
     print_game_board(user)
-
 
 
 main()
