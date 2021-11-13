@@ -213,7 +213,7 @@ def users_guess(user):
     global bullets
     global computers_bullets
     while bullets > 0:
-        print(ship_D, ship_E, ship_F)
+        print( ship_E, ship_F, ship_G , ship_H)
         print(f"{user}'s torpedo's remaining: {bullets}          Computers remaining torpedos: {computers_bullets}")
         print(f"{user}'s ships remaining:{users_ships_remaining}                 Computers ships remaining: {computers_ships_remaining}")
         while True:
@@ -468,17 +468,21 @@ def end_game():
     Function to display scores and user message at 
     end of game or on exiting, also prompting the user to play again.
     """
+    clear()
+    print("-----------------------BRIANS BATTLESHIP GAME-------------------\n")
     global users_score
     global computers_score
     global users_ships_remaining
     global computers_ships_remaining
     global user
     print(
-        f'Congratulations {user} you have finnished Brians Battleship Game'
+        f'Congratulations {user} you have finnished Brians Battleship Game '
     )
+    print()
     print(
         f'You had {users_ships_remaining} ships remaining and the computer had {computers_ships_remaining} ships remaining.'
     )
+    print()
     print(
         f'You had {users_score} points and the computer had {computers_score} points at the end of the game.'
     )
