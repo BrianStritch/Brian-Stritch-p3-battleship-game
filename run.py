@@ -95,12 +95,18 @@ def print_game_board(user):
     also prints the two game boards inline for the user to visually see
     both boards simultaniously throughout the game.
     """
+    nums = ('Columns: 1  2  3  4  5  6  7  8  9  10           1  2  3  4  5  6  7  8  9  10')
     global users_score
     global computers_score
     print("-----------------------BRIANS BATTLESHIP GAME------------------------\n")
-    print(f' Players score: {users_score}                        Computers score: {computers_score}')
-    for rowcol in range(0, 10):
-        print(''.join(game_board[rowcol]) + '\t\t' + ''.join(computers_game_board[rowcol]))    
+    print(f'         Players score: {users_score}                        Computers score: {computers_score}')
+    print(nums)
+    print('Rows                                                                           Rows')
+    for num, rowcol in zip(range(0,10), range(0, 10)):
+        print(
+            num + 1, '\t' + ''.join(game_board[rowcol]) + '\t\t' +''.join(computers_game_board[rowcol]) + '\t', num +1
+            )
+        num + 1
     print(f" {user}'s game board" + '\t\t\t\t' + "Computer's game board")
     print()
     users_guess(user)
