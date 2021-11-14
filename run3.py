@@ -242,7 +242,7 @@ def users_guess(user):
             if num == True:
                 guess_row = int(row)
                 break
-
+            
         while True:
             col = input("Guess column: ")
             guess_col = col
@@ -317,16 +317,19 @@ def check_num_input(num_input):
     and displays a message to the user displaying
     the charachter they input if not an integer
     """
+    print(num_input)
+    sleep(1)
+    
     if num_input == 'exit':
         clear()
-        end_game()
-
+        end_game()   
+   
     try:
         num = int(num_input)
         return True
 
     except ValueError:
-        print(f"please enter a number value, you entered {num_input}")
+        print(f"please enter a number value, you entered {num_input}.")
         return False
 
 
@@ -488,31 +491,47 @@ def end_game():
     end of game or on exiting, also prompting the user to play again.
     """
     clear()
-    print("-----------------------BRIANS BATTLESHIP GAME-------------------\n")
+    
     global users_score
     global computers_score
     global users_ships_remaining
     global computers_ships_remaining
     global user
-    print(
-            f'Congratulations {user} you have finnished Brians Battleship Game.'
-    )
+    print("-----------------------BRIANS BATTLESHIP GAME-------------------\n")
+    print('----------------------------GAME OVER! -------------------------')
     print()
-    print(
-            f'You had {users_ships_remaining} ships remaining and the computer had {computers_ships_remaining} ships remaining.'
-    )
-    print()
-    print(
-            f"Congratulations {user} you won the game with {users_score} points, and the computer had {computers_score} points at the end of the game."
+    if users_ships_remaining > computers_ships_remaining:
+        print(
+            f"Congratulations {user} you won the game with {users_score} points and {users_ships_remaining} ships remaining."
+            
         )
-    if users_score > computers_score:
-        print(f'     Congratulations {user} you won the game with {users_score} points.')
-        print('      Thank you for playing my game, hope to see you again soon.')
+        print(
+            f'The computer had {computers_ships_remaining} ships remaining, and had {computers_score} points at the end of the game.'
+        )
+        print('Thank you for playing my game, hope to see you again soon.')
+        print()
+        play_again()
 
     elif users_score < computers_score:
-        print(f'     Computer wins this time with {computers_score} points.')
-        print(f'     Thanks {user} for playing my game, better luck next time.')
-    play_again = input('     Would you like to play again? Y/N :  \n')
+        print(f'Computer wins this time with {computers_score} points, and {computers_ships_remaining} ships remaining.')
+        print(f'Thanks {user} for playing my game, better luck next time.')
+        play_again()
+        
+    elif users_ships_remaining < computers_ships_remaining:
+        print(f'Computer wins this time with {computers_score} points, and {computers_ships_remaining} ships remaining.')        
+        print(
+            f'The computer had {computers_ships_remaining} ships remaining, and had {computers_score} points at the end of the game.'
+        )
+        print('Thank you for playing my game, hope to see you again soon.')
+        print()
+        # play_again()
+        play_again = input('     Would you like to play again? Y/N :  \n')	
+        if play_again.lower() == 'y':	
+            reset_var_data()	
+            main()
+
+def play_again():
+    play_again = input('Would you like to play again? Y/N :  \n')
     if play_again.lower() == 'y':
         reset_var_data()
         main()
@@ -520,7 +539,7 @@ def end_game():
         print('-----------------------BRIANS BATTLESHIP GAME-------------------')
         print('--------------------------- GAME OVER --------------------------')
         exit()
-
+  
 
 def reset_var_data():
     """
