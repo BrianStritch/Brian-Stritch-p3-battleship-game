@@ -50,7 +50,7 @@ def welcome():
     function to clear the console, then to get the Username from the
     user and issue welcome message.
     """
-    global user
+    # global user
     clear()
     print()
     print('------------------------------- Welcome to ----------------------------------\n')
@@ -116,8 +116,6 @@ def print_game_board(user):
     nums = ('Columns: 1  2  3  4  5  6  7  8  9  10  |  1  2  3  4  5  6  7  8  9  10')
     space = ('     ')
     spaces = ('    ')
-    global users_score
-    global computers_score
     print("---------------------------BRIANS BATTLESHIP GAME----------------------------\n")
     print(f'         Players score: {users_score}                  Computers score: {computers_score}')
     print(nums)
@@ -219,14 +217,6 @@ def place_ship(char, a_game_board, used_rows, used_cols):
 
 def location_of_ship(ship, place):
     ships = list(place)
-    global ship_A
-    global ship_B
-    global ship_C
-    global ship_D
-    global ship_E
-    global ship_F
-    global ship_G
-    global ship_H
 
     if ship == 'A':
         ship_A = ships
@@ -248,7 +238,6 @@ def location_of_ship(ship, place):
 
 def users_guess(user):
     global bullets
-    global computers_bullets
     while bullets > 0:
         print(ship_E, ship_F, ship_G, ship_H)
         print(f"{user}'s torpedo's remaining: {bullets}          Computers remaining torpedos: {computers_bullets}")
@@ -359,8 +348,6 @@ def computers_guess():
 
 
 def shots_fired(guess):
-    global computers_ships_remaining
-    global users_score
     hit = 'hit'
     miss = 'miss'
     if guess in ship_E:
@@ -417,8 +404,6 @@ def shots_fired(guess):
 
 
 def computers_shots_fired(guess):
-    global users_ships_remaining
-    global computers_score
     hit = 'hit_c'
     miss = 'miss_c'
     if guess in ship_A:
@@ -475,8 +460,6 @@ def computers_shots_fired(guess):
 
 
 def print_board_char(hit, guess_row, guess_col):
-    global users_score
-    global computers_score
     if hit == 'hit':
         users_score += 300
         computers_game_board[guess_row - 1][guess_col - 1] = ' @ '
@@ -506,12 +489,6 @@ def end_game():
     end of game or on exiting, also prompting the user to play again.
     """
     clear()
-    global user
-    global users_score
-    global computers_score
-    global users_ships_remaining
-    global computers_ships_remaining
-
     print("-----------------------BRIANS BATTLESHIP GAME-------------------\n")
     print(
             f'Congratulations {user} you have finnished Brians Battleship Game.'
@@ -523,83 +500,78 @@ def end_game():
     )
     print()
     print(
-            f"""Congratulations {user} you won the game with {users_score} points,
-             and the computer had {computers_score} points at the end of the game."""
+            f"Congratulations {user} you won the game with {users_score} points, and the computer had {computers_score} points at the end of the game."
         )
     if users_score > computers_score:
-        print(f'You won the game with {users_ships_remaining} ships still at sea.')
-        print('Thank you for playing my game, hope to see you again soon.')
+        print(f'     Congratulations {user} you won the game with {users_score} points.')
+        print('      Thank you for playing my game, hope to see you again soon.')
 
     elif users_score < computers_score:
-        print(f'Computer wins this time with {computers_score} points and {computers_ships_remaining} ships still sailing.')
-        print(f'Thanks {user} for playing my game, better luck next time.')
-    print()
+        print(f'     Computer wins this time with {computers_score} points.')
+        print(f'     Thanks {user} for playing my game, better luck next time.')
     high_scores()
     print()
-    play_again = input('Press Enter key to restart game: \n')
+    play_again = input('     Press Enter key to restart game: \n')
     reset_var_data()
     main()
     
 
 
 def high_scores():
-    global user
-    global users_score
-    
     new_row = user, users_score
     worksheet_to_update = SHEET.worksheet('players_scores')
     worksheet_to_update.append_row(new_row)
-    print('          Highscore Leaderboard:')
+    print('Highscore Leaderboard:')
     leaderboard = SHEET.worksheet('highscore').get_all_values()
     leaders = leaderboard[0:5]
     for leader in leaders:           
-        print('             ',*leader)
+        print(*leader)
 
 
 def reset_var_data():
     """
     Function to reset all variable values at the end of each game
     """
-    global users_score
+    # global users_score
     users_score = 0
-    global computers_score
-    computers_score = 0
-    global game_board
-    game_board = []
-    global computers_game_board
-    computers_game_board = []
-    global used_rows
-    used_rows = []
-    global used_cols
-    used_cols = []
-    global users_used_guess
-    users_used_guess = []
-    global computers_used_guess
-    computers_used_guess = []
-    global bullets
-    bullets = 20
-    global computers_bullets
-    computers_bullets = 20
-    global users_ships_remaining
-    users_ships_remaining = 4
-    global computers_ships_remaining
-    computers_ships_remaining = 4
-    global ship_A
-    ship_A = []
-    global ship_B
-    ship_B = []
-    global ship_C
-    ship_C = []
-    global ship_D
-    ship_D = []
-    global ship_E
-    ship_E = []
-    global ship_F
-    ship_F = []
-    global ship_G
-    ship_G = []
-    global ship_H
-    ship_H = []
+    # # global computers_score
+    # computers_score = 0
+    # # global game_board
+    # game_board = []
+    # # global computers_game_board
+    # computers_game_board = []
+    # # global used_rows
+    # used_rows = []
+    # # global used_cols
+    # used_cols = []
+    # # global users_used_guess
+    # users_used_guess = []
+    # # global computers_used_guess
+    # computers_used_guess = []
+    # # global bullets
+    # bullets = 20
+    # # global computers_bullets
+    # computers_bullets = 20
+    # # global users_ships_remaining
+    # users_ships_remaining = 4
+    # # global computers_ships_remaining
+    # computers_ships_remaining = 4
+    # # global ship_A
+    # ship_A = []
+    # # global ship_B
+    # ship_B = []
+    # # global ship_C
+    # ship_C = []
+    # # global ship_D
+    # ship_D = []
+    # # global ship_E
+    # ship_E = []
+    # global ship_F
+    # ship_F = []
+    # global ship_G
+    # ship_G = []
+    # global ship_H
+    # ship_H = []
 
 
 def main():

@@ -1,8 +1,26 @@
+import gspread
+from google.oauth2.service_account import Credentials
+# import for google sheets
 from random import randint
 # import only system from os
 from os import system, name
 # import sleep to show output for some time period
 from time import sleep
+from pprint import pprint
+
+
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
+
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('battleship_high_scores')
+players_scores = SHEET.worksheet('players_scores')
+highscore = SHEET.worksheet('highscore')
 
 user = ''
 users_score = 0
@@ -98,8 +116,8 @@ def print_game_board(user):
     nums = ('Columns: 1  2  3  4  5  6  7  8  9  10  |  1  2  3  4  5  6  7  8  9  10')
     space = ('     ')
     spaces = ('    ')
-    global users_score
-    global computers_score
+    # global users_score
+    # global computers_score
     print("---------------------------BRIANS BATTLESHIP GAME----------------------------\n")
     print(f'         Players score: {users_score}                  Computers score: {computers_score}')
     print(nums)
@@ -201,14 +219,14 @@ def place_ship(char, a_game_board, used_rows, used_cols):
 
 def location_of_ship(ship, place):
     ships = list(place)
-    global ship_A
-    global ship_B
-    global ship_C
-    global ship_D
-    global ship_E
-    global ship_F
-    global ship_G
-    global ship_H
+    # global ship_A
+    # global ship_B
+    # global ship_C
+    # global ship_D
+    # global ship_E
+    # global ship_F
+    # global ship_G
+    # global ship_H
 
     if ship == 'A':
         ship_A = ships
@@ -229,8 +247,8 @@ def location_of_ship(ship, place):
 
 
 def users_guess(user):
-    global bullets
-    global computers_bullets
+    # global bullets
+    # global computers_bullets
     while bullets > 0:
         print(ship_E, ship_F, ship_G, ship_H)
         print(f"{user}'s torpedo's remaining: {bullets}          Computers remaining torpedos: {computers_bullets}")
@@ -242,7 +260,7 @@ def users_guess(user):
             if num == True:
                 guess_row = int(row)
                 break
-            
+
         while True:
             col = input("Guess column: ")
             guess_col = col
@@ -317,19 +335,16 @@ def check_num_input(num_input):
     and displays a message to the user displaying
     the charachter they input if not an integer
     """
-    print(num_input)
-    sleep(1)
-    
     if num_input == 'exit':
         clear()
-        end_game()   
-   
+        end_game()
+
     try:
         num = int(num_input)
         return True
 
     except ValueError:
-        print(f"please enter a number value, you entered {num_input}.")
+        print(f"please enter a number value, you entered {num_input}")
         return False
 
 
@@ -344,8 +359,8 @@ def computers_guess():
 
 
 def shots_fired(guess):
-    global computers_ships_remaining
-    global users_score
+    # global computers_ships_remaining
+    # global users_score
     hit = 'hit'
     miss = 'miss'
     if guess in ship_E:
@@ -402,8 +417,8 @@ def shots_fired(guess):
 
 
 def computers_shots_fired(guess):
-    global users_ships_remaining
-    global computers_score
+    # global users_ships_remaining
+    # global computers_score
     hit = 'hit_c'
     miss = 'miss_c'
     if guess in ship_A:
@@ -460,8 +475,8 @@ def computers_shots_fired(guess):
 
 
 def print_board_char(hit, guess_row, guess_col):
-    global users_score
-    global computers_score
+    # global users_score
+    # global computers_score
     if hit == 'hit':
         users_score += 300
         computers_game_board[guess_row - 1][guess_col - 1] = ' @ '
@@ -491,55 +506,53 @@ def end_game():
     end of game or on exiting, also prompting the user to play again.
     """
     clear()
-    
-    global users_score
-    global computers_score
-    global users_ships_remaining
-    global computers_ships_remaining
-    global user
     print("-----------------------BRIANS BATTLESHIP GAME-------------------\n")
-    print('----------------------------GAME OVER! -------------------------')
+    # global user
+    # global users_score
+    # global computers_score
+    # global users_ships_remaining
+    # global computers_ships_remaining
+    
+
+    print(
+            f'Congratulations {user} you have finnished Brians Battleship Game.'
+    )
     print()
-    if users_ships_remaining > computers_ships_remaining:
-        print(
-            f"Congratulations {user} you won the game with {users_score} points and {users_ships_remaining} ships remaining."
-            
+    print('--------------------------- GAME OVER --------------------------')
+    print(
+            f'You had {users_ships_remaining} ships remaining and the computer had {computers_ships_remaining} ships remaining.'
+    )
+    print()
+    print(
+            f"Congratulations {user} you won the game with {users_score} points, and the computer had {computers_score} points at the end of the game."
         )
-        print(
-            f'The computer had {computers_ships_remaining} ships remaining, and had {computers_score} points at the end of the game.'
-        )
-        print('Thank you for playing my game, hope to see you again soon.')
-        print()
-        play_again()
+    if users_score > computers_score:
+        print(f'     Congratulations {user} you won the game with {users_score} points.')
+        print('      Thank you for playing my game, hope to see you again soon.')
 
     elif users_score < computers_score:
-        print(f'Computer wins this time with {computers_score} points, and {computers_ships_remaining} ships remaining.')
-        print(f'Thanks {user} for playing my game, better luck next time.')
-        play_again()
-        
-    elif users_ships_remaining < computers_ships_remaining:
-        print(f'Computer wins this time with {computers_score} points, and {computers_ships_remaining} ships remaining.')        
-        print(
-            f'The computer had {computers_ships_remaining} ships remaining, and had {computers_score} points at the end of the game.'
-        )
-        print('Thank you for playing my game, hope to see you again soon.')
-        print()
-        # play_again()
-        play_again = input('     Would you like to play again? Y/N :  \n')	
-        if play_again.lower() == 'y':	
-            reset_var_data()	
-            main()
+        print(f'     Computer wins this time with {computers_score} points.')
+        print(f'     Thanks {user} for playing my game, better luck next time.')
+    high_scores()
+    print()
+    play_again = input('     Press Enter key to restart game: \n')
+    reset_var_data()
+    main()
+    
 
-def play_again():
-    play_again = input('Would you like to play again? Y/N :  \n')
-    if play_again.lower() == 'y':
-        reset_var_data()
-        main()
-    else:
-        print('-----------------------BRIANS BATTLESHIP GAME-------------------')
-        print('--------------------------- GAME OVER --------------------------')
-        exit()
-  
+
+def high_scores():
+    global user
+    global users_score
+    new_row = user, users_score
+    worksheet_to_update = SHEET.worksheet('players_scores')
+    worksheet_to_update.append_row(new_row)
+    print('Highscore Leaderboard:')
+    leaderboard = SHEET.worksheet('highscore').get_all_values()
+    leaders = leaderboard[0:5]
+    for leader in leaders:           
+        print(*leader)
+
 
 def reset_var_data():
     """
