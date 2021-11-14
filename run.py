@@ -494,6 +494,7 @@ def end_game():
     global users_ships_remaining
     global computers_ships_remaining
     global user
+    
     print(
             f'Congratulations {user} you have finnished Brians Battleship Game.'
     )
