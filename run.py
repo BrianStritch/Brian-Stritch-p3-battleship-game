@@ -59,15 +59,15 @@ def welcome():
     clear()
     print()
     print(
-        '     ---------------------------------- Welcome to ' +
+        '---------------------------------- Welcome to ' +
         '---------------------------------\n'
         )
     print(
-        '     --------------------------- BRIANS BATTLESHIP GAME ' +
+        '--------------------------- BRIANS BATTLESHIP GAME ' +
         '----------------------------\n'
         )
     print(
-        '     ------------------------------------ 2021 ' +
+        '------------------------------------ 2021 ' +
         '-------------------------------------'
         )
     user_name = input('     Enter your name here:\n')
@@ -162,8 +162,8 @@ def print_game_board(user):
             num + 1
         else:
             print(
-                spaces, num + 1, ''.join(game_board[rowcol]) + '  | '
-                + ''.join(computers_game_board[rowcol]), num + 1
+                spaces, num + 1, ''.join(game_board[rowcol]) + '  | ' +
+                ''.join(computers_game_board[rowcol]), num + 1
                 )
     print(f"         {user}'s game board" + '\t\t\t' + "Computer's game board")
     print()
@@ -318,7 +318,7 @@ def users_guess(user):
             if num == 'True':
                 guess_row = int(row)
                 break
-        
+
         while guess_row > 10:
             print('Please enter a number from 1 to 10')
             while True:
@@ -416,7 +416,7 @@ def check_num_input(num_input):
         end_game()
 
     try:
-        unused_variable_num = int(num_input)        
+        unused_variable_num = int(num_input)
         return 'True'
 
     except ValueError:
