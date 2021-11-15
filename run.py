@@ -59,16 +59,16 @@ def welcome():
     clear()
     print()
     print(
-        '---------------------------------- Welcome to ' +
+        '-------------------------------------- Welcome to ' +
         '---------------------------------\n'
         )
     print(
-        '--------------------------- BRIANS BATTLESHIP GAME ' +
+        '------------------------------- BRIANS BATTLESHIP GAME ' +
         '----------------------------\n'
         )
     print(
-        '------------------------------------ 2021 ' +
-        '-------------------------------------'
+        '----------------------------------------- 2021 ' +
+        '------------------------------------'
         )
     user_name = input('     Enter your name here:\n')
     user = user_name.capitalize()
@@ -86,8 +86,8 @@ def game_rules():
     sleep(1)
     clear()
     print(
-        "---------------------------BRIANS BATTLESHIP GAME---" +
-        "-------------------------\n"
+        "----------------------------- BRIANS BATTLESHIP GAME --" +
+        "----------------------------\n"
         )
     print('     Players get 4 ships each.')
     print('     Each ship is 2 characters wide.')
@@ -95,7 +95,7 @@ def game_rules():
     print('     Player goes first, then its the computers turn.')
     print('     Each player gets 300 points per target hit.')
     print('     Additional 150 points bonus awarded for sinking a ship.\n')
-    print('-------------------------GAME INSTRUCTIONS---------------------\n')
+    print('------------------------------- GAME INSTRUCTIONS ---------------------------------\n')
     print('     Guess the co-ordinates of your opponents ship.')
     print('     Top left corner is row: 1, column: 1.')
     print('     Enter the co-ordinates and press Enter key to fire.')
@@ -142,8 +142,8 @@ def print_game_board(user):
     global users_score
     global computers_score
     print(
-        "---------------------------BRIANS BATTLESHIP GAME----" +
-        "------------------------\n"
+        "------------------------------BRIANS BATTLESHIP GAME----" +
+        "--------------------------\n"
         )
     print(
         f'         Players score: {users_score}                 ' +
