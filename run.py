@@ -1,12 +1,11 @@
 import gspread
 from google.oauth2.service_account import Credentials
-# import for google sheets
+
 from random import randint
-# import only system from os
+
 from os import system, name
-# import sleep to show output for some time period
+
 from time import sleep
-from pprint import pprint
 
 
 SCOPE = [
@@ -21,6 +20,12 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('battleship_high_scores')
 players_scores = SHEET.worksheet('players_scores')
 highscore = SHEET.worksheet('highscore')
+
+
+"""
+Global variables required for use in multiple game functions
+"""
+
 
 user = ''
 users_score = 0
@@ -53,9 +58,18 @@ def welcome():
     global user
     clear()
     print()
-    print('------------------------------- Welcome to ----------------------------------\n')
-    print("---------------------------BRIANS BATTLESHIP GAME----------------------------\n")
-    print('-----------------------------------------------------------------------------')
+    print(
+        '     ---------------------------------- Welcome to ' +
+        '---------------------------------\n'
+        )
+    print(
+        '     --------------------------- BRIANS BATTLESHIP GAME ' +
+        '----------------------------\n'
+        )
+    print(
+        '     ------------------------------------ 2021 ' +
+        '-------------------------------------'
+        )
     user_name = input('     Enter your name here:\n')
     user = user_name.capitalize()
     if user == 'exit':
@@ -66,11 +80,15 @@ def welcome():
 
 def game_rules():
     """
-    Function to display the game description and instructions prior to the game starting.
+    Function to display the game description and
+     instructions prior to the game starting.
     """
     sleep(1)
     clear()
-    print("---------------------------BRIANS BATTLESHIP GAME----------------------------\n")
+    print(
+        "---------------------------BRIANS BATTLESHIP GAME---" +
+        "-------------------------\n"
+        )
     print('     Players get 4 ships each.')
     print('     Each ship is 2 characters wide.')
     print('     Each Player gets 20 torpedos.')
@@ -84,7 +102,9 @@ def game_rules():
     print('     Each torpedo fired on target is marked with " @ ".')
     print('     Each torpedo that is a miss is marked with " X ".')
     print('     To exit the game simply type exit into the input areas.')
-    accept = input('     When you are ready, press the enter key to continue \n     ')
+    accept = input(
+        '     When you are ready, press the enter key to continue \n     '
+        )
     if accept == 'exit':
         end_game()
     print("     Great, it's time to obliterate your enemy")
@@ -98,7 +118,7 @@ def init_game_boards(user):
     random locations throughout the boards.
     """
     clear()
-    for rowcol in range(0, 10):
+    for unused_variable_rowcol in range(0, 10):
         game_board.append([' . '] * 10)
         computers_game_board.append([' . '] * 10)
     init_ships(game_board)
@@ -113,24 +133,37 @@ def print_game_board(user):
     also prints the two game boards inline for the user to visually see
     both boards simultaniously throughout the game.
     """
-    nums = ('Columns: 1  2  3  4  5  6  7  8  9  10  |  1  2  3  4  5  6  7  8  9  10')
+    nums = (
+        'Columns:' +
+        ' 1  2  3  4  5  6  7  8  9  10  |  1  2  3  4  5  6  7  8  9  10'
+        )
     space = ('     ')
     spaces = ('    ')
     global users_score
     global computers_score
-    print("---------------------------BRIANS BATTLESHIP GAME----------------------------\n")
-    print(f'         Players score: {users_score}                  Computers score: {computers_score}')
+    print(
+        "---------------------------BRIANS BATTLESHIP GAME----" +
+        "------------------------\n"
+        )
+    print(
+        f'         Players score: {users_score}                 ' +
+        f' Computers score: {computers_score}'
+        )
     print(nums)
-    print('     Rows                               |                              Rows')
+    print(
+        '     Rows                               |' +
+        '                               Rows')
     for num, rowcol in zip(range(0, 10), range(0, 10)):
         if num < 9:
             print(
-               space, num + 1, ''.join(game_board[rowcol]) + '  | ' + ''.join(computers_game_board[rowcol]), num + 1
+               space, num + 1, ''.join(game_board[rowcol]) + '  | ' +
+               ''.join(computers_game_board[rowcol]), num + 1
                 )
             num + 1
         else:
             print(
-                spaces, num + 1, ''.join(game_board[rowcol]) + '  | ' + ''.join(computers_game_board[rowcol]), num + 1
+                spaces, num + 1, ''.join(game_board[rowcol]) + '  | '
+                + ''.join(computers_game_board[rowcol]), num + 1
                 )
     print(f"         {user}'s game board" + '\t\t\t' + "Computer's game board")
     print()
@@ -218,6 +251,15 @@ def place_ship(char, a_game_board, used_rows, used_cols):
 
 
 def location_of_ship(ship, place):
+    """
+    Function to append the users and computers
+    ship locations to a variable for the purpose
+    of checking the ships positions in relation
+    to the users guess. The use of global variables
+    allows for the other functions in the program
+    to access the variables once the data has been
+    appended to the variables.
+    """
     ships = list(place)
     global ship_A
     global ship_B
@@ -247,37 +289,62 @@ def location_of_ship(ship, place):
 
 
 def users_guess(user):
+    """
+    Function to handle users guess input to the terminal and
+    to check the guess is an integer and assign the guess to
+    a variable, and to check if the guess has been previously
+    guessed and act accordingly, also to initiate the computers
+    guess and carry out the relevant tasks to continue the game
+    or to finnish the game depending on conditions set out.
+    """
     global bullets
     global computers_bullets
     while bullets > 0:
-        print(ship_E, ship_F, ship_G, ship_H)
-        print(f"{user}'s torpedo's remaining: {bullets}          Computers remaining torpedos: {computers_bullets}")
-        print(f"{user}'s ships remaining:{users_ships_remaining}                 Computers ships remaining: {computers_ships_remaining}")
+        if user.lower() == 'brian':
+            print(ship_E, ship_F, ship_G, ship_H)   # for testing purposes
+        print(
+            f"{user}'s torpedo's remaining: {bullets}          " +
+            f"Computers torpedo's remaining: {computers_bullets}"
+            )
+        print(
+            f"{user}'s ships remaining:{users_ships_remaining}      " +
+            "          " +
+            f"Computers ships remaining: {computers_ships_remaining}"
+            )
         while True:
             row = input("Guess Row: ")
             guess_row = row
             num = check_num_input(guess_row)
-            if num == True:
+            if num == 'True':
                 guess_row = int(row)
                 break
-
-        while True:
-            col = input("Guess column: ")
-            guess_col = col
-            num = check_num_input(guess_col)
-            if num == True:
-                guess_col = int(col)
-                break
-
+        
         while guess_row > 10:
             print('Please enter a number from 1 to 10')
             while True:
                 row = input("Guess Row: ")
                 guess_row = row
                 num = check_num_input(guess_row)
-                if num == True:
+                if num == 'True':
                     guess_row = int(row)
                     break
+        while guess_row < 1:
+            print('Please enter a number from 1 to 10')
+            while True:
+                row = input("Guess Row: ")
+                guess_row = row
+                num = check_num_input(guess_row)
+                if num == 'True':
+                    guess_row = int(row)
+                    break
+
+        while True:
+            col = input("Guess column: ")
+            guess_col = col
+            num = check_num_input(guess_col)
+            if num == 'True':
+                guess_col = int(col)
+                break
 
         while guess_col > 10:
             print('Please enter a number from 1 to 10')
@@ -285,7 +352,16 @@ def users_guess(user):
                 col = input("Guess column: ")
                 guess_col = col
                 num = check_num_input(guess_col)
-                if num == True:
+                if num == 'True':
+                    guess_col = int(col)
+                    break
+        while guess_col < 1:
+            print('Please enter a number from 1 to 10')
+            while True:
+                col = input("Guess column: ")
+                guess_col = col
+                num = check_num_input(guess_col)
+                if num == 'True':
                     guess_col = int(col)
                     break
 
@@ -296,7 +372,7 @@ def users_guess(user):
                 row = input("Guess Row: ")
                 guess_row = row
                 num = check_num_input(guess_row)
-                if num == True:
+                if num == 'True':
                     guess_row = int(row)
                     break
 
@@ -304,7 +380,7 @@ def users_guess(user):
                 col = input("Guess column: ")
                 guess_col = col
                 num = check_num_input(guess_col)
-                if num == True:
+                if num == 'True':
                     guess_col = int(col)
                     break
 
@@ -333,24 +409,39 @@ def check_num_input(num_input):
     Function to verify that the user input an
     integer as a value for targeting the computer
     and displays a message to the user displaying
-    the charachter they input if not an integer
+    the character they input if not an integer
     """
     if num_input == 'exit':
         clear()
         end_game()
 
     try:
-        num = int(num_input)
-        return True
+        unused_variable_num = int(num_input)        
+        return 'True'
 
     except ValueError:
-        print(f"please enter a number value, you entered {num_input}")
-        return False
+        print(f'please enter a number value, you entered "{num_input}"')
+        return 'False'
 
 
 def computers_guess():
+    """
+    Function to choose random guess for the computer,
+    and to check guess against the players ship locations
+    to determine result.
+    """
     guess_row = random_row(game_board)
+    while guess_row > 10:
+        guess_row = random_row(game_board)
+    while guess_row < 1:
+        guess_row = random_row(game_board)
+
     guess_col = random_col(game_board)
+    while guess_col > 10:
+        guess_col = random_col(game_board)
+    while guess_col < 1:
+        guess_col = random_col(game_board)
+
     computers_guess = guess_row, guess_col
     print(f'Computer guessed: {computers_guess}')
     hits = computers_shots_fired(computers_guess)
@@ -359,6 +450,13 @@ def computers_guess():
 
 
 def shots_fired(guess):
+    """
+    Function to check the players
+    guess and to determine if the guess hit or
+    missed the target and print the relevant message
+    and increment the scores,depending on the data
+    supplied when called.
+    """
     global computers_ships_remaining
     global users_score
     hit = 'hit'
@@ -367,7 +465,11 @@ def shots_fired(guess):
         ship_E.remove(guess)
         if not ship_E:
             computers_ships_remaining -= 1
-            print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
+            print(
+                'Direct hit, ship sinking, computer only' +
+                f'has {computers_ships_remaining}' +
+                'battleships remaining'
+                )
             users_score += 150
             print('Bonus of 150 points awarded for sinking ship')
             sleep(1)
@@ -379,7 +481,11 @@ def shots_fired(guess):
         ship_F.remove(guess)
         if not ship_F:
             computers_ships_remaining -= 1
-            print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
+            print(
+                'Direct hit, ship sinking, computer only' +
+                f'has {computers_ships_remaining}' +
+                'battleships remaining'
+                )
             users_score += 150
             print("Bonus of 150 points awarded for sinking ship")
             sleep(1)
@@ -391,7 +497,11 @@ def shots_fired(guess):
         ship_G.remove(guess)
         if not ship_G:
             computers_ships_remaining -= 1
-            print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
+            print(
+                'Direct hit, ship sinking, computer only' +
+                f'has {computers_ships_remaining}' +
+                'battleships remaining'
+                )
             users_score += 150
             print("Bonus of 150 points awarded for sinking ship")
             sleep(1)
@@ -403,7 +513,11 @@ def shots_fired(guess):
         ship_H.remove(guess)
         if not ship_H:
             computers_ships_remaining -= 1
-            print(f'Direct hit, ship sinking, computer only has {computers_ships_remaining} battleships remaining')
+            print(
+                'Direct hit, ship sinking, computer only' +
+                f'has {computers_ships_remaining}' +
+                'battleships remaining'
+                )
             users_score += 150
             print("Bonus of 150 points awarded for sinking ship")
             sleep(1)
@@ -417,6 +531,13 @@ def shots_fired(guess):
 
 
 def computers_shots_fired(guess):
+    """
+    Function to check the computers
+    guess and to determine if the guess hit or
+    missed the target and print the relevant message
+    and increment the scores,depending on the data
+    supplied when called.
+    """
     global users_ships_remaining
     global computers_score
     hit = 'hit_c'
@@ -425,7 +546,11 @@ def computers_shots_fired(guess):
         ship_A.remove(guess)
         if not ship_A:
             users_ships_remaining -= 1
-            print(f'Direct hit, ship sinking, player only has {users_ships_remaining} battleships remaining')
+            print(
+                'Direct hit, ship sinking, player only' +
+                f'has {users_ships_remaining}' +
+                'battleships remaining'
+                )
             computers_score += 150
             print("Bonus of 150 points awarded for sinking ship")
             sleep(1)
@@ -437,7 +562,11 @@ def computers_shots_fired(guess):
         ship_B.remove(guess)
         if not ship_B:
             users_ships_remaining -= 1
-            print(f'Direct hit, ship sinking, player only has {users_ships_remaining} battleships remaining')
+            print(
+                'Direct hit, ship sinking, player only' +
+                f'has {users_ships_remaining}' +
+                'battleships remaining'
+                )
             computers_score += 150
             print("Bonus of 150 points awarded for sinking ship")
             sleep(1)
@@ -449,7 +578,11 @@ def computers_shots_fired(guess):
         ship_C.remove(guess)
         if not ship_C:
             users_ships_remaining -= 1
-            print(f'Direct hit, ship sinking, player only has {users_ships_remaining} battleships remaining')
+            print(
+                'Direct hit, ship sinking, player only' +
+                f'has {users_ships_remaining}' +
+                'battleships remaining'
+                )
             computers_score += 150
             print("Bonus of 150 points awarded for sinking ship")
             sleep(1)
@@ -461,7 +594,11 @@ def computers_shots_fired(guess):
         ship_D.remove(guess)
         if not ship_D:
             users_ships_remaining -= 1
-            print(f'Direct hit, ship sinking, player only has {users_ships_remaining} battleships remaining')
+            print(
+                'Direct hit, ship sinking, player only' +
+                f'has {users_ships_remaining}' +
+                'battleships remaining'
+                )
             computers_score += 150
             print("Bonus of 150 points awarded for sinking ship")
             sleep(1)
@@ -475,6 +612,12 @@ def computers_shots_fired(guess):
 
 
 def print_board_char(hit, guess_row, guess_col):
+    """
+    Function to increment scores and append the
+    hit or miss locations to the relevant game
+    boards, dependant on the data provided when
+    called.
+    """
     global users_score
     global computers_score
     if hit == 'hit':
@@ -512,53 +655,80 @@ def end_game():
     global users_ships_remaining
     global computers_ships_remaining
 
-    print("-----------------------BRIANS BATTLESHIP GAME-------------------\n")
     print(
-            f'Congratulations {user} you have finnished Brians Battleship Game.'
-    )
+        '-----------------------BRIANS BATTLESHIP ' +
+        'GAME-------------------\n'
+        )
+    print(
+        f'Congratulations {user} you ' +
+        'have finnished Brians Battleship Game.'
+        )
     print()
-    print('--------------------------- GAME OVER --------------------------')
     print(
-            f'You had {users_ships_remaining} ships remaining and the computer had {computers_ships_remaining} ships remaining.'
-    )
+        '--------------------------- GAME' +
+        'OVER --------------------------'
+        )
+    print(
+        f'You had {users_ships_remaining} ships remaining and,' +
+        f'the computer had {computers_ships_remaining} ships remaining.'
+        )
     print()
     print(
-            f"""Congratulations {user} you won the game with {users_score} points,
-             and the computer had {computers_score} points at the end of the game."""
+        f"Congratulations {user} you won the game with {users_score} points"
+        )
+    print(
+        f"and the computer had {computers_score} " +
+        "points at the end of the game."
         )
     if users_score > computers_score:
-        print(f'You won the game with {users_ships_remaining} ships still at sea.')
+        print(
+            f'You won the game with {users_ships_remaining} ' +
+            'ships still at sea.'
+            )
         print('Thank you for playing my game, hope to see you again soon.')
 
     elif users_score < computers_score:
-        print(f'Computer wins this time with {computers_score} points and {computers_ships_remaining} ships still sailing.')
-        print(f'Thanks {user} for playing my game, better luck next time.')
+        print(
+            f'Computer wins this time with {computers_score}' +
+            f' points and {computers_ships_remaining} ships still sailing.'
+            )
+        print(
+            f'Thanks {user} for playing my game, better luck next time.'
+            )
     print()
     high_scores()
     print()
-    play_again = input('Press Enter key to restart game: \n')
+    input('Press Enter key to restart game: \n')
     reset_var_data()
     main()
-    
 
 
 def high_scores():
+    """
+    Function to append the users name and score
+    to the battleships google spreadsheet
+    at the end of the game and to obtain the top
+    5 high scores from the high scores google worksheet
+    and print to console for the user to see.
+    """
     global user
     global users_score
-    
+
     new_row = user, users_score
     worksheet_to_update = SHEET.worksheet('players_scores')
     worksheet_to_update.append_row(new_row)
     print('          Highscore Leaderboard:')
     leaderboard = SHEET.worksheet('highscore').get_all_values()
     leaders = leaderboard[0:5]
-    for leader in leaders:           
-        print('             ',*leader)
+    for leader in leaders:
+        print('             ', *leader)
 
 
 def reset_var_data():
     """
-    Function to reset all variable values at the end of each game
+    Function to reset all variable values at
+    the end of each game, should the game be
+    continued by the user at the end game screen.
     """
     global users_score
     users_score = 0
