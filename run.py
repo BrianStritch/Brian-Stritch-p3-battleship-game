@@ -59,15 +59,15 @@ def welcome():
     clear()
     print()
     print(
-        '-------------------------------------- Welcome to ' +
+        '----------------------------------- Welcome to ' +
         '---------------------------------\n'
         )
     print(
-        '------------------------------- BRIANS BATTLESHIP GAME ' +
+        '---------------------------- BRIANS BATTLESHIP GAME ' +
         '----------------------------\n'
         )
     print(
-        '----------------------------------------- 2021 ' +
+        '-------------------------------------- 2021 ' +
         '------------------------------------'
         )
     user_name = input('     Enter your name here:\n')
@@ -86,8 +86,8 @@ def game_rules():
     sleep(1)
     clear()
     print(
-        "----------------------------- BRIANS BATTLESHIP GAME --" +
-        "----------------------------\n"
+        "--------------------------- BRIANS BATTLESHIP GAME --" +
+        "---------------------------\n"
         )
     print('     Players get 4 ships each.')
     print('     Each ship is 2 characters wide.')
@@ -95,7 +95,7 @@ def game_rules():
     print('     Player goes first, then its the computers turn.')
     print('     Each player gets 300 points per target hit.')
     print('     Additional 150 points bonus awarded for sinking a ship.\n')
-    print('------------------------------- GAME INSTRUCTIONS ---------------------------------\n')
+    print('------------------------------- GAME INSTRUCTIONS ------------------------------\n')
     print('     Guess the co-ordinates of your opponents ship.')
     print('     Top left corner is row: 1, column: 1.')
     print('     Enter the co-ordinates and press Enter key to fire.')
@@ -143,7 +143,7 @@ def print_game_board(user):
     global computers_score
     print(
         "------------------------------BRIANS BATTLESHIP GAME----" +
-        "--------------------------\n"
+        "------------------------\n"
         )
     print(
         f'         Players score: {users_score}                 ' +
@@ -656,49 +656,49 @@ def end_game():
     global computers_ships_remaining
 
     print(
-        '-----------------------BRIANS BATTLESHIP ' +
-        'GAME-------------------\n'
+        '------------------------------ BRIANS BATTLESHIP ' +
+        'GAME---------------------------\n'
         )
     print(
-        f'Congratulations {user} you ' +
+        f'      Congratulations {user} you ' +
         'have finnished Brians Battleship Game.'
         )
     print()
     print(
-        '--------------------------- GAME' +
-        'OVER --------------------------'
+        '----------------------------------- GAME' +
+        'OVER -----------------------------------'
         )
     print(
-        f'You had {users_ships_remaining} ships remaining and,' +
-        f'the computer had {computers_ships_remaining} ships remaining.'
+        f'      You had {users_ships_remaining} ships remaining and,' +
+        f'The computer had {computers_ships_remaining} ships remaining.'
         )
     print()
     print(
-        f"Congratulations {user} you won the game with {users_score} points"
+        f"      Congratulations {user} you won the game with {users_score} points"
         )
     print(
-        f"and the computer had {computers_score} " +
+        f"      and the computer had {computers_score} " +
         "points at the end of the game."
         )
     if users_score > computers_score:
         print(
-            f'You won the game with {users_ships_remaining} ' +
+            f'      You won the game with {users_ships_remaining} ' +
             'ships still at sea.'
             )
-        print('Thank you for playing my game, hope to see you again soon.')
+        print('      Thank you for playing my game, hope to see you again soon.')
 
     elif users_score < computers_score:
         print(
-            f'Computer wins this time with {computers_score}' +
+            f'      Computer wins this time with {computers_score}' +
             f' points and {computers_ships_remaining} ships still sailing.'
             )
         print(
-            f'Thanks {user} for playing my game, better luck next time.'
+            f'      Thanks {user} for playing my game, better luck next time.'
             )
     print()
     high_scores()
     print()
-    input('Press Enter key to restart game: \n')
+    input('                  Press Enter key to restart game: \n')
     reset_var_data()
     main()
 
@@ -717,11 +717,11 @@ def high_scores():
     new_row = user, users_score
     worksheet_to_update = SHEET.worksheet('players_scores')
     worksheet_to_update.append_row(new_row)
-    print('          Highscore Leaderboard:')
+    print('                      Highscore Leaderboard:')
     leaderboard = SHEET.worksheet('highscore').get_all_values()
     leaders = leaderboard[0:5]
     for leader in leaders:
-        print('             ', *leader)
+        print('                         ', *leader)
 
 
 def reset_var_data():
