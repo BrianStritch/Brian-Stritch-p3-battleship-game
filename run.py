@@ -81,26 +81,35 @@ def welcome():
     user = user_name.capitalize()
     if user == 'exit':
         end_game()
-    print('Game Levels:')
+    print('                                    Game Levels:')
     print(
-        '                             Beginner = 1 ,' +
+        '                      Beginner = 1 ,' +
         ' Intermediate = 2 , Advanced = 3'
         )
-    level = input(
-                '                             ' +
+    while True:    
+            level = input(
+                '                           ' +
                 'Please enter your chosen game level: \n'
                 )
+            levels = level
+            num = check_num_input(levels)            
+            if num == 'True':
+                if int(levels) > 0 :
+                    if int(levels) < 4:                          
+                        break
+            print('Please enter a number between 1 and 3.')
     print(
         f"                         Welcome {user}, " +
         f"You chose level {level}"
         )
-    if level == '1':
-        users_ships_remaining = 3
-        computers_ships_remaining = 3
     print(
         '                             ' +
         'good luck, you will need it'
-        )
+        )    
+    if level == '1':
+        users_ships_remaining = 3
+        computers_ships_remaining = 3
+    sleep(1)
     return user
 
 
@@ -116,7 +125,8 @@ def game_rules():
         "--------------------------- BRIANS BATTLESHIP GAME --" +
         "---------------------------\n"
         )
-    print('     Players get 4 ships each.')
+    print('     level 1 Players get 3 ships each.')
+    print('     level 2 and level 3 Players get 4 ships each.')
     print('     Each ship is 2 characters wide.')
     print('     Each Player gets 20 torpedos.')
     print('     Player goes first, then its the computers turn.')
@@ -127,7 +137,6 @@ def game_rules():
         '----------------------\n'
         )
     print('     Guess the co-ordinates of your opponents ship.')
-    print('     Top left corner is row: 1, column: 1.')
     print('     Enter the co-ordinates and press Enter key to fire.')
     print('     Each torpedo fired on target is marked with " @ ".')
     print('     Each torpedo that is a miss is marked with " X ".')
