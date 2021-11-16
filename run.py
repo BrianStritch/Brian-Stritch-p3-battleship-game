@@ -68,13 +68,16 @@ def welcome():
         )
     print(
         '-------------------------------------- 2021 ' +
-        '------------------------------------'
+        '------------------------------------\n'
         )
-    user_name = input('     Enter your name here:\n')
+    user_name = input(
+        '                             ' +
+        ' Enter your name here:\n'
+        )
     user = user_name.capitalize()
     if user == 'exit':
         end_game()
-    print(f"     Welcome {user}, good luck, you'll need it")
+    print(f"                         Welcome {user}, good luck, you'll need it")
     return user
 
 
@@ -85,6 +88,7 @@ def game_rules():
     """
     sleep(1)
     clear()
+    print()
     print(
         "--------------------------- BRIANS BATTLESHIP GAME --" +
         "---------------------------\n"
