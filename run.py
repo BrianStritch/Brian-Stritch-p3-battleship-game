@@ -95,7 +95,10 @@ def game_rules():
     print('     Player goes first, then its the computers turn.')
     print('     Each player gets 300 points per target hit.')
     print('     Additional 150 points bonus awarded for sinking a ship.\n')
-    print('------------------------------- GAME INSTRUCTIONS ------------------------------\n')
+    print(
+        '------------------------------- GAME INSTRUCTIONS --------' +
+        '----------------------\n'
+        )
     print('     Guess the co-ordinates of your opponents ship.')
     print('     Top left corner is row: 1, column: 1.')
     print('     Enter the co-ordinates and press Enter key to fire.')
@@ -669,15 +672,16 @@ def end_game():
         'OVER -----------------------------------'
         )
     print(
-        f'      You had {users_ships_remaining} ships remaining and,' +
-        f'The computer had {computers_ships_remaining} ships remaining.'
+        f'      You had {users_ships_remaining} ships remaining and' +
+        f' the computer had {computers_ships_remaining} ships remaining.'
         )
     print()
     print(
-        f"      Congratulations {user} you won the game with {users_score} points"
+        f"      Congratulations {user} you won the game with {users_score}" +
+        " points"
         )
     print(
-        f"      and the computer had {computers_score} " +
+        f"      The computer had {computers_score} " +
         "points at the end of the game."
         )
     if users_score > computers_score:
@@ -685,7 +689,10 @@ def end_game():
             f'      You won the game with {users_ships_remaining} ' +
             'ships still at sea.'
             )
-        print('      Thank you for playing my game, hope to see you again soon.')
+        print(
+            '      Thank you for playing my game, hope to ' +
+            'see you again soon.'
+            )
 
     elif users_score < computers_score:
         print(
