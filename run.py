@@ -141,8 +141,8 @@ def print_game_board(user):
     both boards simultaniously throughout the game.
     """
     nums = (
-        'Columns:' +
-        ' 1  2  3  4  5  6  7  8  9  10  |  1  2  3  4  5  6  7  8  9  10'
+        ' Columns:' +
+        '1  2  3  4  5  6  7  8  9  10  |  1  2  3  4  5  6  7  8  9  10'
         )
     space = ('     ')
     spaces = ('    ')
@@ -310,16 +310,16 @@ def users_guess(user):
         if user.lower() == 'brian':
             print(ship_E, ship_F, ship_G, ship_H)   # for testing purposes
         print(
-            f"{user}'s torpedo's remaining: {bullets}          " +
-            f"Computers torpedo's remaining: {computers_bullets}"
+            f" {user}'s torpedo's remaining: {bullets}          " +
+            f" Computers torpedo's remaining: {computers_bullets}"
             )
         print(
-            f"{user}'s ships remaining:{users_ships_remaining}      " +
+            f" {user}'s ships remaining:{users_ships_remaining}      " +
             "          " +
-            f"Computers ships remaining: {computers_ships_remaining}"
+            f" Computers ships remaining: {computers_ships_remaining}"
             )
         while True:
-            row = input("Guess Row: ")
+            row = input(" Guess Row: ")
             guess_row = row
             num = check_num_input(guess_row)
             if num == 'True':
@@ -327,18 +327,18 @@ def users_guess(user):
                 break
 
         while guess_row > 10:
-            print('Please enter a number from 1 to 10')
+            print(' Please enter a number from 1 to 10')
             while True:
-                row = input("Guess Row: ")
+                row = input(" Guess Row: ")
                 guess_row = row
                 num = check_num_input(guess_row)
                 if num == 'True':
                     guess_row = int(row)
                     break
         while guess_row < 1:
-            print('Please enter a number from 1 to 10')
+            print(' Please enter a number from 1 to 10')
             while True:
-                row = input("Guess Row: ")
+                row = input(" Guess Row: ")
                 guess_row = row
                 num = check_num_input(guess_row)
                 if num == 'True':
@@ -346,7 +346,7 @@ def users_guess(user):
                     break
 
         while True:
-            col = input("Guess column: ")
+            col = input(" Guess column: ")
             guess_col = col
             num = check_num_input(guess_col)
             if num == 'True':
@@ -354,18 +354,18 @@ def users_guess(user):
                 break
 
         while guess_col > 10:
-            print('Please enter a number from 1 to 10')
+            print(' Please enter a number from 1 to 10')
             while True:
-                col = input("Guess column: ")
+                col = input(" Guess column: ")
                 guess_col = col
                 num = check_num_input(guess_col)
                 if num == 'True':
                     guess_col = int(col)
                     break
         while guess_col < 1:
-            print('Please enter a number from 1 to 10')
+            print(' Please enter a number from 1 to 10')
             while True:
-                col = input("Guess column: ")
+                col = input(" Guess column: ")
                 guess_col = col
                 num = check_num_input(guess_col)
                 if num == 'True':
@@ -374,9 +374,9 @@ def users_guess(user):
 
         guess = (guess_row, guess_col)
         if guess in users_used_guess:
-            print('you fired here before! Please try again:')
+            print(' You fired here before! Please try again:')
             while True:
-                row = input("Guess Row: ")
+                row = input(" Guess Row: ")
                 guess_row = row
                 num = check_num_input(guess_row)
                 if num == 'True':
@@ -384,7 +384,7 @@ def users_guess(user):
                     break
 
             while True:
-                col = input("Guess column: ")
+                col = input(" Guess column: ")
                 guess_col = col
                 num = check_num_input(guess_col)
                 if num == 'True':
@@ -392,7 +392,7 @@ def users_guess(user):
                     break
 
         users_used_guess.append(guess)
-        print(f"{user} guessed row: {guess_row}, column: {guess_col}")
+        print(f" {user} guessed row: {guess_row}, column: {guess_col}")
         hit_or_miss = shots_fired(guess)
         print_board_char(hit_or_miss, guess_row, guess_col)
         bullets -= 1
@@ -427,7 +427,7 @@ def check_num_input(num_input):
         return 'True'
 
     except ValueError:
-        print(f'please enter a number value, you entered "{num_input}"')
+        print(f' please enter a number value, you entered "{num_input}"')
         return 'False'
 
 
@@ -450,7 +450,7 @@ def computers_guess():
         guess_col = random_col(game_board)
 
     computers_guess = guess_row, guess_col
-    print(f'Computer guessed: {computers_guess}')
+    print(f' Computer guessed: {computers_guess}')
     hits = computers_shots_fired(computers_guess)
     print_board_char(hits, guess_row, guess_col)
     sleep(1)
@@ -473,67 +473,67 @@ def shots_fired(guess):
         if not ship_E:
             computers_ships_remaining -= 1
             print(
-                'Direct hit, ship sinking, computer only' +
+                ' Direct hit, ship sinking, computer only' +
                 f'has {computers_ships_remaining}' +
                 'battleships remaining'
                 )
             users_score += 150
-            print('Bonus of 150 points awarded for sinking ship')
+            print(' Bonus of 150 points awarded for sinking ship')
             sleep(1)
             return hit
         else:
-            print('Direct hit, computers ship defenses are down')
+            print(' Direct hit, computers ship defenses are down')
             return hit
     elif guess in ship_F:
         ship_F.remove(guess)
         if not ship_F:
             computers_ships_remaining -= 1
             print(
-                'Direct hit, ship sinking, computer only' +
+                ' Direct hit, ship sinking, computer only' +
                 f'has {computers_ships_remaining}' +
                 'battleships remaining'
                 )
             users_score += 150
-            print("Bonus of 150 points awarded for sinking ship")
+            print(" Bonus of 150 points awarded for sinking ship")
             sleep(1)
             return hit
         else:
-            print('Direct hit, computers ship defenses are down')
+            print(' Direct hit, computers ship defenses are down')
             return hit
     elif guess in ship_G:
         ship_G.remove(guess)
         if not ship_G:
             computers_ships_remaining -= 1
             print(
-                'Direct hit, ship sinking, computer only' +
+                ' Direct hit, ship sinking, computer only' +
                 f'has {computers_ships_remaining}' +
                 'battleships remaining'
                 )
             users_score += 150
-            print("Bonus of 150 points awarded for sinking ship")
+            print(" Bonus of 150 points awarded for sinking ship")
             sleep(1)
             return hit
         else:
-            print('Direct hit, computers ship defenses are down')
+            print(' Direct hit, computers ship defenses are down')
             return hit
     elif guess in ship_H:
         ship_H.remove(guess)
         if not ship_H:
             computers_ships_remaining -= 1
             print(
-                'Direct hit, ship sinking, computer only' +
+                ' Direct hit, ship sinking, computer only' +
                 f'has {computers_ships_remaining}' +
                 'battleships remaining'
                 )
             users_score += 150
-            print("Bonus of 150 points awarded for sinking ship")
+            print(" Bonus of 150 points awarded for sinking ship")
             sleep(1)
             return hit
         else:
-            print('Direct hit, computers ship defenses are down')
+            print(' Direct hit, computers ship defenses are down')
             return hit
     else:
-        print('You Missed')
+        print(' You Missed')
         return miss
 
 
@@ -554,67 +554,67 @@ def computers_shots_fired(guess):
         if not ship_A:
             users_ships_remaining -= 1
             print(
-                'Direct hit, ship sinking, player only' +
+                ' Direct hit, ship sinking, player only' +
                 f'has {users_ships_remaining}' +
                 'battleships remaining'
                 )
             computers_score += 150
-            print("Bonus of 150 points awarded for sinking ship")
+            print(" Bonus of 150 points awarded for sinking ship")
             sleep(1)
             return hit
         else:
-            print('Direct hit, players ship defenses are down')
+            print(' Direct hit, players ship defenses are down')
             return hit
     elif guess in ship_B:
         ship_B.remove(guess)
         if not ship_B:
             users_ships_remaining -= 1
             print(
-                'Direct hit, ship sinking, player only' +
+                ' Direct hit, ship sinking, player only' +
                 f'has {users_ships_remaining}' +
                 'battleships remaining'
                 )
             computers_score += 150
-            print("Bonus of 150 points awarded for sinking ship")
+            print(" Bonus of 150 points awarded for sinking ship")
             sleep(1)
             return hit
         else:
-            print('Direct hit, players ship defenses are down')
+            print(' Direct hit, players ship defenses are down')
             return hit
     elif guess in ship_C:
         ship_C.remove(guess)
         if not ship_C:
             users_ships_remaining -= 1
             print(
-                'Direct hit, ship sinking, player only' +
+                ' Direct hit, ship sinking, player only' +
                 f'has {users_ships_remaining}' +
                 'battleships remaining'
                 )
             computers_score += 150
-            print("Bonus of 150 points awarded for sinking ship")
+            print(" Bonus of 150 points awarded for sinking ship")
             sleep(1)
             return hit
         else:
-            print('Direct hit, players ship defenses are down')
+            print(' Direct hit, players ship defenses are down')
             return hit
     elif guess in ship_D:
         ship_D.remove(guess)
         if not ship_D:
             users_ships_remaining -= 1
             print(
-                'Direct hit, ship sinking, player only' +
+                ' Direct hit, ship sinking, player only' +
                 f'has {users_ships_remaining}' +
                 'battleships remaining'
                 )
             computers_score += 150
-            print("Bonus of 150 points awarded for sinking ship")
+            print(" Bonus of 150 points awarded for sinking ship")
             sleep(1)
             return hit
         else:
-            print('Direct hit, players ship defenses are down')
+            print(' Direct hit, players ship defenses are down')
             return hit
     else:
-        print('Computer Missed')
+        print(' Computer Missed')
         return miss
 
 
