@@ -77,7 +77,10 @@ def welcome():
     user = user_name.capitalize()
     if user == 'exit':
         end_game()
-    print(f"                         Welcome {user}, good luck, you'll need it")
+    print(
+        f"                         Welcome {user}, " +
+        "good luck, you'll need it"
+        )
     return user
 
 
