@@ -82,8 +82,14 @@ def welcome():
     if user == 'exit':
         end_game()
     print('Game Levels:')
-    print('Beginner = 1 , Intermediate = 2 , Advanced = 3')
-    level = input("Please enter your chosen game level: \n")
+    print(
+        '                             Beginner = 1 ,' +
+        ' Intermediate = 2 , Advanced = 3'
+        )
+    level = input(
+                '                             ' +
+                'Please enter your chosen game level: \n'
+                )
     print(
         f"                         Welcome {user}, " +
         f"You chose level {level}"
@@ -218,27 +224,27 @@ def print_game_board(user):
 
         elif level == '2':
             column_nums = (
-                ' Columns:' +
-                '1  2  3  4  5  6  7  8  9  10  | ' +
-                ' 1  2  3  4  5  6  7  8  9  10'
+                '           Columns:' +
+                '1  2  3  4  5  6  7   | ' +
+                ' 1  2  3  4  5  6  7'
                 )
-            space = ('     ')
+            space = ('               ')
             spaces = ('    ')
             print(
                 "------------------------------BRIANS BATTLESHIP GAME----" +
                 "------------------------\n"
                 )
             print(
-                f'         Players score: {users_score}                 ' +
-                f' Computers score: {computers_score}'
+                f'               Players score: {users_score}       ' +
+                f'           Computers score: {computers_score}'
                 )
             print(column_nums)
             print(
-                '     Rows                               |' +
-                '                               Rows'
+                '               Rows                      |' +
+                '                      Rows'
                 )
-            for num, rowcol in zip(range(0, 10), range(0, 10)):
-                if num < 9:
+            for num, rowcol in zip(range(0, 7), range(0, 7)):
+                if num < 6:
                     print(
                         space, num + 1, ''.join(game_board[rowcol]) + '  | ' +
                         ''.join(computers_game_board[rowcol]), num + 1
@@ -246,11 +252,11 @@ def print_game_board(user):
                     num + 1
                 else:
                     print(
-                        spaces, num + 1, ''.join(game_board[rowcol]) + '  | ' +
+                        space, num + 1, ''.join(game_board[rowcol]) + '  | ' +
                         ''.join(computers_game_board[rowcol]), num + 1
                         )
             print(
-                f"         {user}'s game board" + '\t\t\t' +
+                f"             {user}'s game board" + '\t\t\t' +
                 "Computer's game board"
                 )
         elif level == '3':
@@ -335,7 +341,7 @@ def init_ships(a_game_board):
             location_of_ship('C', user_ship3)
             user_ship4 = place_ship('-DD', a_game_board, used_rows, used_cols)
             location_of_ship('D', user_ship4)
-    else:
+    elif a_game_board == computers_game_board:
         if level == '1':
             computer_ship1 = place_ship(' 1 ', a_game_board, used_rows, used_cols)
             location_of_ship('E', computer_ship1)
@@ -364,27 +370,49 @@ def place_ship(char, a_game_board, used_rows, used_cols):
     ship_row = random_row(a_game_board)
     if ship_row not in used_rows:
         used_rows.append(ship_row)
+    else:
+        ship_row = random_row(a_game_board)
+        if ship_row not in used_rows:
+            used_rows.append(ship_row)
+
     ship_col = random_col(a_game_board)
     if ship_col not in used_cols:
         used_cols.append(ship_col)
+    else:
+        ship_col = random_col(a_game_board)
+        if ship_col not in used_rows:
+            used_rows.append(ship_row)
+
     ship_col2 = ship_col + 1
     if ship_col2 not in used_cols:
         ship_col2 = ship_col + 1
         if level == '1':
             if ship_col2 > 3:
                 ship_col2 = ship_col - 1
-                used_cols.append(ship_col2)
+                if ship_col2 in used_cols:
+                    ship_col2 = ship_row -1
+                    if ship_col2 in used_cols:
+                        ship_col2 = ship_row + 1
+                used_cols.append(ship_col2)  
             else:
                 used_cols.append(ship_col2)
         if level == '2':
             if ship_col2 > 5:
                 ship_col2 = ship_col - 1
+                if ship_col2 in used_cols:
+                    ship_col2 = ship_row -1
+                    if ship_col2 in used_cols:
+                        ship_col2 = ship_row + 1                
                 used_cols.append(ship_col2)
             else:
                 used_cols.append(ship_col2)
         if level == '3':
             if ship_col2 > 8:
                 ship_col2 = ship_col - 1
+                if ship_col2 in used_cols:
+                    ship_col2 = ship_row -1
+                    if ship_col2 in used_cols:
+                        ship_col2 = ship_row + 1                
                 used_cols.append(ship_col2)
             else:
                 used_cols.append(ship_col2)
@@ -458,6 +486,7 @@ def users_guess(user):
     
     while bullets > 0:
         if user.lower() == 'brian':
+            print(ship_A, ship_B, ship_C, ship_D)
             print(ship_E, ship_F, ship_G, ship_H)   # for testing purposes
         print(
             f" {user}'s torpedo's remaining: {bullets}          " +
