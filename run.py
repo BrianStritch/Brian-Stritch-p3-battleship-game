@@ -86,17 +86,17 @@ def welcome():
         '                      Beginner = 1 ,' +
         ' Intermediate = 2 , Advanced = 3'
         )
-    while True:    
-            level = input(
-                '                           ' +
-                'Please enter your chosen game level: \n'
-                )
-            levels = level
-            num = check_num_input(levels)            
-            if num == 'True':
-                if int(levels) > 0 :
-                    if int(levels) < 4:                          
-                        break
+    while True:
+        level = input(
+            '                           ' +
+            'Please enter your chosen game level: \n'
+            )
+        levels = level
+        num = check_num_input(levels)
+        if num == 'True':
+            if int(levels) > 0:
+                if int(levels) < 4:
+                    break
             print('Please enter a number between 1 and 3.')
     print(
         f"                         Welcome {user}, " +
@@ -105,7 +105,7 @@ def welcome():
     print(
         '                             ' +
         'good luck, you will need it'
-        )    
+        )
     if level == '1':
         users_ships_remaining = 3
         computers_ships_remaining = 3
@@ -352,20 +352,34 @@ def init_ships(a_game_board):
             location_of_ship('D', user_ship4)
     elif a_game_board == computers_game_board:
         if level == '1':
-            computer_ship1 = place_ship(' 1 ', a_game_board, used_rows, used_cols)
+            computer_ship1 = place_ship(
+                ' 1 ', a_game_board, used_rows, used_cols
+                )
             location_of_ship('E', computer_ship1)
-            computer_ship2 = place_ship(' 2 ', a_game_board, used_rows, used_cols)
+            computer_ship2 = place_ship(
+                ' 2 ', a_game_board, used_rows, used_cols
+                )
             location_of_ship('F', computer_ship2)
-            computer_ship3 = place_ship(' 3 ', a_game_board, used_rows, used_cols)
+            computer_ship3 = place_ship(
+                ' 3 ', a_game_board, used_rows, used_cols
+                )
             location_of_ship('G', computer_ship3)
         else:
-            computer_ship1 = place_ship(' 1 ', a_game_board, used_rows, used_cols)
+            computer_ship1 = place_ship(
+                ' 1 ', a_game_board, used_rows, used_cols
+                )
             location_of_ship('E', computer_ship1)
-            computer_ship2 = place_ship(' 2 ', a_game_board, used_rows, used_cols)
+            computer_ship2 = place_ship(
+                ' 2 ', a_game_board, used_rows, used_cols
+                )
             location_of_ship('F', computer_ship2)
-            computer_ship3 = place_ship(' 3 ', a_game_board, used_rows, used_cols)
+            computer_ship3 = place_ship(
+                ' 3 ', a_game_board, used_rows, used_cols
+                )
             location_of_ship('G', computer_ship3)
-            computer_ship4 = place_ship(' 4 ', a_game_board, used_rows, used_cols)
+            computer_ship4 = place_ship(
+                ' 4 ', a_game_board, used_rows, used_cols
+                )
             location_of_ship('H', computer_ship4)
 
 
@@ -399,19 +413,19 @@ def place_ship(char, a_game_board, used_rows, used_cols):
             if ship_col2 > 3:
                 ship_col2 = ship_col - 1
                 if ship_col2 in used_cols:
-                    ship_col2 = ship_row -1
+                    ship_col2 = ship_row - 1
                     if ship_col2 in used_cols:
                         ship_col2 = ship_row + 1
-                used_cols.append(ship_col2)  
+                used_cols.append(ship_col2)
             else:
                 used_cols.append(ship_col2)
         if level == '2':
             if ship_col2 > 5:
                 ship_col2 = ship_col - 1
                 if ship_col2 in used_cols:
-                    ship_col2 = ship_row -1
+                    ship_col2 = ship_row - 1
                     if ship_col2 in used_cols:
-                        ship_col2 = ship_row + 1                
+                        ship_col2 = ship_row + 1
                 used_cols.append(ship_col2)
             else:
                 used_cols.append(ship_col2)
@@ -419,9 +433,9 @@ def place_ship(char, a_game_board, used_rows, used_cols):
             if ship_col2 > 8:
                 ship_col2 = ship_col - 1
                 if ship_col2 in used_cols:
-                    ship_col2 = ship_row -1
+                    ship_col2 = ship_row - 1
                     if ship_col2 in used_cols:
-                        ship_col2 = ship_row + 1                
+                        ship_col2 = ship_row + 1
                 used_cols.append(ship_col2)
             else:
                 used_cols.append(ship_col2)
@@ -492,7 +506,7 @@ def users_guess(user):
     """
     global bullets
     global computers_bullets
-    
+
     while bullets > 0:
         if user.lower() == 'brian':
             print(ship_A, ship_B, ship_C, ship_D)
@@ -559,25 +573,28 @@ def users_guess(user):
                 if num == 'True':
                     guess_col = int(col)
                     break
+        while True:
+            guess = (guess_row, guess_col)
+            if guess in users_used_guess:
+                print(' You fired here before! Please try again:')
+                while True:
+                    row = input(" Guess Row: ")
+                    guess_row = row
+                    num = check_num_input(guess_row)
+                    if num == 'True':
+                        guess_row = int(row)
+                        break
 
-        guess = (guess_row, guess_col)
-        if guess in users_used_guess:
-            print(' You fired here before! Please try again:')
-            while True:
-                row = input(" Guess Row: ")
-                guess_row = row
-                num = check_num_input(guess_row)
-                if num == 'True':
-                    guess_row = int(row)
-                    break
-
-            while True:
-                col = input(" Guess column: ")
-                guess_col = col
-                num = check_num_input(guess_col)
-                if num == 'True':
-                    guess_col = int(col)
-                    break
+                while True:
+                    col = input(" Guess column: ")
+                    guess_col = col
+                    num = check_num_input(guess_col)
+                    if num == 'True':
+                        guess_col = int(col)
+                        break
+            else:
+                guess = (guess_row, guess_col)
+                break
 
         users_used_guess.append(guess)
         print(f" {user} guessed row: {guess_row}, column: {guess_col}")
@@ -661,8 +678,8 @@ def shots_fired(guess):
         if not ship_E:
             computers_ships_remaining -= 1
             print(
-                ' Direct hit, ship sinking, computer only' +
-                f'has {computers_ships_remaining}' +
+                ' Direct hit, ship sinking, computer only ' +
+                f'has {computers_ships_remaining} ' +
                 'battleships remaining'
                 )
             users_score += 150
@@ -677,8 +694,8 @@ def shots_fired(guess):
         if not ship_F:
             computers_ships_remaining -= 1
             print(
-                ' Direct hit, ship sinking, computer only' +
-                f'has {computers_ships_remaining}' +
+                ' Direct hit, ship sinking, computer only ' +
+                f'has {computers_ships_remaining} ' +
                 'battleships remaining'
                 )
             users_score += 150
@@ -693,8 +710,8 @@ def shots_fired(guess):
         if not ship_G:
             computers_ships_remaining -= 1
             print(
-                ' Direct hit, ship sinking, computer only' +
-                f'has {computers_ships_remaining}' +
+                ' Direct hit, ship sinking, computer only ' +
+                f'has {computers_ships_remaining} ' +
                 'battleships remaining'
                 )
             users_score += 150
@@ -709,8 +726,8 @@ def shots_fired(guess):
         if not ship_H:
             computers_ships_remaining -= 1
             print(
-                ' Direct hit, ship sinking, computer only' +
-                f'has {computers_ships_remaining}' +
+                ' Direct hit, ship sinking, computer only ' +
+                f'has {computers_ships_remaining} ' +
                 'battleships remaining'
                 )
             users_score += 150
@@ -742,8 +759,8 @@ def computers_shots_fired(guess):
         if not ship_A:
             users_ships_remaining -= 1
             print(
-                ' Direct hit, ship sinking, player only' +
-                f'has {users_ships_remaining}' +
+                ' Direct hit, ship sinking, player only ' +
+                f'has {users_ships_remaining} ' +
                 'battleships remaining'
                 )
             computers_score += 150
@@ -758,8 +775,8 @@ def computers_shots_fired(guess):
         if not ship_B:
             users_ships_remaining -= 1
             print(
-                ' Direct hit, ship sinking, player only' +
-                f'has {users_ships_remaining}' +
+                ' Direct hit, ship sinking, player only ' +
+                f'has {users_ships_remaining} ' +
                 'battleships remaining'
                 )
             computers_score += 150
@@ -774,8 +791,8 @@ def computers_shots_fired(guess):
         if not ship_C:
             users_ships_remaining -= 1
             print(
-                ' Direct hit, ship sinking, player only' +
-                f'has {users_ships_remaining}' +
+                ' Direct hit, ship sinking, player only ' +
+                f'has {users_ships_remaining} ' +
                 'battleships remaining'
                 )
             computers_score += 150
@@ -790,8 +807,8 @@ def computers_shots_fired(guess):
         if not ship_D:
             users_ships_remaining -= 1
             print(
-                ' Direct hit, ship sinking, player only' +
-                f'has {users_ships_remaining}' +
+                ' Direct hit, ship sinking, player only ' +
+                f'has {users_ships_remaining} ' +
                 'battleships remaining'
                 )
             computers_score += 150
@@ -860,8 +877,8 @@ def end_game():
         )
     print()
     print(
-        '----------------------------------- GAME' +
-        'OVER -----------------------------------'
+        '----------------------------------- GAME ' +
+        'OVER ----------------------------------'
         )
     print(
         f'      You had {users_ships_remaining} ships remaining and' +
@@ -885,7 +902,6 @@ def end_game():
             '      Thank you for playing my game, hope to ' +
             'see you again soon.'
             )
-
     elif users_score < computers_score:
         print(
             f'      Computer wins this time with {computers_score}' +
