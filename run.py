@@ -60,6 +60,9 @@ def welcome():
     global level
     global users_ships_remaining
     global computers_ships_remaining
+    game_level = ''
+    
+    
     clear()
     print()
     print(
@@ -74,13 +77,22 @@ def welcome():
         '-------------------------------------- 2021 ' +
         '------------------------------------\n'
         )
-    user_name = input(
+    
+    while True:
+        
+        user_name = input(
         '                             ' +
         ' Enter your name here:\n'
-        )
+        )                
+        if not user_name:
+            print('Please enter a username.')            
+        elif user_name == 'exit':
+            end_game()
+            break 
+        else:
+            break       
     user = user_name.capitalize()
-    if user == 'exit':
-        end_game()
+    print(f'                                    Welcome {user}')
     print('                                    Game Levels:')
     print(
         '                      Beginner = 1 ,' +
@@ -98,9 +110,15 @@ def welcome():
                 if int(levels) < 4:
                     break
             print('Please enter a number between 1 and 3.')
+    if level == '1':
+        game_level = 'Beginner'
+    elif level == '2':
+        game_level = 'Intermediate'
+    elif level == '3':
+        game_level = 'Advanced'
     print(
         f"                         Welcome {user}, " +
-        f"You chose level {level}"
+        f"You chose level {level}, {game_level}"
         )
     print(
         '                             ' +
@@ -410,32 +428,23 @@ def place_ship(char, a_game_board, used_rows, used_cols):
     if ship_col2 not in used_cols:
         ship_col2 = ship_col + 1
         if level == '1':
-            if ship_col2 > 3:
+            if ship_col2 > 4: 
                 ship_col2 = ship_col - 1
-                if ship_col2 in used_cols:
-                    ship_col2 = ship_row - 1
-                    if ship_col2 in used_cols:
-                        ship_col2 = ship_row + 1
-                used_cols.append(ship_col2)
+                used_cols.append(ship_col2)                
+            elif ship_col2 < 2:
+                ship_col2 = ship_col + 1                
+                used_cols.append(ship_col2) 
             else:
                 used_cols.append(ship_col2)
         if level == '2':
             if ship_col2 > 5:
-                ship_col2 = ship_col - 1
-                if ship_col2 in used_cols:
-                    ship_col2 = ship_row - 1
-                    if ship_col2 in used_cols:
-                        ship_col2 = ship_row + 1
+                ship_col2 = ship_col - 1                
                 used_cols.append(ship_col2)
             else:
                 used_cols.append(ship_col2)
         if level == '3':
             if ship_col2 > 8:
                 ship_col2 = ship_col - 1
-                if ship_col2 in used_cols:
-                    ship_col2 = ship_row - 1
-                    if ship_col2 in used_cols:
-                        ship_col2 = ship_row + 1
                 used_cols.append(ship_col2)
             else:
                 used_cols.append(ship_col2)
@@ -868,8 +877,8 @@ def end_game():
     global computers_ships_remaining
 
     print(
-        '------------------------------ BRIANS BATTLESHIP ' +
-        'GAME---------------------------\n'
+        '---------------------------- BRIANS BATTLESHIP ' +
+        'GAME ----------------------------\n'
         )
     print(
         f'      Congratulations {user} you ' +
@@ -877,26 +886,14 @@ def end_game():
         )
     print()
     print(
-        '----------------------------------- GAME ' +
+        '---------------------------------- GAME--' +
         'OVER ----------------------------------'
-        )
-    print(
-        f'      You had {users_ships_remaining} ships remaining and' +
-        f' the computer had {computers_ships_remaining} ships remaining.'
-        )
-    print()
-    print(
-        f"      Congratulations {user} you won the game with {users_score}" +
-        " points"
-        )
-    print(
-        f"      The computer had {computers_score} " +
-        "points at the end of the game."
-        )
+        )    
+    print()    
     if users_score > computers_score:
         print(
-            f'      You won the game with {users_ships_remaining} ' +
-            'ships still at sea.'
+            f'      You won the game with {users_score} points and ' +
+            f'with {users_ships_remaining} ships still at sea.'
             )
         print(
             '      Thank you for playing my game, hope to ' +
@@ -932,7 +929,7 @@ def high_scores():
     new_row = user, users_score
     worksheet_to_update = SHEET.worksheet('players_scores')
     worksheet_to_update.append_row(new_row)
-    print('                      Highscore Leaderboard:')
+    print('                      Top 5 Highscore Leaderboard :')
     leaderboard = SHEET.worksheet('highscore').get_all_values()
     leaders = leaderboard[0:5]
     for leader in leaders:
