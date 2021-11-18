@@ -210,6 +210,7 @@ def print_game_board(user):
         global users_score
         global computers_score
         if level == '1':
+            clear()
             column_nums = (
                 '                 Columns:' +
                 '1  2  3  4  5   | ' +
@@ -250,6 +251,7 @@ def print_game_board(user):
                 )
 
         elif level == '2':
+            clear()
             column_nums = (
                 '           Columns:' +
                 '1  2  3  4  5  6  7   | ' +
@@ -287,6 +289,7 @@ def print_game_board(user):
                 "Computer's game board"
                 )
         elif level == '3':
+            clear()
             column_nums = (
                 ' Columns:' +
                 '1  2  3  4  5  6  7  8  9  10  | ' +
