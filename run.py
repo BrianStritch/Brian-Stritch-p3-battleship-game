@@ -323,6 +323,7 @@ def print_game_board(user):
                 f"         {user}'s game board" + '\t\t\t' +
                 "Computer's game board"
                 )
+    clear()
     game_board_size()
     print()
     users_guess(user)
