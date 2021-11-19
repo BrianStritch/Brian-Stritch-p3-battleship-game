@@ -61,8 +61,6 @@ def welcome():
     global users_ships_remaining
     global computers_ships_remaining
     game_level = ''
-    
-    
     clear()
     print()
     print(
@@ -77,20 +75,30 @@ def welcome():
         '-------------------------------------- 2021 ' +
         '------------------------------------\n'
         )
-    
     while True:
-        
         user_name = input(
-        '                             ' +
-        ' Enter your name here:\n'
-        )                
+            '                             ' +
+            ' Enter your name here:\n'
+            )
         if not user_name:
-            print('Please enter a username.')            
+            print(
+                '                             ',
+                'Please enter a username.'
+                )
+        elif len(user_name) > 6:
+            print(
+                '                  Please enter a username with ',
+                'a maximum of 6 charachters please'
+                )
+        elif user_name.isalpha():
+            break        
+        elif user_name.isalnum():
+            print('                  Please enter a name without numbers')        
         elif user_name == 'exit':
             end_game()
-            break 
+            break
         else:
-            break       
+            break
     user = user_name.capitalize()
     print(f'                                    Welcome {user}')
     print('                                    Game Levels:')
@@ -127,7 +135,7 @@ def welcome():
     if level == '1':
         users_ships_remaining = 3
         computers_ships_remaining = 3
-    sleep(1)
+    sleep(2)
     return user
 
 
@@ -165,7 +173,7 @@ def game_rules():
     if accept == 'exit':
         end_game()
     print("     Great, it's time to obliterate your enemy")
-    sleep(1)
+    sleep(2)
 
 
 def init_game_boards(user):
@@ -206,128 +214,125 @@ def print_game_board(user):
     also prints the two game boards inline for the user to visually see
     both boards simultaniously throughout the game.
     """
-    def game_board_size():
-        global users_score
-        global computers_score
-        if level == '1':
-            clear()
-            column_nums = (
-                '                 Columns:' +
-                '1  2  3  4  5   | ' +
-                ' 1  2  3  4  5'
-                )
-            space = ('                     ')
-            spaces = ('    ')
-            print(
-                "------------------------------BRIANS BATTLESHIP GAME----" +
-                "------------------------\n"
-                )
-            print(
-                f'                Players score: {users_score}      ' +
-                f'         Computers score: {computers_score}'
-                )
-            print()
-            print(column_nums)
-            print(
-                '                     Rows                |' +
-                '                Rows'
-                )
-            for num, rowcol in zip(range(0, 5), range(0, 5)):
-                if num < 4:
-                    print(
-                        space, num + 1, ''.join(game_board[rowcol]) + '  | ' +
-                        ''.join(computers_game_board[rowcol]), num + 1
-                        )
-                    num + 1
-                else:
-                    print(
-                        space, num + 1, ''.join(game_board[rowcol]) + '  | ' +
-                        ''.join(computers_game_board[rowcol]), num + 1
-                        )
-            print()
-            print(
-                f"                {user}'s game board" + '\t\t' +
-                "Computer's game board"
-                )
+    global users_score
+    global computers_score
+    if level == '1':
+        clear()
+        column_nums = (
+            '                 Columns:' +
+            '1  2  3  4  5   | ' +
+            ' 1  2  3  4  5'
+            )
+        space = ('                     ')
+        spaces = ('    ')
+        print(
+            "------------------------------BRIANS BATTLESHIP GAME----" +
+            "------------------------\n"
+            )
+        print(
+            f'                Players score: {users_score}      ' +
+            f'         Computers score: {computers_score}'
+            )
+        print()
+        print(column_nums)
+        print(
+            '                     Rows                |' +
+            '                Rows'
+            )
+        for num, rowcol in zip(range(0, 5), range(0, 5)):
+            if num < 4:
+                print(
+                    space, num + 1, ''.join(game_board[rowcol]) + '  | ' +
+                    ''.join(computers_game_board[rowcol]), num + 1
+                    )
+                num + 1
+            else:
+                print(
+                    space, num + 1, ''.join(game_board[rowcol]) + '  | ' +
+                    ''.join(computers_game_board[rowcol]), num + 1
+                    )
+        print()
+        print(
+            f"                {user}'s game board" + '\t\t' +
+            "Computer's game board"
+             )
 
-        elif level == '2':
-            clear()
-            column_nums = (
-                '           Columns:' +
-                '1  2  3  4  5  6  7   | ' +
-                ' 1  2  3  4  5  6  7'
-                )
-            space = ('               ')
-            spaces = ('    ')
-            print(
-                "------------------------------BRIANS BATTLESHIP GAME----" +
-                "------------------------\n"
-                )
-            print(
-                f'               Players score: {users_score}       ' +
-                f'           Computers score: {computers_score}'
-                )
-            print(column_nums)
-            print(
-                '               Rows                      |' +
-                '                      Rows'
-                )
-            for num, rowcol in zip(range(0, 7), range(0, 7)):
-                if num < 6:
-                    print(
-                        space, num + 1, ''.join(game_board[rowcol]) + '  | ' +
-                        ''.join(computers_game_board[rowcol]), num + 1
-                        )
-                    num + 1
-                else:
-                    print(
-                        space, num + 1, ''.join(game_board[rowcol]) + '  | ' +
-                        ''.join(computers_game_board[rowcol]), num + 1
-                        )
-            print(
-                f"             {user}'s game board" + '\t\t\t' +
-                "Computer's game board"
-                )
-        elif level == '3':
-            clear()
-            column_nums = (
-                ' Columns:' +
-                '1  2  3  4  5  6  7  8  9  10  | ' +
-                ' 1  2  3  4  5  6  7  8  9  10'
-                )
-            space = ('     ')
-            spaces = ('    ')
-            print(
-                "------------------------------BRIANS BATTLESHIP GAME----" +
-                "------------------------\n"
-                )
-            print(
-                f'         Players score: {users_score}                 ' +
-                f' Computers score: {computers_score}'
-                )
-            print(column_nums)
-            print(
-                '     Rows                               |' +
-                '                               Rows'
-                )
-            for num, rowcol in zip(range(0, 10), range(0, 10)):
-                if num < 9:
-                    print(
-                        space, num + 1, ''.join(game_board[rowcol]) + '  | ' +
-                        ''.join(computers_game_board[rowcol]), num + 1
-                        )
-                    num + 1
-                else:
-                    print(
-                        spaces, num + 1, ''.join(game_board[rowcol]) + '  | ' +
-                        ''.join(computers_game_board[rowcol]), num + 1
-                        )
-            print(
-                f"         {user}'s game board" + '\t\t\t' +
-                "Computer's game board"
-                )
-    clear()
-    game_board_size()
+    elif level == '2':
+        clear()
+        column_nums = (
+            '           Columns:' +
+            '1  2  3  4  5  6  7   | ' +
+            ' 1  2  3  4  5  6  7'
+            )
+        space = ('               ')
+        spaces = ('    ')
+        print(
+            "------------------------------BRIANS BATTLESHIP GAME----" +
+            "------------------------\n"
+            )
+        print(
+            f'               Players score: {users_score}       ' +
+            f'           Computers score: {computers_score}'
+            )
+        print(column_nums)
+        print(
+            '               Rows                      |' +
+            '                      Rows'
+            )
+        for num, rowcol in zip(range(0, 7), range(0, 7)):
+            if num < 6:
+                print(
+                    space, num + 1, ''.join(game_board[rowcol]) + '  | ' +
+                    ''.join(computers_game_board[rowcol]), num + 1
+                    )
+                num + 1
+            else:
+                print(
+                    space, num + 1, ''.join(game_board[rowcol]) + '  | ' +
+                    ''.join(computers_game_board[rowcol]), num + 1
+                    )
+        print(
+            f"             {user}'s game board" + '\t\t\t' +
+            "Computer's game board"
+            )
+    elif level == '3':
+        clear()
+        column_nums = (
+            ' Columns:' +
+            '1  2  3  4  5  6  7  8  9  10  | ' +
+            ' 1  2  3  4  5  6  7  8  9  10'
+            )
+        space = ('     ')
+        spaces = ('    ')
+        print(
+            "------------------------------BRIANS BATTLESHIP GAME----" +
+            "------------------------\n"
+            )
+        print(
+            f'         Players score: {users_score}                 ' +
+            f' Computers score: {computers_score}'
+            )
+        print(column_nums)
+        print(
+            '     Rows                               |' +
+            '                               Rows'
+            )
+        for num, rowcol in zip(range(0, 10), range(0, 10)):
+            if num < 9:
+                print(
+                    space, num + 1, ''.join(game_board[rowcol]) + '  | ' +
+                    ''.join(computers_game_board[rowcol]), num + 1
+                    )
+                num + 1
+            else:
+                print(
+                    spaces, num + 1, ''.join(game_board[rowcol]) + '  | ' +
+                    ''.join(computers_game_board[rowcol]), num + 1
+                    )
+        print(
+            f"         {user}'s game board" + '\t\t\t' +
+            "Computer's game board"
+            )
     print()
     users_guess(user)
 
@@ -346,6 +351,14 @@ def random_col(game_board):
     to position ships
     """
     return randint(1, len(game_board[0]) - 1)
+
+
+def random_orientation():
+    """
+    function to return random integer between 1 and 2 to
+    determine the orientation of the ship on the game board
+    """
+    return randint(1, 2)
 
 
 def init_ships(a_game_board):
@@ -427,22 +440,21 @@ def place_ship(char, a_game_board, used_rows, used_cols):
         ship_col = random_col(a_game_board)
         if ship_col not in used_rows:
             used_rows.append(ship_row)
-
     ship_col2 = ship_col + 1
     if ship_col2 not in used_cols:
         ship_col2 = ship_col + 1
         if level == '1':
-            if ship_col2 > 4: 
+            if ship_col2 > 4:
                 ship_col2 = ship_col - 1
-                used_cols.append(ship_col2)                
+                used_cols.append(ship_col2)
             elif ship_col2 < 2:
-                ship_col2 = ship_col + 1                
-                used_cols.append(ship_col2) 
+                ship_col2 = ship_col + 1
+                used_cols.append(ship_col2)
             else:
                 used_cols.append(ship_col2)
         if level == '2':
             if ship_col2 > 5:
-                ship_col2 = ship_col - 1                
+                ship_col2 = ship_col - 1
                 used_cols.append(ship_col2)
             else:
                 used_cols.append(ship_col2)
@@ -454,20 +466,61 @@ def place_ship(char, a_game_board, used_rows, used_cols):
                 used_cols.append(ship_col2)
     else:
         used_cols.append(ship_col2)
-
+    ship_row2 = ship_row + 1
+    if ship_row2 not in used_rows:
+        ship_row2 = ship_row + 1
+        if level == '1':
+            if ship_row2 > 4:
+                ship_row2 = ship_row - 1
+                used_rows.append(ship_row2)
+            elif ship_row2 < 2:
+                ship_row2 = ship_col + 1
+                used_rows.append(ship_row2)
+            else:
+                used_rows.append(ship_row2)
+        if level == '2':
+            if ship_row2 > 5:
+                ship_row2 = ship_col - 1
+                used_rows.append(ship_row2)
+            else:
+                used_rows.append(ship_row2)
+        if level == '3':
+            if ship_row2 > 8:
+                ship_row2 = ship_col - 1
+                used_rows.append(ship_row2)
+            else:
+                used_rows.append(ship_row2)
+    else:
+        used_rows.append(ship_row2)
+    direction = random_orientation()
     if a_game_board == game_board:
-        a_game_board[ship_row][ship_col] = char
-        a_game_board[ship_row][ship_col2] = char
-        ship = ship_row, ship_col
-        ship_ = ship_row, ship_col2
-        return ship, ship_
+        if direction == 1:
+            # ship_row2 = ship_row + 1
+            a_game_board[ship_row][ship_col] = '|$|'
+            a_game_board[ship_row2][ship_col] = '|$|'
+            ship = ship_row, ship_col
+            ship_ = ship_row2, ship_col
+            return ship, ship_
+        elif direction == 2:
+            a_game_board[ship_row][ship_col] = char
+            a_game_board[ship_row][ship_col2] = char
+            ship = ship_row, ship_col
+            ship_ = ship_row, ship_col2
+            return ship, ship_
 
     if a_game_board == computers_game_board:
-        a_game_board[ship_row][ship_col] = " . "
-        a_game_board[ship_row][ship_col2] = " . "
-        ship = ship_row, ship_col
-        ship_ = ship_row, ship_col2
-        return ship, ship_
+        if direction == 1:
+            a_game_board[ship_row][ship_col] = " . "
+            a_game_board[ship_row][ship_col2] = " . "
+            ship = ship_row, ship_col
+            ship_ = ship_row, ship_col2
+            return ship, ship_
+        elif direction == 2:
+            a_game_board[ship_row][ship_col] = " . "
+            a_game_board[ship_row2][ship_col] = " . "
+            ship = ship_row, ship_col
+            ship_ = ship_row2, ship_col
+            return ship, ship_
 
 
 def location_of_ship(ship, place):
@@ -490,22 +543,26 @@ def location_of_ship(ship, place):
     global ship_G
     global ship_H
 
-    if ship == 'A':
-        ship_A = ships
-    elif ship == 'B':
-        ship_B = ships
-    elif ship == 'C':
-        ship_C = ships
-    elif ship == 'D':
-        ship_D = ships
-    elif ship == 'E':
-        ship_E = ships
-    elif ship == 'F':
-        ship_F = ships
-    elif ship == 'G':
-        ship_G = ships
-    elif ship == 'H':
-        ship_H = ships
+    if ships not in ship_A or ship_B or ship_C or \
+            ship_D or ship_E or ship_F or ship_G or ship_H:
+        if ship == 'A':
+            ship_A = ships
+        elif ship == 'B':
+            ship_B = ships
+        elif ship == 'C':
+            ship_C = ships
+        elif ship == 'D':
+            ship_D = ships
+        elif ship == 'E':
+            ship_E = ships
+        elif ship == 'F':
+            ship_F = ships
+        elif ship == 'G':
+            ship_G = ships
+        elif ship == 'H':
+            ship_H = ships
+    else:
+        place = place_ship('-DD', a_game_board, used_rows, used_cols)
 
 
 def users_guess(user):
@@ -522,11 +579,11 @@ def users_guess(user):
 
     while bullets > 0:
         if user.lower() == 'brian':
-            print(ship_A, ship_B, ship_C, ship_D)
+            print(ship_A, ship_B, ship_C, ship_D)   # for testing purposes
             print(ship_E, ship_F, ship_G, ship_H)   # for testing purposes
         print(
-            f" {user}'s torpedo's remaining: {bullets}          " +
-            f" Computers torpedo's remaining: {computers_bullets}"
+            f" {user}'s torpedoes: {bullets}/20          " +
+            f" Computers torpedoes : {computers_bullets}/20"
             )
         print(
             f" {user}'s ships remaining:{users_ships_remaining}      " +
@@ -614,7 +671,7 @@ def users_guess(user):
         hit_or_miss = shots_fired(guess)
         print_board_char(hit_or_miss, guess_row, guess_col)
         bullets -= 1
-        sleep(1)
+        sleep(2)
         computers_guess()
         computers_bullets -= 1
         if bullets == 0:
@@ -624,7 +681,7 @@ def users_guess(user):
         elif computers_ships_remaining == 0:
             end_game()
         else:
-            sleep(2)
+            sleep(3)
             clear()
             print_game_board(user)
 
@@ -671,7 +728,7 @@ def computers_guess():
     print(f' Computer guessed: {computers_guess}')
     hits = computers_shots_fired(computers_guess)
     print_board_char(hits, guess_row, guess_col)
-    sleep(1)
+    sleep(2)
 
 
 def shots_fired(guess):
@@ -697,7 +754,7 @@ def shots_fired(guess):
                 )
             users_score += 150
             print(' Bonus of 150 points awarded for sinking ship')
-            sleep(1)
+            sleep(2)
             return hit
         else:
             print(' Direct hit, computers ship defenses are down')
@@ -713,7 +770,7 @@ def shots_fired(guess):
                 )
             users_score += 150
             print(" Bonus of 150 points awarded for sinking ship")
-            sleep(1)
+            sleep(2)
             return hit
         else:
             print(' Direct hit, computers ship defenses are down')
@@ -729,7 +786,7 @@ def shots_fired(guess):
                 )
             users_score += 150
             print(" Bonus of 150 points awarded for sinking ship")
-            sleep(1)
+            sleep(2)
             return hit
         else:
             print(' Direct hit, computers ship defenses are down')
@@ -745,7 +802,7 @@ def shots_fired(guess):
                 )
             users_score += 150
             print(" Bonus of 150 points awarded for sinking ship")
-            sleep(1)
+            sleep(2)
             return hit
         else:
             print(' Direct hit, computers ship defenses are down')
@@ -778,7 +835,7 @@ def computers_shots_fired(guess):
                 )
             computers_score += 150
             print(" Bonus of 150 points awarded for sinking ship")
-            sleep(1)
+            sleep(2)
             return hit
         else:
             print(' Direct hit, players ship defenses are down')
@@ -794,7 +851,7 @@ def computers_shots_fired(guess):
                 )
             computers_score += 150
             print(" Bonus of 150 points awarded for sinking ship")
-            sleep(1)
+            sleep(2)
             return hit
         else:
             print(' Direct hit, players ship defenses are down')
@@ -810,7 +867,7 @@ def computers_shots_fired(guess):
                 )
             computers_score += 150
             print(" Bonus of 150 points awarded for sinking ship")
-            sleep(1)
+            sleep(2)
             return hit
         else:
             print(' Direct hit, players ship defenses are down')
@@ -826,7 +883,7 @@ def computers_shots_fired(guess):
                 )
             computers_score += 150
             print(" Bonus of 150 points awarded for sinking ship")
-            sleep(1)
+            sleep(2)
             return hit
         else:
             print(' Direct hit, players ship defenses are down')
@@ -892,8 +949,8 @@ def end_game():
     print(
         '---------------------------------- GAME--' +
         'OVER ----------------------------------'
-        )    
-    print()    
+        )
+    print()
     if users_score > computers_score:
         print(
             f'      You won the game with {users_score} points and ' +
