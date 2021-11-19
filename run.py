@@ -82,18 +82,21 @@ def welcome():
             )
         if not user_name:
             print(
-                '                             ',
+                '                           ',
                 'Please enter a username.'
                 )
         elif len(user_name) > 6:
             print(
-                '                  Please enter a username with ',
-                'a maximum of 6 charachters please'
+                '            Please enter a username with ',
+                'a maximum of 6 charachters please:'
                 )
         elif user_name.isalpha():
             break        
         elif user_name.isalnum():
-            print('                  Please enter a name without numbers')        
+            print(
+                '                       Please enter a ',
+                'name without numbers:'
+                )        
         elif user_name == 'exit':
             end_game()
             break
