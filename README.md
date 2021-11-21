@@ -63,13 +63,19 @@ The last screen is visible only when one of the following conditions are met:
 
 4. Once the game starts the game boards are generated and the users ships and computers ships are randomly placed within the game boards. The user can see their ships, however the computers ships remain hidden.
 
-5. The user is asked to guess a row number relevant to the game board size and a column number relevant to the game board size to fire a torpedo to this location on the computers game board.
+5. The game board and number of ships are determined by the game difficulty chosen by the user at the initial welcome screen, and users that choose difficulty level 1 play on a 5 x 5 game board and have 3 ships each. Users that choose difficulty level 2 play on a 7 x 7 game board with 4 ships each. Users that choose difficulty level 3 play on a 10 x 10 game board wit 4 ships each. The user and the computer get 20 torpedoes each for all game difficulty levels. 
 
-6. The user is displayed their current correct and incorrect answer scores during the game at the lower left and right of the screen.
+6. The user is asked to guess a row number relevant to the game board size and a column number relevant to the game board size to fire a torpedo to this location on the computers game board.
 
-7. At the end of the ten questions the user is directed to an end game screen with a new backdrop to differentiate the game screen from the end of game screen, and the user is congratulated and a message is displayed to the user notifying them of their score out of ten.
+7. The user is then displayed the result of their location and is informed if the torpedo has struck its taget, or whether it is a miss.
 
-8. At the end game screen the user has the option to restart the current game or can exit and is redirected to the game selection screen.
+8. The computer then takes its turn randomly choosing a location on the users game board and a message is displayed to inform the user if the computer was succesful at finding their ships or not.
+
+9. The game will continue until the ships have been sunk or the user and computer have no ammunition remaining.
+
+10. At the end of game screen, a message is displayed to the user notifying them of their score and of the remaining ships still at sea. If the user has been victorious then they are congratulated on their victory, alternatively if the computer is victorious the user is displayed a message notifying them of their loss.
+
+8. At the end game screen the user can retart the game and is redirected to the welcome screen.
 
 ## __Technologies__
 ### __Languages used__
@@ -83,15 +89,16 @@ The last screen is visible only when one of the following conditions are met:
   2. Gitpod
     * Platform used to develop and test site.
   3. Github
-    * Platform used to host repository and deployed site.
-  4. Google Fonts
-    * Used for text choice for the game.
-  5. Font Awesome
-    * Used for social media Icons in the footer
-  6. Microsoft Powerpoint
-    * Used to design a visual version of the game in order to quicky establish the layout and styling of the game.
+    * Platform used to host the repository.
+  4. Heroku
+    * This was used to deploy the live terminal version of the game.
+  5. Google Sheets
+    * This was used to retain the username and scores for the high scores displayed at the end game screen.
 
 ### __Existing Features__
+  - The game has three levels of difficulty
+  - The game has the functionality to randomly place ships on the horizontal or vertical axis.
+  - The game has the functionality to record high scores and add the user to the leaderboard should they be applicable.
 
 #### __Social Media__
 
@@ -100,34 +107,26 @@ The last screen is visible only when one of the following conditions are met:
 
 ### __Features Left to Implement__
 
-- Addition of new game types
-- Username entry
-- High score logging  
+- The functionality for the computer to recognise that a ship has been hit and target the surrounding area in order to make the game more realistic as this is how a human would interact with the game should they succesfully hit their opponents ship.
+- The functionality to allow the user to play a battle-space-ship game where the ships are large square objects.
+- The functionality to allow a ship to move around once they have been hit but to stop when sunk.
 
 ## __Testing__ 
 
- - All aspects of the game have been tested and appear to be working as intended. The user should be able to achieve their goal as the game intends, depending on whichever game they choose to play when they visit. 
-
- - I have used Developer tools in Google Chrome to test the responsiveness of the site on different devices small and large and the site appears to render well on different screen sizes, however some issues were noted. see bugs below.
+ - All aspects of the game have been tested and appear to be working as intended with very few errors present. The user should be able to achieve their goal as the game intends, depending on whichever game level they choose to play when they visit. 
 
  - I have tested the site out on Google Chrome and Android, Edge, Safari however it has not been tested on IOS.
 
- - Social Media
-    - Social media link testing    
-        - Click on Linked-in icon and verify that the correct page opens in a new tab.
-        - Click on Gitpod icon and verify that the correct page opens in a new tab.
-    
+ - Community Testing:
+    * Family members testing rigorously and reporting on faults or bugs found and putting forward input to imrove the 
 
 ### __Validator Testing__ 
 ##### __W3C HTML Code Validator:__
   - The code for the html index.html page was entered into the validator and all aspects of the page passed.
   - No errors or warnings were returned when passing through the official W3 HTML validator.
-     ![Smarty Pants Quiz game HTML validator results](/assets/readme/readme-images/html-validator-results.JPG)
+     ![Smarty Pants Quiz game HTML validator results](/readme-images/pep8-checker.JPG)
 
-##### __W3C CSS Jigsaw Validator:__
-  - The code for the stylesheet.css was entered into the validator and passed.
-  - No errors or warnings were returned when passing through the official w3 CSS validator.
-     ![Smarty Pants Quiz game CSS validator results](/assets/readme/readme-images/css-validator-results.JPG)
+
 
 #### __Accessibility lighthouse:__
   - The game site was entered tested using lighthouse in chrome developer tools and passed with 100% in all areas.

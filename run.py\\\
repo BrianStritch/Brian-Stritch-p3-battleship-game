@@ -50,8 +50,6 @@ ship_F = []
 ship_G = []
 ship_H = []
 
-ships_list = ship_A, ship_B, ship_C, ship_D, ship_E, ship_F, ship_G, ship_H
-
 
 def welcome():
     """
@@ -375,41 +373,20 @@ def init_ships(a_game_board):
     global level
     if a_game_board == game_board:
         if level == '1':
-            while True:            
-                user_ship1 = place_ship('-DD', a_game_board, used_rows, used_cols)
-                if user_ship1 not in ships_list:
-                    break
+            user_ship1 = place_ship('-DD', a_game_board, used_rows, used_cols)
             location_of_ship('A', user_ship1)
-            while True:
-                user_ship2 = place_ship('-DD', a_game_board, used_rows, used_cols)
-                if user_ship2 not in ships_list:
-                    break
+            user_ship2 = place_ship('-DD', a_game_board, used_rows, used_cols)
             location_of_ship('B', user_ship2)
-            while True:
-                user_ship3 = place_ship('-DD', a_game_board, used_rows, used_cols)
-                if user_ship3 not in ships_list:
-                    break
+            user_ship3 = place_ship('-DD', a_game_board, used_rows, used_cols)
             location_of_ship('C', user_ship3)
         else:
-            while True:            
-                user_ship1 = place_ship('-DD', a_game_board, used_rows, used_cols)
-                if user_ship1 not in ships_list:
-                    break
+            user_ship1 = place_ship('-DD', a_game_board, used_rows, used_cols)
             location_of_ship('A', user_ship1)
-            while True:
-                user_ship2 = place_ship('-DD', a_game_board, used_rows, used_cols)
-                if user_ship2 not in ships_list:
-                    break
+            user_ship2 = place_ship('-DD', a_game_board, used_rows, used_cols)
             location_of_ship('B', user_ship2)
-            while True:
-                user_ship3 = place_ship('-DD', a_game_board, used_rows, used_cols)
-                if user_ship3 not in ships_list:
-                    break
+            user_ship3 = place_ship('-DD', a_game_board, used_rows, used_cols)
             location_of_ship('C', user_ship3)
-            while True:
-                user_ship4 = place_ship('-DD', a_game_board, used_rows, used_cols)
-                if user_ship4 not in ships_list:
-                    break
+            user_ship4 = place_ship('-DD', a_game_board, used_rows, used_cols)
             location_of_ship('D', user_ship4)
     elif a_game_board == computers_game_board:
         if level == '1':
@@ -445,18 +422,13 @@ def init_ships(a_game_board):
 
 
 
-def pick_ship_coordinates(a_game_board):
-    while True:
-        ship_row = random_row(a_game_board)
-        ship_col = random_col(a_game_board)
-        ship_row2 = ship_row + 1
-        ship_col2 = ship_col + 1
-        if [ship_row , ship_col] and [ship_row2 , ship_col] and [ship_row, ship_col2] not in ships_list:
-            ship_data = ship_row , ship_col, ship_row2, ship_col2
-            break
-    return ship_data
 
 def place_ship(char, a_game_board, used_rows, used_cols):
+    """
+    Function to select random position and assign to variable and place ship on
+    position and append location to a list to be checked
+     against to verify if location has been already selected and used.
+    """
     global level
     global ship_A
     global ship_B
@@ -466,202 +438,106 @@ def place_ship(char, a_game_board, used_rows, used_cols):
     global ship_F
     global ship_G
     global ship_H
-    global ships_list
-    
 
     while True:
-        
-        ship_data = pick_ship_coordinates(a_game_board)
-        ship_row , ship_col, ship_row2, ship_col2 = ship_data
-        ship = ship_row, ship_col
-        ship_ = ship_row, ship_col2
-        ship2_ = ship_row2, ship_col
+        ship_row = random_row(a_game_board)
+        if ship_row not in used_rows:
+            used_rows.append(ship_row)
+        else:
+            ship_row = random_row(a_game_board)
+            if ship_row not in used_rows:
+                used_rows.append(ship_row)
 
-        if ship and ship_ and ship2_ not in ships_list:
-            if level == '1':                         
-                if ship2_ not in ships_list:
-                    if ship_row < 2:
-                        ship_row2 = ship_row + 1                         
-                    elif ship_row > 3:
-                        ship_row2 = ship_row - 1
-                elif ship_ not in ships_list:
-                    if ship_col < 2:
-                        ship_col2 = ship_col + 1
-                    elif ship_col > 3:
-                        ship_col2 = ship_col - 1
+        ship_col = random_col(a_game_board)
+        if ship_col not in used_cols:
+            used_cols.append(ship_col)
+        else:
+            ship_col = random_col(a_game_board)
+            if ship_col not in used_rows:
+                used_rows.append(ship_row)
+        ship_col2 = ship_col + 1
+        if ship_col2 not in used_cols:
+            ship_col2 = ship_col + 1
+            if level == '1':
+                if ship_col2 > 4:
+                    ship_col2 = ship_col - 1
+                    used_cols.append(ship_col2)
+                elif ship_col2 < 2:
+                    ship_col2 = ship_col + 1
+                    used_cols.append(ship_col2)
+                else:
+                    used_cols.append(ship_col2)
+            if level == '2':
+                if ship_col2 > 5:
+                    ship_col2 = ship_col - 1
+                    used_cols.append(ship_col2)
+                else:
+                    used_cols.append(ship_col2)
+            if level == '3':
+                if ship_col2 > 8:
+                    ship_col2 = ship_col - 1
+                    used_cols.append(ship_col2)
+                else:
+                    used_cols.append(ship_col2)
+        else:
+            used_cols.append(ship_col2)
+        ship_row2 = ship_row + 1
+        if ship_row2 not in used_rows:
+            ship_row2 = ship_row + 1
+            if level == '1':
+                if ship_row2 > 4:
+                    ship_row2 = ship_row - 1
+                    used_rows.append(ship_row2)
+                elif ship_row2 < 2:
+                    ship_row2 = ship_col + 1
+                    used_rows.append(ship_row2)
+                else:
+                    used_rows.append(ship_row2)
+            if level == '2':
+                if ship_row2 > 5:
+                    ship_row2 = ship_col - 1
+                    used_rows.append(ship_row2)
+                else:
+                    used_rows.append(ship_row2)
+            if level == '3':
+                if ship_row2 > 8:
+                    ship_row2 = ship_col - 1
+                    used_rows.append(ship_row2)
+                else:
+                    used_rows.append(ship_row2)
+        else:
+            used_rows.append(ship_row2)
+        direction = random_orientation()
+        if a_game_board == game_board:
+            if direction == 1:
+                a_game_board[ship_row][ship_col] = '|$|'
+                a_game_board[ship_row2][ship_col] = '|$|'
+                ship = ship_row, ship_col
+                ship_ = ship_row2, ship_col
+                return ship, ship_
+            elif direction == 2:
+                a_game_board[ship_row][ship_col] = char
+                a_game_board[ship_row][ship_col2] = char
+                ship = ship_row, ship_col
+                ship_ = ship_row, ship_col2
+                return ship, ship_
 
-            elif level == '2':
-                if ship2_ not in ships_list:
-                    if ship_row < 2:
-                        ship_row2 = ship_row + 1
-                    elif ship_row > 5:
-                        ship_row2 = ship_row - 1
-                elif ship_ not in ships_list:
-                    if ship_col < 2:
-                        ship_col2 = ship_col + 1
-                    elif ship_col > 5:
-                        ship_col2 = ship_col - 1
+        if a_game_board == computers_game_board:
+            if direction == 1:
+                a_game_board[ship_row][ship_col] = " . "
+                a_game_board[ship_row][ship_col2] = " . "
+                ship = ship_row, ship_col
+                ship_ = ship_row, ship_col2            
+                return ship, ship_
+            elif direction == 2:
+                a_game_board[ship_row][ship_col] = " . "
+                a_game_board[ship_row2][ship_col] = " . "
+                ship = ship_row, ship_col
+                ship_ = ship_row2, ship_col
+                return ship, ship_
 
-            elif level == '3':
-                if ship2_ not in ships_list:
-                    if ship_row < 2:
-                        ship_row2 = ship_row + 1
-                    elif ship_row > 8:
-                        ship_row2 = ship_row - 1
-                elif ship_ not in ships_list:
-                    if ship_col < 2:
-                        ship_col2 = ship_col + 1
-                    elif ship_col > 8:
-                        ship_col2 = ship_col - 1
-
-        if ship and ship_ and ship2_ not in ships_list:
-            direction = random_orientation()
-            if a_game_board == game_board:
-                if direction == 1:
-                    a_game_board[ship_row][ship_col] = '|$|'
-                    a_game_board[ship_row2][ship_col] = '|$|'
-                    ship_position = ship, ship2_
-                    break
-                    
-                elif direction == 2:
-                    a_game_board[ship_row][ship_col] = char
-                    a_game_board[ship_row][ship_col2] = char
-                    ship_position = ship, ship_
-                    break   
-
-            if a_game_board == computers_game_board:
-                if direction == 1:
-                    a_game_board[ship_row][ship_col] = " 0 "
-                    a_game_board[ship_row][ship_col2] = " 0 " 
-                    ship_position = ship, ship2_
-                    break
-                    
-                elif direction == 2:
-                    a_game_board[ship_row][ship_col] = " x "
-                    a_game_board[ship_row2][ship_col] = " x "
-                    ship_position = ship, ship2_
-                    break  
-    a, b = ship_position
-    return a, b  
-    
-    
-
-
-
-# def place_ship(char, a_game_board, used_rows, used_cols):
-#     """
-#     Function to select random position and assign to variable and place ship on
-#     position and append location to a list to be checked
-#      against to verify if location has been already selected and used.
-#     """
-#     global level
-#     global ship_A
-#     global ship_B
-#     global ship_C
-#     global ship_D
-#     global ship_E
-#     global ship_F
-#     global ship_G
-#     global ship_H
-
-#     while True:
-#         ship_row = random_row(a_game_board)
-#         if ship_row not in used_rows:
-#             used_rows.append(ship_row)
-#         else:
-#             ship_row = random_row(a_game_board)
-#             if ship_row not in used_rows:
-#                 used_rows.append(ship_row)
-
-#         ship_col = random_col(a_game_board)
-#         if ship_col not in used_cols:
-#             used_cols.append(ship_col)
-#         else:
-#             ship_col = random_col(a_game_board)
-#             if ship_col not in used_rows:
-#                 used_rows.append(ship_row)
-#         ship_col2 = ship_col + 1
-#         if ship_col2 not in used_cols:
-#             ship_col2 = ship_col + 1
-#             if level == '1':
-#                 if ship_col2 > 4:
-#                     ship_col2 = ship_col - 1
-#                     used_cols.append(ship_col2)
-#                 elif ship_col2 < 2:
-#                     ship_col2 = ship_col + 1
-#                     used_cols.append(ship_col2)
-#                 else:
-#                     used_cols.append(ship_col2)
-#             if level == '2':
-#                 if ship_col2 > 5:
-#                     ship_col2 = ship_col - 1
-#                     used_cols.append(ship_col2)
-#                 else:
-#                     used_cols.append(ship_col2)
-#             if level == '3':
-#                 if ship_col2 > 8:
-#                     ship_col2 = ship_col - 1
-#                     used_cols.append(ship_col2)
-#                 else:
-#                     used_cols.append(ship_col2)
-#         else:
-#             used_cols.append(ship_col2)
-#         ship_row2 = ship_row + 1
-#         if ship_row2 not in used_rows:
-#             ship_row2 = ship_row + 1
-#             if level == '1':
-#                 if ship_row2 > 4:
-#                     ship_row2 = ship_row - 1
-#                     used_rows.append(ship_row2)
-#                 elif ship_row2 < 2:
-#                     ship_row2 = ship_col + 1
-#                     used_rows.append(ship_row2)
-#                 else:
-#                     used_rows.append(ship_row2)
-#             if level == '2':
-#                 if ship_row2 > 5:
-#                     ship_row2 = ship_col - 1
-#                     used_rows.append(ship_row2)
-#                 else:
-#                     used_rows.append(ship_row2)
-#             if level == '3':
-#                 if ship_row2 > 8:
-#                     ship_row2 = ship_col - 1
-#                     used_rows.append(ship_row2)
-#                 else:
-#                     used_rows.append(ship_row2)
-#         else:
-#             used_rows.append(ship_row2)
-#         direction = random_orientation()
-#         if a_game_board == game_board:
-#             if direction == 1:
-#                 a_game_board[ship_row][ship_col] = '|$|'
-#                 a_game_board[ship_row2][ship_col] = '|$|'
-#                 ship = ship_row, ship_col
-#                 ship_ = ship_row2, ship_col
-#                 return ship, ship_
-#             elif direction == 2:
-#                 a_game_board[ship_row][ship_col] = char
-#                 a_game_board[ship_row][ship_col2] = char
-#                 ship = ship_row, ship_col
-#                 ship_ = ship_row, ship_col2
-#                 return ship, ship_
-
-#         if a_game_board == computers_game_board:
-#             if direction == 1:
-#                 a_game_board[ship_row][ship_col] = " . "
-#                 a_game_board[ship_row][ship_col2] = " . "
-#                 ship = ship_row, ship_col
-#                 ship_ = ship_row, ship_col2            
-#                 return ship, ship_
-#             elif direction == 2:
-#                 a_game_board[ship_row][ship_col] = " . "
-#                 a_game_board[ship_row2][ship_col] = " . "
-#                 ship = ship_row, ship_col
-#                 ship_ = ship_row2, ship_col
-#                 return ship, ship_
-
-
+def print_board_char(x,y):
+    ships = list
 
 
 def location_of_ship(ship, place):
@@ -701,7 +577,11 @@ def location_of_ship(ship, place):
         ship_G = ships
     elif ship == 'H':
         ship_H = ships
+    
 
+
+
+    
 
 def users_guess(user):
     """
@@ -719,7 +599,7 @@ def users_guess(user):
         if user.lower() == 'brian':
             print(ship_A, ship_B, ship_C, ship_D)   # for testing purposes
             print(ship_E, ship_F, ship_G, ship_H)   # for testing purposes
-        
+        # mark_ship_position(ship,place)
         print(
             f" {user}'s torpedoes: {bullets}/20          " +
             f" Computers torpedoes : {computers_bullets}/20"
