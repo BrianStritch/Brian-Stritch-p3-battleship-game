@@ -374,20 +374,20 @@ def init_ships(a_game_board):
     global level
     if a_game_board == game_board:
         if level == '1':
-            user_ship1 = place_ship('-DD', a_game_board, used_rows, used_cols)
+            user_ship1 = place_ship('<DD', a_game_board, used_rows, used_cols)
             location_of_ship('A', user_ship1)
-            user_ship2 = place_ship('-DD', a_game_board, used_rows, used_cols)
+            user_ship2 = place_ship('<DD', a_game_board, used_rows, used_cols)
             location_of_ship('B', user_ship2)
-            user_ship3 = place_ship('-DD', a_game_board, used_rows, used_cols)
+            user_ship3 = place_ship('<DD', a_game_board, used_rows, used_cols)
             location_of_ship('C', user_ship3)
         else:
-            user_ship1 = place_ship('-DD', a_game_board, used_rows, used_cols)
+            user_ship1 = place_ship('<DD', a_game_board, used_rows, used_cols)
             location_of_ship('A', user_ship1)
-            user_ship2 = place_ship('-DD', a_game_board, used_rows, used_cols)
+            user_ship2 = place_ship('<DD', a_game_board, used_rows, used_cols)
             location_of_ship('B', user_ship2)
-            user_ship3 = place_ship('-DD', a_game_board, used_rows, used_cols)
+            user_ship3 = place_ship('<DD', a_game_board, used_rows, used_cols)
             location_of_ship('C', user_ship3)
-            user_ship4 = place_ship('-DD', a_game_board, used_rows, used_cols)
+            user_ship4 = place_ship('<DD', a_game_board, used_rows, used_cols)
             location_of_ship('D', user_ship4)
     elif a_game_board == computers_game_board:
         if level == '1':
