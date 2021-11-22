@@ -515,7 +515,7 @@ def place_ship(char, a_game_board, used_rows, used_cols):
                     
                             elif direction == 2:
                                 a_game_board[ship_row][ship_col] = char
-                                a_game_board[ship_row][ship_col2] = char
+                                a_game_board[ship_row][ship_col2] = 'DD>'
                                 ships_list.append(ship)
                                 ships_list.append(ship_)                               
                                 return ship, ship_  
