@@ -771,7 +771,8 @@ def computers_guess():
     """
     Function to choose random guess for the computer,
     and to check guess against the players ship locations
-    to determine result.
+    to determine result. Additional functionality to
+     behave like AI if shots fired on target.
     """
     global computer_hit_col
     global computer_hit_row
