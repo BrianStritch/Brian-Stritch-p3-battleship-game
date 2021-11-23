@@ -806,24 +806,21 @@ def computers_guess():
     elif computer_hit == 2:
         if True:
             if computer_hit_attempt == 1:
-                computer_guess_col = computer_hit_col + 1
-                computer_guess_hit = [computer_guess_row, computer_guess_col]
+                computer_guess_hit = [computer_guess_row, computer_guess_col + 1]
 
             elif computer_hit_attempt == 2:
-                computer_guess_col = computer_hit_col - 1
-                computer_guess_hit = [computer_guess_row, computer_guess_col]
+                computer_guess_hit = [computer_guess_row, computer_guess_col - 1]
 
             elif computer_hit_attempt == 3:
-                computer_guess_row = computer_hit_row + 1
-                computer_guess_hit = [computer_guess_row, computer_guess_col ]
+                computer_guess_hit = [computer_guess_row + 1, computer_guess_col]
             
             elif computer_hit_attempt == 4:
-                computer_guess_row = computer_hit_row - 1
-                computer_guess_hit = [computer_guess_row, computer_guess_col ]
+                computer_guess_hit = [computer_guess_row - 1, computer_guess_col]
         
         print(f' Computer guessed: {computer_guess_hit}')
         hits = computers_shots_fired(computer_guess_hit)
-        print_board_char(hits, computer_guess_row, computer_guess_col)
+        x,y = computer_guess_hit
+        print_board_char(hits, x , y )
         sleep(2)
 
 
