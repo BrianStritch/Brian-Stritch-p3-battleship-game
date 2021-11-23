@@ -33,10 +33,15 @@ users_score = 0
 computers_score = 0
 game_board = []
 computers_game_board = []
-used_rows = []
-used_cols = []
 users_used_guess = []
+computer_guess_hit = []
 computers_used_guess = []
+computer_hit = 1
+computer_guess_row = []
+computer_guess_col = []
+computer_hit_col = []
+computer_hit_row = []
+computer_hit_attempt = 0
 bullets = 20
 computers_bullets = 20
 users_ships_remaining = 4
@@ -374,51 +379,37 @@ def init_ships(a_game_board):
     global level
     if a_game_board == game_board:
         if level == '1':
-            user_ship1 = place_ship('<DD', a_game_board, used_rows, used_cols)
+            user_ship1 = place_ship('<DD', a_game_board)
             location_of_ship('A', user_ship1)
-            user_ship2 = place_ship('<DD', a_game_board, used_rows, used_cols)
+            user_ship2 = place_ship('<DD', a_game_board)
             location_of_ship('B', user_ship2)
-            user_ship3 = place_ship('<DD', a_game_board, used_rows, used_cols)
+            user_ship3 = place_ship('<DD', a_game_board)
             location_of_ship('C', user_ship3)
         else:
-            user_ship1 = place_ship('<DD', a_game_board, used_rows, used_cols)
+            user_ship1 = place_ship('<DD', a_game_board)
             location_of_ship('A', user_ship1)
-            user_ship2 = place_ship('<DD', a_game_board, used_rows, used_cols)
+            user_ship2 = place_ship('<DD', a_game_board)
             location_of_ship('B', user_ship2)
-            user_ship3 = place_ship('<DD', a_game_board, used_rows, used_cols)
+            user_ship3 = place_ship('<DD', a_game_board)
             location_of_ship('C', user_ship3)
-            user_ship4 = place_ship('<DD', a_game_board, used_rows, used_cols)
+            user_ship4 = place_ship('<DD', a_game_board)
             location_of_ship('D', user_ship4)
     elif a_game_board == computers_game_board:
         if level == '1':
-            computer_ship1 = place_ship(
-                'c', a_game_board, used_rows, used_cols
-                )
+            computer_ship1 = place_ship('c', a_game_board)
             location_of_ship('E', computer_ship1)
-            computer_ship2 = place_ship(
-                'c', a_game_board, used_rows, used_cols
-                )
+            computer_ship2 = place_ship('c', a_game_board)
             location_of_ship('F', computer_ship2)
-            computer_ship3 = place_ship(
-                'c', a_game_board, used_rows, used_cols
-                )
+            computer_ship3 = place_ship('c', a_game_board)
             location_of_ship('G', computer_ship3)
         else:
-            computer_ship1 = place_ship(
-                'c', a_game_board, used_rows, used_cols
-                )
+            computer_ship1 = place_ship('c', a_game_board)
             location_of_ship('E', computer_ship1)
-            computer_ship2 = place_ship(
-                'c', a_game_board, used_rows, used_cols
-                )
+            computer_ship2 = place_ship('c', a_game_board)
             location_of_ship('F', computer_ship2)
-            computer_ship3 = place_ship(
-                'c', a_game_board, used_rows, used_cols
-                )
+            computer_ship3 = place_ship('c', a_game_board)
             location_of_ship('G', computer_ship3)
-            computer_ship4 = place_ship(
-                'c', a_game_board, used_rows, used_cols
-                )
+            computer_ship4 = place_ship('c', a_game_board)
             location_of_ship('H', computer_ship4)
 
 
@@ -530,7 +521,7 @@ def pick_ship_coordinates(a_game_board):
                             return ship_data
     
 
-def place_ship(char, a_game_board, used_rows, used_cols):
+def place_ship(char, a_game_board):
     """
     Function to call pick ship co-ordinates and use
     returned values to place ship on game board 
@@ -641,6 +632,8 @@ def users_guess(user):
     global computers_bullets
     global ships_list
     global computers_ships_list
+    global computers_hit
+    global computers_hit_attempt
 
     while bullets > 0:
         if user.lower() == 'brian':
@@ -648,6 +641,7 @@ def users_guess(user):
             print(ship_E, ship_F, ship_G, ship_H)   # for testing purposes
             print(ships_list)                       # for testing purposes
             print(computers_ships_list)             # for testing purposes
+            print(computer_hit, computer_hit_attempt)
         print(
             f" {user}'s torpedoes: {bullets}/20          " +
             f" Computers torpedoes : {computers_bullets}/20"
@@ -734,7 +728,7 @@ def users_guess(user):
                 break
 
         users_used_guess.append(guess)
-        print(f" {user} guessed row: {guess_row}, column: {guess_col}")
+        print(f" {user} guessed row: {guess_row}, column: {guess_col} {guess}")
         hit_or_miss = shots_fired(guess)
         print_board_char(hit_or_miss, guess_row, guess_col)
         bullets -= 1
@@ -779,23 +773,57 @@ def computers_guess():
     and to check guess against the players ship locations
     to determine result.
     """
-    guess_row = random_row(game_board)
-    while guess_row > 10:
-        guess_row = random_row(game_board)
-    while guess_row < 1:
-        guess_row = random_row(game_board)
+    global computer_hit_col
+    global computer_hit_row
+    global computer_hit_attempt
+    global computer_hit
+    global computer_guess_hit
+    global computer_guess_row
+    global computer_guess_col
 
-    guess_col = random_col(game_board)
-    while guess_col > 10:
-        guess_col = random_col(game_board)
-    while guess_col < 1:
-        guess_col = random_col(game_board)
+    if computer_hit == 1:
+        computer_guess_row = random_row(game_board)
+        while computer_guess_row > 10:
+            computer_guess_row = random_row(game_board)
+        while computer_guess_row < 1:
+            computer_guess_row = random_row(game_board)
 
-    computers_guess = guess_row, guess_col
-    print(f' Computer guessed: {computers_guess}')
-    hits = computers_shots_fired(computers_guess)
-    print_board_char(hits, guess_row, guess_col)
-    sleep(2)
+        computer_guess_col = random_col(game_board)
+        while computer_guess_col > 10:
+            computer_guess_col = random_col(game_board)
+        while computer_guess_col < 1:
+            computer_guess_col = random_col(game_board)
+
+        computers_guess = [computer_guess_row, computer_guess_col]
+        computer_hit_row = computer_guess_row
+        computer_hit_col = computer_guess_col
+        print(f' Computer guessed: {computers_guess}')
+        hits = computers_shots_fired(computers_guess)
+        print_board_char(hits, computer_guess_row, computer_guess_col)
+        sleep(2)
+    
+    elif computer_hit == 2:
+        if True:
+            if computer_hit_attempt == 1:
+                computer_guess_col = computer_guess_col + 1
+                computer_guess_hit = [computer_guess_row, computer_guess_col]
+
+            elif computer_hit_attempt == 2:
+                computer_guess_col = computers_guess_col - 1
+                computer_guess_hit = [computer_guess_row, computer_guess_col]
+
+            elif computer_hit_attempt == 3:
+                computer_guess_row = computers_guess_row + 1
+                computer_guess_hit = [computer_guess_row, computer_guess_col ]
+            
+            elif computer_hit_attempt == 4:
+                computer_guess_row = computers_guess_row - 1
+                computer_guess_hit = [computer_guess_row, computer_guess_col ]
+        
+        print(f' Computer guessed: {computer_guess_hit}')
+        hits = computers_shots_fired(computer_guess_hit)
+        print_board_char(hits, computer_guess_row, computer_guess_col)
+        sleep(2)
 
 
 def shots_fired(guess):
@@ -889,6 +917,8 @@ def computers_shots_fired(guess):
     """
     global users_ships_remaining
     global computers_score
+    global computer_hit
+    global computer_hit_attempt
     hit = 'hit_c'
     miss = 'miss_c'
     if guess in ship_A:
@@ -902,10 +932,14 @@ def computers_shots_fired(guess):
                 )
             computers_score += 150
             print(" Bonus of 150 points awarded for sinking ship")
+            computer_hit_attempt = 0
+            computer_hit = 1
             sleep(2)
             return hit
         else:
             print(' Direct hit, players ship defenses are down')
+            computer_hit_attempt += 1
+            computer_hit = 2
             return hit
     elif guess in ship_B:
         ship_B.remove(guess)
@@ -918,10 +952,14 @@ def computers_shots_fired(guess):
                 )
             computers_score += 150
             print(" Bonus of 150 points awarded for sinking ship")
+            computer_hit_attempt = 0
+            computer_hit = 1
             sleep(2)
             return hit
         else:
             print(' Direct hit, players ship defenses are down')
+            computer_hit_attempt += 1
+            computer_hit = 2
             return hit
     elif guess in ship_C:
         ship_C.remove(guess)
@@ -934,10 +972,14 @@ def computers_shots_fired(guess):
                 )
             computers_score += 150
             print(" Bonus of 150 points awarded for sinking ship")
+            computer_hit_attempt = 0
+            computer_hit = 1
             sleep(2)
             return hit
         else:
             print(' Direct hit, players ship defenses are down')
+            computer_hit_attempt += 1
+            computer_hit = 2
             return hit
     elif guess in ship_D:
         ship_D.remove(guess)
@@ -950,14 +992,23 @@ def computers_shots_fired(guess):
                 )
             computers_score += 150
             print(" Bonus of 150 points awarded for sinking ship")
+            computer_hit_attempt = 0
+            computer_hit = 1
             sleep(2)
             return hit
         else:
             print(' Direct hit, players ship defenses are down')
+            computer_hit_attempt += 1
+            computer_hit = 2
             return hit
     else:
-        print(' Computer Missed')
-        return miss
+        if computer_hit == 1:
+            print(' Computer Missed')
+            return miss
+        if computer_hit == 2:
+            print(' Computer Missed')
+            computer_hit_attempt += 1
+            return miss
 
 
 def print_board_char(hit, guess_row, guess_col):
@@ -1077,11 +1128,7 @@ def reset_var_data():
     global game_board
     game_board = []
     global computers_game_board
-    computers_game_board = []
-    global used_rows
-    used_rows = []
-    global used_cols
-    used_cols = []
+    computers_game_board = []  
     global users_used_guess
     users_used_guess = []
     global computers_used_guess
