@@ -747,7 +747,7 @@ def users_guess(user):
                 break
 
         users_used_guess.append(guess)
-        print(f" {user} guessed row: {guess_row}, column: {guess_col} {guess}")
+        print(f" {user} guessed row: {guess_row}, column: {guess_col}")
         hit_or_miss = shots_fired(guess)
         print_board_char(hit_or_miss, guess_row, guess_col)
         bullets -= 1
@@ -786,6 +786,10 @@ def check_num_input(num_input):
         return 'False'
 
 
+""" this code works but allows the computer
+to keep reselecting previously selected places
+"""
+        
 def computers_guess():
     """
     Function to choose random guess for the computer,
@@ -817,7 +821,8 @@ def computers_guess():
         computers_guess = [computer_guess_row, computer_guess_col]
         computer_hit_row = computer_guess_row
         computer_hit_col = computer_guess_col
-        print(f' Computer guessed: {computers_guess}')
+        computers_guess_display = [computer_guess_row + 1, computer_guess_col + 1]
+        print(f' Computer guessed: {computers_guess_display}')
         hits = computers_shots_fired(computers_guess)
         print_board_char(hits, computer_guess_row, computer_guess_col)
         sleep(2)
@@ -836,7 +841,9 @@ def computers_guess():
             elif computer_hit_attempt == 4:
                 computer_guess_hit = [computer_guess_row - 1, computer_guess_col]
         
-        print(f' Computer guessed: {computer_guess_hit}')
+        x,y = computer_guess_hit            
+        computers_guess_display_hit = [x + 1, y + 1]
+        print(f' Computer guessed: {computers_guess_display_hit}') 
         hits = computers_shots_fired(computer_guess_hit)
         x,y = computer_guess_hit
         print_board_char(hits, x , y )
