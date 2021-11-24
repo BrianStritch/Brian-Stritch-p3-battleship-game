@@ -647,6 +647,7 @@ def users_guess(user):
     guess and carry out the relevant tasks to continue the game
     or to finnish the game depending on conditions set out.
     """
+    global level
     global bullets
     global computers_bullets
     global ships_list
@@ -670,25 +671,7 @@ def users_guess(user):
             "          " +
             f" Computers ships remaining: {computers_ships_remaining}"
             )
-        while True:
-            row = input(" Guess Row: ")
-            guess_row = row
-            num = check_num_input(guess_row)
-            if num == 'True':
-                guess_row = int(row)
-                break
-
-        while guess_row > 10:
-            print(' Please enter a number from 1 to 10')
-            while True:
-                row = input(" Guess Row: ")
-                guess_row = row
-                num = check_num_input(guess_row)
-                if num == 'True':
-                    guess_row = int(row)
-                    break
-        while guess_row < 1:
-            print(' Please enter a number from 1 to 10')
+        if level == '1':
             while True:
                 row = input(" Guess Row: ")
                 guess_row = row
@@ -697,36 +680,17 @@ def users_guess(user):
                     guess_row = int(row)
                     break
 
-        while True:
-            col = input(" Guess column: ")
-            guess_col = col
-            num = check_num_input(guess_col)
-            if num == 'True':
-                guess_col = int(col)
-                break
-
-        while guess_col > 10:
-            print(' Please enter a number from 1 to 10')
-            while True:
-                col = input(" Guess column: ")
-                guess_col = col
-                num = check_num_input(guess_col)
-                if num == 'True':
-                    guess_col = int(col)
-                    break
-        while guess_col < 1:
-            print(' Please enter a number from 1 to 10')
-            while True:
-                col = input(" Guess column: ")
-                guess_col = col
-                num = check_num_input(guess_col)
-                if num == 'True':
-                    guess_col = int(col)
-                    break
-        while True:
-            guess = [guess_row, guess_col]
-            if guess in users_used_guess:
-                print('You fired here before! Please try again:')
+            while guess_row > 5:
+                print(' Please enter a number from 1 to 5')
+                while True:
+                    row = input(" Guess Row: ")
+                    guess_row = row
+                    num = check_num_input(guess_row)
+                    if num == 'True':
+                        guess_row = int(row)
+                        break
+            while guess_row < 1:
+                print(' Please enter a number from 1 to 5')
                 while True:
                     row = input(" Guess Row: ")
                     guess_row = row
@@ -735,6 +699,16 @@ def users_guess(user):
                         guess_row = int(row)
                         break
 
+            while True:
+                col = input(" Guess column: ")
+                guess_col = col
+                num = check_num_input(guess_col)
+                if num == 'True':
+                    guess_col = int(col)
+                    break
+
+            while guess_col > 5:
+                print(' Please enter a number from 1 to 5')
                 while True:
                     col = input(" Guess column: ")
                     guess_col = col
@@ -742,10 +716,196 @@ def users_guess(user):
                     if num == 'True':
                         guess_col = int(col)
                         break
-            else:
+            while guess_col < 1:
+                print(' Please enter a number from 1 to 5')
+                while True:
+                    col = input(" Guess column: ")
+                    guess_col = col
+                    num = check_num_input(guess_col)
+                    if num == 'True':
+                        guess_col = int(col)
+                        break
+            while True:
                 guess = [guess_row, guess_col]
-                break
+                if guess in users_used_guess:
+                    print('You fired here before! Please try again:')
+                    while True:
+                        row = input(" Guess Row: ")
+                        guess_row = row
+                        num = check_num_input(guess_row)
+                        if num == 'True':
+                            guess_row = int(row)
+                            break
 
+                    while True:
+                        col = input(" Guess column: ")
+                        guess_col = col
+                        num = check_num_input(guess_col)
+                        if num == 'True':
+                            guess_col = int(col)
+                            break
+                else:
+                    guess = [guess_row, guess_col]
+                    break
+
+
+        elif level == '2':
+            while True:
+                row = input(" Guess Row: ")
+                guess_row = row
+                num = check_num_input(guess_row)
+                if num == 'True':
+                    guess_row = int(row)
+                    break
+
+            while guess_row > 7:
+                print(' Please enter a number from 1 to 7')
+                while True:
+                    row = input(" Guess Row: ")
+                    guess_row = row
+                    num = check_num_input(guess_row)
+                    if num == 'True':
+                        guess_row = int(row)
+                        break
+            while guess_row < 1:
+                print(' Please enter a number from 1 to 7')
+                while True:
+                    row = input(" Guess Row: ")
+                    guess_row = row
+                    num = check_num_input(guess_row)
+                    if num == 'True':
+                        guess_row = int(row)
+                        break
+
+            while True:
+                col = input(" Guess column: ")
+                guess_col = col
+                num = check_num_input(guess_col)
+                if num == 'True':
+                    guess_col = int(col)
+                    break
+
+            while guess_col > 7:
+                print(' Please enter a number from 1 to 7')
+                while True:
+                    col = input(" Guess column: ")
+                    guess_col = col
+                    num = check_num_input(guess_col)
+                    if num == 'True':
+                        guess_col = int(col)
+                        break
+            while guess_col < 1:
+                print(' Please enter a number from 1 to 7')
+                while True:
+                    col = input(" Guess column: ")
+                    guess_col = col
+                    num = check_num_input(guess_col)
+                    if num == 'True':
+                        guess_col = int(col)
+                        break
+            while True:
+                guess = [guess_row, guess_col]
+                if guess in users_used_guess:
+                    print('You fired here before! Please try again:')
+                    while True:
+                        row = input(" Guess Row: ")
+                        guess_row = row
+                        num = check_num_input(guess_row)
+                        if num == 'True':
+                            guess_row = int(row)
+                            break
+
+                    while True:
+                        col = input(" Guess column: ")
+                        guess_col = col
+                        num = check_num_input(guess_col)
+                        if num == 'True':
+                            guess_col = int(col)
+                            break
+                else:
+                    guess = [guess_row, guess_col]
+                    break
+
+
+        elif level == '3':
+            while True:
+                row = input(" Guess Row: ")
+                guess_row = row
+                num = check_num_input(guess_row)
+                if num == 'True':
+                    guess_row = int(row)
+                    break
+
+            while guess_row > 10:
+                print(' Please enter a number from 1 to 10')
+                while True:
+                    row = input(" Guess Row: ")
+                    guess_row = row
+                    num = check_num_input(guess_row)
+                    if num == 'True':
+                        guess_row = int(row)
+                        break
+            while guess_row < 1:
+                print(' Please enter a number from 1 to 10')
+                while True:
+                    row = input(" Guess Row: ")
+                    guess_row = row
+                    num = check_num_input(guess_row)
+                    if num == 'True':
+                        guess_row = int(row)
+                        break
+
+            while True:
+                col = input(" Guess column: ")
+                guess_col = col
+                num = check_num_input(guess_col)
+                if num == 'True':
+                    guess_col = int(col)
+                    break
+
+            while guess_col > 10:
+                print(' Please enter a number from 1 to 10')
+                while True:
+                    col = input(" Guess column: ")
+                    guess_col = col
+                    num = check_num_input(guess_col)
+                    if num == 'True':
+                        guess_col = int(col)
+                        break
+            while guess_col < 1:
+                print(' Please enter a number from 1 to 10')
+                while True:
+                    col = input(" Guess column: ")
+                    guess_col = col
+                    num = check_num_input(guess_col)
+                    if num == 'True':
+                        guess_col = int(col)
+                        break
+            while True:
+                guess = [guess_row, guess_col]
+                if guess in users_used_guess:
+                    print('You fired here before! Please try again:')
+                    while True:
+                        row = input(" Guess Row: ")
+                        guess_row = row
+                        num = check_num_input(guess_row)
+                        if num == 'True':
+                            guess_row = int(row)
+                            break
+
+                    while True:
+                        col = input(" Guess column: ")
+                        guess_col = col
+                        num = check_num_input(guess_col)
+                        if num == 'True':
+                            guess_col = int(col)
+                            break
+                else:
+                    guess = [guess_row, guess_col]
+                    break
+
+
+        print('herenow')
         users_used_guess.append(guess)
         print(f" {user} guessed row: {guess_row}, column: {guess_col}")
         hit_or_miss = shots_fired(guess)
