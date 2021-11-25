@@ -1140,7 +1140,6 @@ def computers_guess():
                         pass
                 if hit_row_plus not in computers_last_row and \
                         hit_row2 not in computers_used_guess:
-                    print('inside row >=1')
                     if row < 10 and row >= 1:
                         computer_guess_hit = [row +1,col]
                         computers_last_row.append('hit_row_plus')
@@ -1157,7 +1156,6 @@ def computers_guess():
                         pass
                 if hit_col_plus not in computers_last_row and \
                         hit_col2 not in computers_used_guess:
-                    print('inside col >=1')
                     if col < 10 and col >= 1:
                         computer_guess_hit = [row, col +1]
                         computers_last_row.append('hit_col_plus')
@@ -1261,6 +1259,7 @@ def computers_shots_fired(guess):
     and increment the scores,depending on the data
     supplied when called.
     """
+    global user
     global users_ships_remaining
     global computers_score
     global computer_hit
@@ -1273,7 +1272,7 @@ def computers_shots_fired(guess):
         if not ship_A:
             users_ships_remaining -= 1
             print(
-                ' Direct hit, ship sinking, player only ' +
+                f" Direct hit, ship sinking, {user} only " +
                 f'has {users_ships_remaining} ' +
                 'battleships remaining'
                 )
@@ -1285,7 +1284,7 @@ def computers_shots_fired(guess):
             sleep(2)
             return hit
         else:
-            print(' Direct hit, players ship defenses are down')
+            print(f" Direct hit, {user}s'  ship defenses are down")
             computer_hit_attempt += 1
             computer_hit = 2
             return hit
@@ -1294,7 +1293,7 @@ def computers_shots_fired(guess):
         if not ship_B:
             users_ships_remaining -= 1
             print(
-                ' Direct hit, ship sinking, player only ' +
+                f" Direct hit, ship sinking, {user} only " +
                 f'has {users_ships_remaining} ' +
                 'battleships remaining'
                 )
@@ -1306,7 +1305,7 @@ def computers_shots_fired(guess):
             sleep(2)
             return hit
         else:
-            print(' Direct hit, players ship defenses are down')
+            print(f" Direct hit, {user}s'  ship defenses are down")
             computer_hit_attempt += 1
             computer_hit = 2
             return hit
@@ -1315,7 +1314,7 @@ def computers_shots_fired(guess):
         if not ship_C:
             users_ships_remaining -= 1
             print(
-                ' Direct hit, ship sinking, player only ' +
+                f" Direct hit, ship sinking, {user} only " +
                 f'has {users_ships_remaining} ' +
                 'battleships remaining'
                 )
@@ -1327,7 +1326,7 @@ def computers_shots_fired(guess):
             sleep(2)
             return hit
         else:
-            print(' Direct hit, players ship defenses are down')
+            print(f" Direct hit, {user}s'  ship defenses are down")
             computer_hit_attempt += 1
             computer_hit = 2
             return hit
@@ -1336,7 +1335,7 @@ def computers_shots_fired(guess):
         if not ship_D:
             users_ships_remaining -= 1
             print(
-                ' Direct hit, ship sinking, player only ' +
+                f" Direct hit, ship sinking, {user} only " +
                 f'has {users_ships_remaining} ' +
                 'battleships remaining'
                 )
@@ -1348,7 +1347,7 @@ def computers_shots_fired(guess):
             sleep(2)
             return hit
         else:
-            print(' Direct hit, players ship defenses are down')
+            print(f" Direct hit, {user}s' ship defenses are down")
             computer_hit_attempt += 1
             computer_hit = 2
             return hit
