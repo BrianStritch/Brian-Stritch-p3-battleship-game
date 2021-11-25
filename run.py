@@ -1068,7 +1068,7 @@ def computers_guess():
             while True:            
                 if hit_row_minus not in computers_last_row and \
                         hit_row1 not in computers_used_guess:
-                    if row > 1 and row <= 5:
+                    if row > 1 and row <= 4:
                         computer_guess_hit = [row -1, col]
                         computers_last_row.append('hit_row_minus')
                         break 
@@ -1076,7 +1076,7 @@ def computers_guess():
                         pass
                 if hit_row_plus not in computers_last_row and \
                         hit_row2 not in computers_used_guess:
-                    if row < 5 and row >= 1:
+                    if row < 4 and row >= 1:
                         computer_guess_hit = [row +1,col]
                         computers_last_row.append('hit_row_plus')
                         break
@@ -1084,7 +1084,7 @@ def computers_guess():
                         pass
                 if hit_col_minus not in computers_last_row and \
                         hit_col1 not in computers_used_guess:
-                    if col > 2 and col <= 5:
+                    if col > 2 and col <= 4:
                         computer_guess_hit = [row, col -1]
                         computers_last_row.append('hit_col_minus')
                         break
@@ -1100,7 +1100,7 @@ def computers_guess():
             while True:            
                 if hit_row_minus not in computers_last_row and \
                         hit_row1 not in computers_used_guess:
-                    if row > 1 and row <= 7:
+                    if row > 1 and row <= 6:
                         computer_guess_hit = [row -1, col]
                         computers_last_row.append('hit_row_minus')
                         break 
@@ -1108,7 +1108,7 @@ def computers_guess():
                         pass
                 if hit_row_plus not in computers_last_row and \
                         hit_row2 not in computers_used_guess:
-                    if row < 7 and row >= 1:
+                    if row < 6 and row >= 1:
                         computer_guess_hit = [row +1,col]
                         computers_last_row.append('hit_row_plus')
                         break
@@ -1116,7 +1116,7 @@ def computers_guess():
                         pass
                 if hit_col_minus not in computers_last_row and \
                         hit_col1 not in computers_used_guess:
-                    if col > 2 and col <= 7:
+                    if col > 2 and col <= 6:
                         computer_guess_hit = [row, col -1]
                         computers_last_row.append('hit_col_minus')
                         break
@@ -1124,7 +1124,7 @@ def computers_guess():
                         pass
                 if hit_col_plus not in computers_last_row and \
                         hit_col2 not in computers_used_guess:
-                    if col < 7 and col >= 1:
+                    if col < 6 and col >= 1:
                         computer_guess_hit = [row, col +1]
                         computers_last_row.append('hit_col_plus')
                         break  
@@ -1132,7 +1132,7 @@ def computers_guess():
             while True:            
                 if hit_row_minus not in computers_last_row and \
                         hit_row1 not in computers_used_guess:
-                    if row > 1 and row <= 10:
+                    if row > 1 and row <= 9:
                         computer_guess_hit = [row -1, col]
                         computers_last_row.append('hit_row_minus')
                         break 
@@ -1140,7 +1140,7 @@ def computers_guess():
                         pass
                 if hit_row_plus not in computers_last_row and \
                         hit_row2 not in computers_used_guess:
-                    if row < 10 and row >= 1:
+                    if row < 9 and row >= 1:
                         computer_guess_hit = [row +1,col]
                         computers_last_row.append('hit_row_plus')
                         break
@@ -1148,7 +1148,7 @@ def computers_guess():
                         pass
                 if hit_col_minus not in computers_last_row and \
                         hit_col1 not in computers_used_guess:
-                    if col > 2 and col <= 10:
+                    if col > 2 and col <= 9:
                         computer_guess_hit = [row, col -1]
                         computers_last_row.append('hit_col_minus')
                         break
@@ -1156,7 +1156,7 @@ def computers_guess():
                         pass
                 if hit_col_plus not in computers_last_row and \
                         hit_col2 not in computers_used_guess:
-                    if col < 10 and col >= 1:
+                    if col < 9 and col >= 1:
                         computer_guess_hit = [row, col +1]
                         computers_last_row.append('hit_col_plus')
                         break             
@@ -1369,7 +1369,7 @@ def print_board_char(hit, guess_row, guess_col):
     global computers_score
     if hit == 'hit':
         users_score += 300
-        computers_game_board[guess_row - 1][guess_col - 1] = ' @ '
+        computers_game_board[guess_row - 1][guess_col - 1] = ' @ '        
     elif hit == 'miss':
         computers_game_board[guess_row - 1][guess_col - 1] = ' X '
     elif hit == 'hit_c':
@@ -1530,9 +1530,6 @@ def reset_var_data():
     ship_G = []
     global ship_H
     ship_H = []
-    
-
-
 
 
 def main():
