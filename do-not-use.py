@@ -36,8 +36,6 @@ computers_game_board = []
 users_used_guess = []
 computer_guess_hit = []
 computers_used_guess = []
-computers_last_col = []
-computers_last_row = []
 computer_hit = 1
 computer_guess_row = []
 computer_guess_col = []
@@ -968,10 +966,8 @@ def computers_guess():
     global computer_guess_row
     global computer_guess_col
     global computers_used_guess
-    global computers_last_col
-    global computers_last_row
 
-    if computer_hit == 1:        
+    if computer_hit == 1:
         if level == '1':
             computer_guess_row = int(random_row(game_board))
             while computer_guess_row > 4:
@@ -994,7 +990,6 @@ def computers_guess():
                 else:
                     computers_guess = [computer_guess_row, computer_guess_col]
                     break
-
         if level == '2':
             computer_guess_row = int(random_row(game_board))
             while computer_guess_row > 6:
@@ -1017,7 +1012,6 @@ def computers_guess():
                 else:
                     computers_guess = [computer_guess_row, computer_guess_col]
                     break
-
         if level == '3':
             computer_guess_row = int(random_row(game_board))
             while computer_guess_row > 9:
@@ -1053,123 +1047,205 @@ def computers_guess():
         print_board_char(hits, computer_guess_row, computer_guess_col)
         sleep(2)
     
-    elif computer_hit == 2:
-        row = computer_hit_row
-        col = computer_hit_col
-        hit_col_minus = 'hit_col_minus'
-        hit_col_plus = 'hit_col_plus'
-        hit_row_minus = 'hit_row_minus'
-        hit_row_plus = 'hit_row_plus'
-        hit_col1 = [row, col -1]
-        hit_col2 = [row, col +1]
-        hit_row1 = [row -1, col]
-        hit_row2 = [row +1,col]
-        if level == '1':
-            while True:            
-                if hit_row_minus not in computers_last_row and \
-                        hit_row1 not in computers_used_guess:
-                    if row > 1 and row <= 5:
-                        computer_guess_hit = [row -1, col]
-                        computers_last_row.append('hit_row_minus')
-                        break 
-                    else:
-                        pass
-                if hit_row_plus not in computers_last_row and \
-                        hit_row2 not in computers_used_guess:
-                    if row < 5 and row >= 1:
-                        computer_guess_hit = [row +1,col]
-                        computers_last_row.append('hit_row_plus')
-                        break
-                    else:
-                        pass
-                if hit_col_minus not in computers_last_row and \
-                        hit_col1 not in computers_used_guess:
-                    if col > 2 and col <= 5:
-                        computer_guess_hit = [row, col -1]
-                        computers_last_row.append('hit_col_minus')
-                        break
-                    else:
-                        pass
-                if hit_col_plus not in computers_last_row and \
-                        hit_col2 not in computers_used_guess:
-                    if col < 4 and col >= 1:
-                        computer_guess_hit = [row, col +1]
-                        computers_last_row.append('hit_col_plus')
-                        break 
-        if level == '2': 
-            while True:            
-                if hit_row_minus not in computers_last_row and \
-                        hit_row1 not in computers_used_guess:
-                    if row > 1 and row <= 7:
-                        computer_guess_hit = [row -1, col]
-                        computers_last_row.append('hit_row_minus')
-                        break 
-                    else:
-                        pass
-                if hit_row_plus not in computers_last_row and \
-                        hit_row2 not in computers_used_guess:
-                    if row < 7 and row >= 1:
-                        computer_guess_hit = [row +1,col]
-                        computers_last_row.append('hit_row_plus')
-                        break
-                    else:
-                        pass
-                if hit_col_minus not in computers_last_row and \
-                        hit_col1 not in computers_used_guess:
-                    if col > 2 and col <= 7:
-                        computer_guess_hit = [row, col -1]
-                        computers_last_row.append('hit_col_minus')
-                        break
-                    else:
-                        pass
-                if hit_col_plus not in computers_last_row and \
-                        hit_col2 not in computers_used_guess:
-                    if col < 7 and col >= 1:
-                        computer_guess_hit = [row, col +1]
-                        computers_last_row.append('hit_col_plus')
-                        break  
-        if level == '3': 
-            while True:            
-                if hit_row_minus not in computers_last_row and \
-                        hit_row1 not in computers_used_guess:
-                    if row > 1 and row <= 10:
-                        computer_guess_hit = [row -1, col]
-                        computers_last_row.append('hit_row_minus')
-                        break 
-                    else:
-                        pass
-                if hit_row_plus not in computers_last_row and \
-                        hit_row2 not in computers_used_guess:
-                    print('inside row >=1')
-                    if row < 10 and row >= 1:
-                        computer_guess_hit = [row +1,col]
-                        computers_last_row.append('hit_row_plus')
-                        break
-                    else:
-                        pass
-                if hit_col_minus not in computers_last_row and \
-                        hit_col1 not in computers_used_guess:
-                    if col > 2 and col <= 10:
-                        computer_guess_hit = [row, col -1]
-                        computers_last_row.append('hit_col_minus')
-                        break
-                    else:
-                        pass
-                if hit_col_plus not in computers_last_row and \
-                        hit_col2 not in computers_used_guess:
-                    print('inside col >=1')
-                    if col < 10 and col >= 1:
-                        computer_guess_hit = [row, col +1]
-                        computers_last_row.append('hit_col_plus')
-                        break             
-
-        [x, y] = computer_guess_hit 
-        computers_guess_display_hit = [x +1, y +1]
+    elif computer_hit == 2:        
+        while True:
+            if level == '1':
+                if computer_hit_attempt == 1:
+                    computer_guess_hit = [
+                        computer_guess_row, computer_guess_col - 1
+                        ]
+                    if computer_guess_hit not in computers_used_guess:
+                        if computer_guess_col >= 5 or computer_guess_col <= 0:
+                            computer_hit_attempt += 1
+                            break
+                        else:
+                            break       
+                    
+                elif computer_hit_attempt == 2:
+                    computer_guess_hit = [
+                        computer_guess_row - 1, computer_guess_col
+                        ]
+                    if computer_guess_hit not in computers_used_guess:
+                        if computer_guess_col >= 5 or computer_guess_col <= 0:
+                            computer_hit_attempt += 1
+                            break
+                        else:
+                            break
+                
+                elif computer_hit_attempt == 3:
+                    computer_guess_hit = [
+                        computer_guess_row + 1, computer_guess_col
+                        ]
+                    if computer_guess_hit not in computers_used_guess:
+                        if computer_guess_col >= 5 or computer_guess_col <= 0:
+                            computer_hit_attempt += 1
+                            break
+                        else:
+                            break
+                elif computer_hit_attempt == 4:
+                    computer_guess_hit = [
+                        computer_guess_row, computer_guess_col + 1
+                        ]
+                    if computer_guess_hit not in computers_used_guess:
+                        if computer_guess_col >= 5 or computer_guess_col <= 0:
+                            computer_hit_attempt += 1
+                            break
+                        else:
+                            break
+            if level == '2':
+                if computer_hit_attempt == 1:
+                    computer_guess_hit = [
+                        computer_guess_row, computer_guess_col - 1
+                        ]
+                    if computer_guess_hit not in computers_used_guess:
+                        if computer_guess_col >= 7 or computer_guess_col <= 0:
+                            computer_hit_attempt += 1
+                            break
+                        else:
+                            break       
+                    
+                elif computer_hit_attempt == 2:
+                    computer_guess_hit = [
+                        computer_guess_row - 1, computer_guess_col
+                        ]
+                    if computer_guess_hit not in computers_used_guess:
+                        if computer_guess_col >= 7 or computer_guess_col <= 0:
+                            computer_hit_attempt += 1
+                            break
+                        else:
+                            break
+                
+                elif computer_hit_attempt == 3:
+                    computer_guess_hit = [
+                        computer_guess_row + 1, computer_guess_col
+                        ]
+                    if computer_guess_hit not in computers_used_guess:
+                        if computer_guess_col >= 7 or computer_guess_col <= 0:
+                            computer_hit_attempt += 1
+                            break
+                        else:
+                            break
+                elif computer_hit_attempt == 4:
+                    computer_guess_hit = [
+                        computer_guess_row, computer_guess_col + 1
+                        ]
+                    if computer_guess_hit not in computers_used_guess:
+                        if computer_guess_col >= 7 or computer_guess_col <= 0:
+                            computer_hit_attempt += 1
+                            break
+                        else:
+                            break
+            if level == '3':
+                if computer_hit_attempt == 1:
+                    computer_guess_hit = [
+                        computer_guess_row, computer_guess_col - 1
+                        ]
+                    if computer_guess_hit not in computers_used_guess:
+                        if computer_guess_col >= 10 or computer_guess_col <= 0:
+                            computer_hit_attempt += 1
+                            break
+                        else:
+                            break       
+                    
+                elif computer_hit_attempt == 2:
+                    computer_guess_hit = [
+                        computer_guess_row - 1, computer_guess_col
+                        ]
+                    if computer_guess_hit not in computers_used_guess:
+                        if computer_guess_col >= 10 or computer_guess_col <= 0:
+                            computer_hit_attempt += 1
+                            break
+                        else:
+                            break
+                
+                elif computer_hit_attempt == 3:
+                    computer_guess_hit = [
+                        computer_guess_row + 1, computer_guess_col
+                        ]
+                    if computer_guess_hit not in computers_used_guess:
+                        if computer_guess_col >= 10 or computer_guess_col <= 0:
+                            computer_hit_attempt += 1
+                            break
+                        else:
+                            break
+                elif computer_hit_attempt == 4:
+                    computer_guess_hit = [
+                        computer_guess_row, computer_guess_col + 1
+                        ]
+                    if computer_guess_hit not in computers_used_guess:
+                        if computer_guess_col >= 10 or computer_guess_col <= 0:
+                            computer_hit_attempt += 1
+                            break
+                        else:
+                            break            
+        x, y = computer_guess_hit            
+        computers_guess_display_hit = [x + 1, y + 1]
         print(f' Computer guessed: {computers_guess_display_hit}')        
         hits = computers_shots_fired(computer_guess_hit)
         computers_used_guess.append(computer_guess_hit)
+        x, y = computer_guess_hit
         print_board_char(hits, x, y)
         sleep(2)
+
+       
+# def computers_guess():
+#     """
+#     Function to choose random guess for the computer,
+#     and to check guess against the players ship locations
+#     to determine result. Additional functionality to
+#      behave like AI if shots fired on target.
+#     """
+#     global computer_hit_col
+#     global computer_hit_row
+#     global computer_hit_attempt
+#     global computer_hit
+#     global computer_guess_hit
+#     global computer_guess_row
+#     global computer_guess_col
+
+#     if computer_hit == 1:
+#         computer_guess_row = random_row(game_board)
+#         while computer_guess_row > 10:
+#             computer_guess_row = random_row(game_board)
+#         while computer_guess_row < 1:
+#             computer_guess_row = random_row(game_board)
+
+#         computer_guess_col = random_col(game_board)
+#         while computer_guess_col > 10:
+#             computer_guess_col = random_col(game_board)
+#         while computer_guess_col < 1:
+#             computer_guess_col = random_col(game_board)
+
+#         computers_guess = [computer_guess_row, computer_guess_col]
+#         computer_hit_row = computer_guess_row
+#         computer_hit_col = computer_guess_col
+#         computers_guess_display = [computer_guess_row + 1, computer_guess_col + 1]
+#         print(f' Computer guessed: {computers_guess_display}')
+#         hits = computers_shots_fired(computers_guess)
+#         print_board_char(hits, computer_guess_row, computer_guess_col)
+#         sleep(2)
+    
+#     elif computer_hit == 2:
+#         while True:
+#             if computer_hit_attempt == 1:
+#                 computer_guess_hit = [computer_guess_row, computer_guess_col + 1]
+                
+#             elif computer_hit_attempt == 2:
+#                 computer_guess_hit = [computer_guess_row, computer_guess_col - 1]
+
+#             elif computer_hit_attempt == 3:
+#                 computer_guess_hit = [computer_guess_row + 1, computer_guess_col]
+            
+#             elif computer_hit_attempt == 4:
+#                 computer_guess_hit = [computer_guess_row - 1, computer_guess_col]
+        
+#         x,y = computer_guess_hit            
+#         computers_guess_display_hit = [x + 1, y + 1]
+#         print(f' Computer guessed: {computers_guess_display_hit}') 
+#         hits = computers_shots_fired(computer_guess_hit)
+#         x,y = computer_guess_hit
+#         print_board_char(hits, x , y )
+#         sleep(2)
 
 
 def shots_fired(guess):
@@ -1265,7 +1341,6 @@ def computers_shots_fired(guess):
     global computers_score
     global computer_hit
     global computer_hit_attempt
-    global computers_last_row
     hit = 'hit_c'
     miss = 'miss_c'
     if guess in ship_A:
@@ -1279,7 +1354,6 @@ def computers_shots_fired(guess):
                 )
             computers_score += 150
             print(" Bonus of 150 points awarded for sinking ship")
-            computers_last_row = []
             computer_hit_attempt = 0
             computer_hit = 1
             sleep(2)
@@ -1300,7 +1374,6 @@ def computers_shots_fired(guess):
                 )
             computers_score += 150
             print(" Bonus of 150 points awarded for sinking ship")
-            computers_last_row = []
             computer_hit_attempt = 0
             computer_hit = 1
             sleep(2)
@@ -1321,7 +1394,6 @@ def computers_shots_fired(guess):
                 )
             computers_score += 150
             print(" Bonus of 150 points awarded for sinking ship")
-            computers_last_row = []
             computer_hit_attempt = 0
             computer_hit = 1
             sleep(2)
@@ -1342,7 +1414,6 @@ def computers_shots_fired(guess):
                 )
             computers_score += 150
             print(" Bonus of 150 points awarded for sinking ship")
-            computers_last_row = []
             computer_hit_attempt = 0
             computer_hit = 1
             sleep(2)
@@ -1353,10 +1424,13 @@ def computers_shots_fired(guess):
             computer_hit = 2
             return hit
     else:
-        if computer_hit == 1 or computer_hit == 2:
+        if computer_hit == 1:
             print(' Computer Missed')
             return miss
-        
+        if computer_hit == 2:
+            print(' Computer Missed')
+            computer_hit_attempt += 1
+            return miss
 
 
 def print_board_char(hit, guess_row, guess_col):
@@ -1469,10 +1543,6 @@ def reset_var_data():
     the end of each game, should the game be
     continued by the user at the end game screen.
     """
-    global user
-    user = ''
-    global level    
-    level = ''
     global users_score
     users_score = 0
     global computers_score
@@ -1485,24 +1555,6 @@ def reset_var_data():
     users_used_guess = []
     global computers_used_guess
     computers_used_guess = []
-    global computer_guess_hit
-    computer_guess_hit = []
-    global computers_last_col
-    computers_last_col = []
-    global computers_last_row
-    computers_last_row = []
-    global computer_hit
-    computer_hit = 1
-    global computer_guess_row
-    computer_guess_row = []
-    global computer_guess_col
-    computer_guess_col = []
-    global computer_hit_col
-    computer_hit_col = []
-    global computer_hit_row
-    computer_hit_row = []
-    global computer_hit_attempt
-    computer_hit_attempt = 0
     global bullets
     bullets = 20
     global computers_bullets
@@ -1511,10 +1563,6 @@ def reset_var_data():
     users_ships_remaining = 4
     global computers_ships_remaining
     computers_ships_remaining = 4
-    global ships_list
-    ships_list = []
-    global computers_ships_list
-    computers_ships_list = []    
     global ship_A
     ship_A = []
     global ship_B
@@ -1531,9 +1579,6 @@ def reset_var_data():
     ship_G = []
     global ship_H
     ship_H = []
-    
-
-
 
 
 def main():
