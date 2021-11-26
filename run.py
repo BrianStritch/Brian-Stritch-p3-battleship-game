@@ -352,10 +352,11 @@ def random_row(game_board):
     to position ships
     """
     global level
-    if level == '1':
-        return randint(1, 4)
-    else:
-        return randint(1, len(game_board[0]) - 1)
+    return randint(1, len(game_board[0]) - 1)
+        
+    #     if level == '1':
+    #     return randint(0, 4)
+    # else:
 
 
 def random_col(game_board):
@@ -364,10 +365,11 @@ def random_col(game_board):
     to position ships
     """
     global level
-    if level == '1':
-        return randint(1, 4)
-    else:
-        return randint(1, len(game_board[0]) - 1)
+    return randint(1, len(game_board[0]) - 1)
+
+    #     if level == '1':
+    #     return randint(1, 4)
+    # else:
 
 
 def random_orientation():
@@ -404,20 +406,20 @@ def init_ships(a_game_board):
             location_of_ship('D', user_ship4)
     elif a_game_board == computers_game_board:
         if level == '1':
-            computer_ship1 = place_ship('c', a_game_board)
+            computer_ship1 = place_ship(' 1 ', a_game_board)
             location_of_ship('E', computer_ship1)
-            computer_ship2 = place_ship('c', a_game_board)
+            computer_ship2 = place_ship(' 2 ', a_game_board)
             location_of_ship('F', computer_ship2)
-            computer_ship3 = place_ship('c', a_game_board)
+            computer_ship3 = place_ship(' 3 ', a_game_board)
             location_of_ship('G', computer_ship3)
         else:
-            computer_ship1 = place_ship('c', a_game_board)
+            computer_ship1 = place_ship(' 1 ', a_game_board)
             location_of_ship('E', computer_ship1)
-            computer_ship2 = place_ship('c', a_game_board)
+            computer_ship2 = place_ship(' 2 ', a_game_board)
             location_of_ship('F', computer_ship2)
-            computer_ship3 = place_ship('c', a_game_board)
+            computer_ship3 = place_ship(' 3 ', a_game_board)
             location_of_ship('G', computer_ship3)
-            computer_ship4 = place_ship('c', a_game_board)
+            computer_ship4 = place_ship(' 4 ', a_game_board)
             location_of_ship('H', computer_ship4)
 
 
@@ -432,17 +434,17 @@ def pick_ship_coordinates(a_game_board):
     global computers_ships_list
 
     def ship_row_func(a_game_board):
-        ship_row1 = random_row(a_game_board)
+        ship_row1 = random_row(a_game_board) 
         return ship_row1
 
     def ship_col_func(a_game_board):
-        ship_col1 = random_col(a_game_board)
+        ship_col1 = random_col(a_game_board) 
         return ship_col1
            
     while True:
         ship_row1 = ship_row_func(a_game_board)
         ship_col1 = ship_col_func(a_game_board)
-        ship_row = ship_row1
+        ship_row = ship_row1 
         ship_col = ship_col1     
         ship_row2 = ship_row + 1
         ship_col2 = ship_col + 1
@@ -571,15 +573,15 @@ def place_ship(char, a_game_board):
                         if ship and ship_ and ship2_ not in ships_list:
                             direction = random_orientation()
                             if direction == 1:
-                                a_game_board[ship_row][ship_col] = '|$|'
-                                a_game_board[ship_row2][ship_col] = '|$|' 
+                                a_game_board[ship_row -1][ship_col -1] = '|$|'
+                                a_game_board[ship_row2 -1][ship_col -1] = '|$|' 
                                 ships_list.append(ship)
                                 ships_list.append(ship2_)                               
                                 return ship, ship2_ 
                     
                             elif direction == 2:
-                                a_game_board[ship_row][ship_col] = char
-                                a_game_board[ship_row][ship_col2] = char
+                                a_game_board[ship_row -1][ship_col -1] = char
+                                a_game_board[ship_row -1][ship_col2 -1] = char
                                 ships_list.append(ship)
                                 ships_list.append(ship_)                               
                                 return ship, ship_ 
@@ -592,18 +594,19 @@ def place_ship(char, a_game_board):
                                 computers_ships_list:
                             direction = random_orientation()
                             if direction == 1:
-                                a_game_board[ship_row][ship_col] = ' . '
-                                a_game_board[ship_row][ship_col2] = ' . '
-                                computers_ships_list.append(ship)
-                                computers_ships_list.append(ship2_)    
-                                return ship, ship2_
-                    
-                            elif direction == 2:
-                                a_game_board[ship_row][ship_col] = ' . '
-                                a_game_board[ship_row2][ship_col] = ' . '
+                                a_game_board[ship_row -1][ship_col -1] = char
+                                a_game_board[ship_row2 -1][ship_col -1] = char
                                 computers_ships_list.append(ship)
                                 computers_ships_list.append(ship_) 
-                                return ship, ship_ 
+                                return ship, ship2_ 
+                    
+                            elif direction == 2:
+                                a_game_board[ship_row -1][ship_col -1] = char
+                                a_game_board[ship_row -1][ship_col2 -1] = char
+                                computers_ships_list.append(ship)
+                                computers_ships_list.append(ship_)    
+                                return ship, ship_
+                                
 
 
 def location_of_ship(ship, place):
@@ -660,13 +663,15 @@ def users_guess(user):
     global computers_ships_list
     global computers_hit
     global computers_hit_attempt
+    global computers_used_guess
 
     while bullets > 0:
         if user.lower() == 'brian':
-            print(ship_A, ship_B, ship_C, ship_D)   # for testing purposes
-            print(ship_E, ship_F, ship_G, ship_H)   # for testing purposes
+            print('users:', ship_A, ship_B, ship_C, ship_D)   # for testing purposes
+            print('comp: ', ship_E, ship_F, ship_G, ship_H)   # for testing purposes
             print(ships_list)                       # for testing purposes
             print(computers_ships_list)             # for testing purposes
+            print(computers_used_guess)
             print(computer_hit, computer_hit_attempt)   # for testing purposes 
         print(
             f" {user}'s torpedoes: {bullets}/20          " +
@@ -914,7 +919,9 @@ def users_guess(user):
         print_board_char(hit_or_miss, guess_row, guess_col)
         bullets -= 1
         sleep(2)
+        print('before computers guess')
         computers_guess()
+        print('after computers guess')
         computers_bullets -= 1
         if bullets == 0:
             end_game()
@@ -948,11 +955,6 @@ def check_num_input(num_input):
         return 'False'
 
 
-""" this code works but allows the computer
-to keep reselecting previously selected places
-"""
-
-
 def computers_guess():
     """
     Function to choose random guess for the computer,
@@ -970,27 +972,58 @@ def computers_guess():
     global computers_used_guess
     global computers_last_col
     global computers_last_row
+    print('inside computers guess')
 
-    if computer_hit == 1:        
+    if computer_hit == 1: 
+        print('inside computers guess hit_1')       
         if level == '1':
+            print('inside computers guess hit_1 level 1') 
             computer_guess_row = int(random_row(game_board))
-            while computer_guess_row > 4:
+            while computer_guess_row > 5:
+                print('inside computers guess hit_1 level 1 while 1') 
                 computer_guess_row = int(random_row(game_board))
+                if computer_guess_row < 5:
+                    print('inside computers guess hit_1 level 1 while 1 break')
+                    break
             while computer_guess_row < 1:
+                print('inside computers guess hit_1 level 1 while 2 ')
                 computer_guess_row = int(random_row(game_board))
+                if computer_guess_row > 1:
+                    print('inside computers guess hit_1 level 1 while 2 break')
+                    break
             computer_guess_col = int(random_col(game_board))
-            while computer_guess_col > 4:
+            while computer_guess_col > 5:
+                print('inside computers guess hit_1 level 1 while 3')
                 computer_guess_col = int(random_col(game_board))
+                if computer_guess_col < 5:
+                    print('inside computers guess hit_1 level 1 while 3 break')
+                    break
             while computer_guess_col < 1:
+                print('inside computers guess hit_1 level 1 while 4 ')
                 computer_guess_col = int(random_col(game_board))
+                if computer_guess_col > 1:
+                    print('inside computers guess hit_1 level 1 while 4 break')
+                    break
             while True:
                 computers_guess = [computer_guess_row, computer_guess_col]
+                print('inside computers guess hit_1 while true')
                 if computers_guess in computers_used_guess:
+                    print('inside computers guess hit_1 guess in used')
                     computer_guess_row = int(random_row(game_board))
-                    while computer_guess_row > 4:
+                    computer_guess_col = int(random_col(game_board))
+                    print('inside computers guess hit_1 after guess in used')
+                    while computer_guess_row > 5:
                         computer_guess_row = int(random_row(game_board))
+                        break
                     while computer_guess_row < 1:
                         computer_guess_row = int(random_row(game_board))
+                        break
+                    while computer_guess_col > 5:
+                        computer_guess_row = int(random_col(game_board))
+                        break
+                    while computer_guess_col < 1:
+                        computer_guess_col = int(random_col(game_board))
+                        break
                 else:
                     computers_guess = [computer_guess_row, computer_guess_col]
                     break
@@ -999,21 +1032,38 @@ def computers_guess():
             computer_guess_row = int(random_row(game_board))
             while computer_guess_row > 6:
                 computer_guess_row = int(random_row(game_board))
-            while computer_guess_row < 1:
+                if computer_guess_row < 6:
+                    break
+            while computer_guess_row < 0:
                 computer_guess_row = int(random_row(game_board))
+                if computer_guess_row > 0:
+                    break
             computer_guess_col = int(random_col(game_board))
             while computer_guess_col > 6:
                 computer_guess_col = int(random_col(game_board))
-            while computer_guess_col < 1:
+                if computer_guess_col < 6:
+                    break
+            while computer_guess_col < 0:
                 computer_guess_col = int(random_col(game_board))
+                if computer_guess_col > 0:
+                    break
             while True:
                 computers_guess = [computer_guess_row, computer_guess_col]
                 if computers_guess in computers_used_guess:
                     computer_guess_row = int(random_row(game_board))
+                    computer_guess_col = int(random_col(game_board))
                     while computer_guess_row > 6:
                         computer_guess_row = int(random_row(game_board))
-                    while computer_guess_row < 1:
+                        break
+                    while computer_guess_row < 0:
                         computer_guess_row = int(random_row(game_board))
+                        break
+                    while computer_guess_col > 6:
+                        computer_guess_row = int(random_col(game_board))
+                        break
+                    while computer_guess_col < 0:
+                        computer_guess_col = int(random_col(game_board))
+                        break
                 else:
                     computers_guess = [computer_guess_row, computer_guess_col]
                     break
@@ -1022,38 +1072,56 @@ def computers_guess():
             computer_guess_row = int(random_row(game_board))
             while computer_guess_row > 9:
                 computer_guess_row = int(random_row(game_board))
-            while computer_guess_row < 1:
+                if computer_guess_row < 9:
+                    break
+            while computer_guess_row < 0:
                 computer_guess_row = int(random_row(game_board))
+                if computer_guess_row > 0:
+                    break
             computer_guess_col = int(random_col(game_board))
             while computer_guess_col > 9:
                 computer_guess_col = int(random_col(game_board))
-            while computer_guess_col < 1:
+                if computer_guess_col < 9:
+                    break
+            while computer_guess_col < 0:
                 computer_guess_col = int(random_col(game_board))
+                if computer_guess_col > 0:
+                    break
             while True:
                 computers_guess = [computer_guess_row, computer_guess_col]
                 if computers_guess in computers_used_guess:
                     computer_guess_row = int(random_row(game_board))
+                    computer_guess_col = int(random_col(game_board))
                     while computer_guess_row > 9:
                         computer_guess_row = int(random_row(game_board))
-                    while computer_guess_row < 1:
+                        break
+                    while computer_guess_row < 0:
                         computer_guess_row = int(random_row(game_board))
+                        break
+                    while computer_guess_col > 9:
+                        computer_guess_row = int(random_col(game_board))
+                        break
+                    while computer_guess_col < 0:
+                        computer_guess_col = int(random_col(game_board))
+                        break
                 else:
                     computers_guess = [computer_guess_row, computer_guess_col]
                     break      
      
         computers_used_guess.append(computers_guess)
-        computers_guess = [computer_guess_row, computer_guess_col]
+        computers_guess = [computer_guess_row -1, computer_guess_col -1]
         computers_guess_display = [
-            computer_guess_row + 1, computer_guess_col + 1
+            computer_guess_row , computer_guess_col 
             ]
-        computer_hit_row = computer_guess_row
-        computer_hit_col = computer_guess_col
+        computer_hit_row = computer_guess_row -1
+        computer_hit_col = computer_guess_col -1      
         print(f' Computer guessed: {computers_guess_display}')
         hits = computers_shots_fired(computers_guess)
         print_board_char(hits, computer_guess_row, computer_guess_col)
         sleep(2)
     
     elif computer_hit == 2:
+        print('inside computers guess hit_1') 
         row = computer_hit_row
         col = computer_hit_col
         hit_col_minus = 'hit_col_minus'
@@ -1068,7 +1136,7 @@ def computers_guess():
             while True:            
                 if hit_row_minus not in computers_last_row and \
                         hit_row1 not in computers_used_guess:
-                    if row > 1 and row <= 4:
+                    if row > 0 and row <= 4:
                         computer_guess_hit = [row -1, col]
                         computers_last_row.append('hit_row_minus')
                         break 
@@ -1076,7 +1144,7 @@ def computers_guess():
                         pass
                 if hit_row_plus not in computers_last_row and \
                         hit_row2 not in computers_used_guess:
-                    if row < 4 and row >= 1:
+                    if row < 4 and row >= 0:
                         computer_guess_hit = [row +1,col]
                         computers_last_row.append('hit_row_plus')
                         break
@@ -1084,7 +1152,7 @@ def computers_guess():
                         pass
                 if hit_col_minus not in computers_last_row and \
                         hit_col1 not in computers_used_guess:
-                    if col > 2 and col <= 4:
+                    if col > 0 and col <= 4:
                         computer_guess_hit = [row, col -1]
                         computers_last_row.append('hit_col_minus')
                         break
@@ -1092,7 +1160,7 @@ def computers_guess():
                         pass
                 if hit_col_plus not in computers_last_row and \
                         hit_col2 not in computers_used_guess:
-                    if col < 4 and col >= 1:
+                    if col < 4 and col >= 0:
                         computer_guess_hit = [row, col +1]
                         computers_last_row.append('hit_col_plus')
                         break 
@@ -1100,7 +1168,7 @@ def computers_guess():
             while True:            
                 if hit_row_minus not in computers_last_row and \
                         hit_row1 not in computers_used_guess:
-                    if row > 1 and row <= 6:
+                    if row > 0 and row <= 6:
                         computer_guess_hit = [row -1, col]
                         computers_last_row.append('hit_row_minus')
                         break 
@@ -1108,7 +1176,7 @@ def computers_guess():
                         pass
                 if hit_row_plus not in computers_last_row and \
                         hit_row2 not in computers_used_guess:
-                    if row < 6 and row >= 1:
+                    if row < 6 and row >= 0:
                         computer_guess_hit = [row +1,col]
                         computers_last_row.append('hit_row_plus')
                         break
@@ -1116,7 +1184,7 @@ def computers_guess():
                         pass
                 if hit_col_minus not in computers_last_row and \
                         hit_col1 not in computers_used_guess:
-                    if col > 2 and col <= 6:
+                    if col > 0 and col <= 6:
                         computer_guess_hit = [row, col -1]
                         computers_last_row.append('hit_col_minus')
                         break
@@ -1124,7 +1192,7 @@ def computers_guess():
                         pass
                 if hit_col_plus not in computers_last_row and \
                         hit_col2 not in computers_used_guess:
-                    if col < 6 and col >= 1:
+                    if col < 6 and col >= 0:
                         computer_guess_hit = [row, col +1]
                         computers_last_row.append('hit_col_plus')
                         break  
@@ -1132,7 +1200,7 @@ def computers_guess():
             while True:            
                 if hit_row_minus not in computers_last_row and \
                         hit_row1 not in computers_used_guess:
-                    if row > 1 and row <= 9:
+                    if row > 0 and row <= 9:
                         computer_guess_hit = [row -1, col]
                         computers_last_row.append('hit_row_minus')
                         break 
@@ -1140,7 +1208,7 @@ def computers_guess():
                         pass
                 if hit_row_plus not in computers_last_row and \
                         hit_row2 not in computers_used_guess:
-                    if row < 9 and row >= 1:
+                    if row < 9 and row >= 0:
                         computer_guess_hit = [row +1,col]
                         computers_last_row.append('hit_row_plus')
                         break
@@ -1148,7 +1216,7 @@ def computers_guess():
                         pass
                 if hit_col_minus not in computers_last_row and \
                         hit_col1 not in computers_used_guess:
-                    if col > 2 and col <= 9:
+                    if col > 0 and col <= 9:
                         computer_guess_hit = [row, col -1]
                         computers_last_row.append('hit_col_minus')
                         break
@@ -1156,12 +1224,12 @@ def computers_guess():
                         pass
                 if hit_col_plus not in computers_last_row and \
                         hit_col2 not in computers_used_guess:
-                    if col < 9 and col >= 1:
+                    if col < 9 and col >= 0:
                         computer_guess_hit = [row, col +1]
                         computers_last_row.append('hit_col_plus')
                         break             
 
-        [x, y] = computer_guess_hit 
+        [x, y ] = computer_guess_hit 
         computers_guess_display_hit = [x +1, y +1]
         print(f' Computer guessed: {computers_guess_display_hit}')        
         hits = computers_shots_fired(computer_guess_hit)
@@ -1284,7 +1352,7 @@ def computers_shots_fired(guess):
             sleep(2)
             return hit
         else:
-            print(f" Direct hit, {user}s'  ship defenses are down")
+            print(f" Direct hit, {user}'s  ship defenses are down")
             computer_hit_attempt += 1
             computer_hit = 2
             return hit
@@ -1305,7 +1373,7 @@ def computers_shots_fired(guess):
             sleep(2)
             return hit
         else:
-            print(f" Direct hit, {user}s'  ship defenses are down")
+            print(f" Direct hit, {user}'s  ship defenses are down")
             computer_hit_attempt += 1
             computer_hit = 2
             return hit
@@ -1326,7 +1394,7 @@ def computers_shots_fired(guess):
             sleep(2)
             return hit
         else:
-            print(f" Direct hit, {user}s'  ship defenses are down")
+            print(f" Direct hit, {user}'s  ship defenses are down")
             computer_hit_attempt += 1
             computer_hit = 2
             return hit
@@ -1347,7 +1415,7 @@ def computers_shots_fired(guess):
             sleep(2)
             return hit
         else:
-            print(f" Direct hit, {user}s' ship defenses are down")
+            print(f" Direct hit, {user}'s ship defenses are down")
             computer_hit_attempt += 1
             computer_hit = 2
             return hit
@@ -1355,7 +1423,6 @@ def computers_shots_fired(guess):
         if computer_hit == 1 or computer_hit == 2:
             print(' Computer Missed')
             return miss
-        
 
 
 def print_board_char(hit, guess_row, guess_col):
@@ -1374,9 +1441,9 @@ def print_board_char(hit, guess_row, guess_col):
         computers_game_board[guess_row - 1][guess_col - 1] = ' X '
     elif hit == 'hit_c':
         computers_score += 300
-        game_board[guess_row][guess_col] = ' @ '
+        game_board[guess_row -1][guess_col -1] = ' @ '
     elif hit == 'miss_c':
-        game_board[guess_row][guess_col] = ' X '
+        game_board[guess_row -1][guess_col -1] = ' X '
 
 
 def clear():
