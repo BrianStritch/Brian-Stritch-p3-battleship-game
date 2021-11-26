@@ -678,9 +678,6 @@ def users_guess(user):
     global computers_last_row
 
     while bullets > 0:
-        if user == 'Brian':
-            print(computer_hit)
-            print('last row: ', computers_last_row)
         print(
             f" {user}'s torpedoes: {bullets}/20            " +
             f"      Computers torpedoes : {computers_bullets}/20"
