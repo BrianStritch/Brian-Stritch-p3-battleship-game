@@ -37,7 +37,7 @@ users_used_guess = []
 computer_guess_hit = []
 computers_used_guess = []
 computers_last_col = []
-computers_last_row = []
+computers_last_row = [0]
 computer_hit = 1
 computer_guess_row = []
 computer_guess_col = []
@@ -927,7 +927,7 @@ def users_guess(user):
         print_board_char(hit_or_miss, guess_row, guess_col)
         bullets -= 1
         sleep(2)
-        computers_guess()
+        computers_guess() 
         computers_bullets -= 1
         if bullets == 0:
             end_game()
@@ -968,7 +968,7 @@ def computers_guess():
     to determine result. Additional functionality to
      behave like AI if shots fired on target.
     """
-
+    
     global computer_hit_attempt
     global computer_hit
     global computer_guess_hit
@@ -980,9 +980,6 @@ def computers_guess():
 
     if computer_hit == 1:
         def computer_random_guess():
-            """
-            function to take random guess for computer
-            """
             global computer_hit_col
             global computer_hit_row
             if level == '1':
@@ -1128,11 +1125,6 @@ def computers_guess():
     elif computer_hit == 2:
 
         def seek_and_destroy():
-            """
-            function to act like AI personality
-            and seek adjacent columns to destroy
-            users ships
-            """
             global computer_hit_attempt
             global computer_hit
             global computer_guess_row
@@ -1143,9 +1135,8 @@ def computers_guess():
             global computer_guess_hit
             global computer_hit_row
             global computer_hit_col
-            row = computer_hit_row + 1
-            col = computer_hit_col + 1
-
+            row = computer_hit_row
+            col = computer_hit_col
             hit_col1 = [row, col - 1]
             hit_col2 = [row, col + 1]
             hit_row1 = [row - 1, col]
@@ -1153,107 +1144,127 @@ def computers_guess():
 
             if level == '1':
                 while True:
-                    if '1' not in computers_last_row and \
+                    if 1 not in computers_last_row and \
                             hit_row1 not in computers_used_guess \
                             and row > 0 and row <= 4:
                         computer_guess_hit = [row - 1, col]
-                        computers_last_row.append('1')
+                        print('comp guess 1')
+                        computers_last_row.append(1)
+                        break
+                    else:
                         break
 
-                    if '2' not in computers_last_row and \
+                    if 2 not in computers_last_row and \
                             hit_row2 not in computers_used_guess \
                             and row < 4 and row >= 0:
                         computer_guess_hit = [row + 1, col]
-                        computers_last_row.append('2')
+                        print('comp guess 2')
+                        computers_last_row.append(2)
+                        break
+                    else:
                         break
 
-                    if '3' not in computers_last_row and \
+                    if 3 not in computers_last_row and \
                             hit_col1 not in computers_used_guess \
                             and col > 0 and col <= 4:
                         computer_guess_hit = [row, col - 1]
-                        computers_last_row.append('3')
+                        print('comp guess 3')
+                        computers_last_row.remove(3)
+                        break
+                    else:
                         break
 
-                    if'4' not in computers_last_row and \
+                    if 4 not in computers_last_row and \
                             hit_col2 not in computers_used_guess \
                             and col < 4 and col >= 0:
                         computer_guess_hit = [row, col + 1]
-                        computers_last_row.append('4')
+                        print('comp guess 4')
+                        computers_last_row.append(4)
                         break
-                    elif computer_guess_hit in computers_used_guess:
-                        computer_hit = 1
-                        computer_random_guess()
+                    else:
+                        break                        
 
             if level == '2':
                 while True:
-                    if '1' not in computers_last_row and \
+                    if 1 not in computers_last_row and \
                             hit_row1 not in computers_used_guess \
                             and row > 0 and row <= 6:
                         computer_guess_hit = [row - 1, col]
-                        computers_last_row.append('1')
+                        computers_last_row.append(1)
                         break
+                    else:
+                        pass
 
-                    if '2' not in computers_last_row and \
+                    if 2 not in computers_last_row and \
                             hit_row2 not in computers_used_guess \
                             and row < 6 and row >= 0:
                         computer_guess_hit = [row + 1, col]
-                        computers_last_row.append('2')
+                        computers_last_row.append(2)
                         break
+                    else:
+                        pass
 
-                    if '3' not in computers_last_row and \
+                    if 3 not in computers_last_row and \
                             hit_col1 not in computers_used_guess \
                             and col > 0 and col <= 6:
                         computer_guess_hit = [row, col - 1]
-                        computers_last_row.append('3')
+                        computers_last_row.append(3)
                         break
+                    else:
+                        pass
 
-                    if'4' not in computers_last_row and \
+                    if 4 not in computers_last_row and \
                             hit_col2 not in computers_used_guess \
                             and col < 6 and col >= 0:
                         computer_guess_hit = [row, col + 1]
-                        computers_last_row.append('4')
+                        computers_last_row.append(4)
                         break
-                    elif computer_guess_hit in computers_used_guess:
-                        computer_hit = 1
-                        computer_random_guess()
+                    else:
+                        alert('error end')   
 
             if level == '3':
                 while True:
-                    if '1' not in computers_last_row and \
+                    if 1 not in computers_last_row and \
                             hit_row1 not in computers_used_guess \
                             and row > 0 and row <= 9:
                         computer_guess_hit = [row - 1, col]
-                        computers_last_row.append('1')
+                        computers_last_row.append(1)
                         break
+                    else:
+                        pass
 
-                    if '2' not in computers_last_row and \
+                    if 2 not in computers_last_row and \
                             hit_row2 not in computers_used_guess \
                             and row < 9 and row >= 0:
                         computer_guess_hit = [row + 1, col]
-                        computers_last_row.append('2')
+                        computers_last_row.append(2)
                         break
+                    else:
+                        pass
 
-                    if '3' not in computers_last_row and \
+                    if 3 not in computers_last_row and \
                             hit_col1 not in computers_used_guess \
                             and col > 0 and col <= 9:
                         computer_guess_hit = [row, col - 1]
-                        computers_last_row.append('3')
+                        computers_last_row.append(3)
                         break
+                    else:
+                        pass
 
-                    if'4' not in computers_last_row and \
+                    if 4 not in computers_last_row and \
                             hit_col2 not in computers_used_guess \
                             and col < 9 and col >= 0:
                         computer_guess_hit = [row, col + 1]
-                        computers_last_row.append('4')
+                        computers_last_row.append(4)
                         break
-                    elif computer_guess_hit in computers_used_guess:
-                        computer_hit = 1
-                        computer_random_guess()
+                else:
+                    computer_hit = 1
+                    computer_random_guess()   
 
             [x, y] = computer_guess_hit
-            computers_guess_display_hit = [x, y]
-            a = x
-            b = y
+            computers_guess_display_hit = [x + 1, y + 1]
+            a = x + 1
+            b = y + 1
             print(f' Computer guessed: {computers_guess_display_hit}')
             hits = computers_shots_fired(computers_guess_display_hit)
             computers_used_guess.append(computers_guess_display_hit)
