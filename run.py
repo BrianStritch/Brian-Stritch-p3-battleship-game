@@ -37,7 +37,7 @@ users_used_guess = []
 computer_guess_hit = []
 computers_used_guess = []
 computers_last_col = []
-computers_last_row = []
+computers_last_row = [0]
 computer_hit = 1
 computer_guess_row = []
 computer_guess_col = []
@@ -672,12 +672,14 @@ def users_guess(user):
     global computers_bullets
     global ships_list
     global computers_ships_list
-    global computers_hit
+    global computer_hit
     global computers_hit_attempt
     global computers_used_guess
     global computers_last_row
 
     while bullets > 0:
+        if user == 'Brian':
+            print(computer_hit)
         print(
             f" {user}'s torpedoes: {bullets}/20            " +
             f"      Computers torpedoes : {computers_bullets}/20"
@@ -924,7 +926,7 @@ def users_guess(user):
         print_board_char(hit_or_miss, guess_row, guess_col)
         bullets -= 1
         sleep(2)
-        computers_guess()
+        computers_guess() 
         computers_bullets -= 1
         if bullets == 0:
             end_game()
@@ -1113,7 +1115,6 @@ def computers_guess():
     elif computer_hit == 2:
         row = computer_hit_row
         col = computer_hit_col
-
         hit_col1 = [row, col - 1]
         hit_col2 = [row, col + 1]
         hit_row1 = [row - 1, col]
@@ -1127,7 +1128,7 @@ def computers_guess():
                     computers_last_row.append(1)
                     break
                 else:
-                    pass
+                    computers_last_row.remove(1)
 
                 if 2 not in computers_last_row and \
                         hit_row2 not in computers_used_guess \
@@ -1136,16 +1137,16 @@ def computers_guess():
                     computers_last_row.append(2)
                     break
                 else:
-                    pass
+                    computers_last_row.remove(2)
 
                 if 3 not in computers_last_row and \
                         hit_col1 not in computers_used_guess \
                         and col > 0 and col <= 4:
                     computer_guess_hit = [row, col - 1]
-                    computers_last_row.append(3)
+                    computers_last_row.remove(3)
                     break
                 else:
-                    pass
+                    print('error 3')
 
                 if 4 not in computers_last_row and \
                         hit_col2 not in computers_used_guess \
@@ -1154,8 +1155,9 @@ def computers_guess():
                     computers_last_row.append(4)
                     break
                 else:
-                    computer_hit = 1
-                    break
+                    computers_last_row.remove(4)
+                        
+
         if level == '2':
             while True:
                 if 1 not in computers_last_row and \
@@ -1192,8 +1194,8 @@ def computers_guess():
                     computers_last_row.append(4)
                     break
                 else:
-                    computer_hit = 1
-                    break
+                    alert('error end')   
+
         if level == '3':
             while True:
                 if 1 not in computers_last_row and \
@@ -1230,8 +1232,7 @@ def computers_guess():
                     computers_last_row.append(4)
                     break
                 else:
-                    computer_hit = 1
-                    break
+                    alert('error end')   
 
         [x, y] = computer_guess_hit
         computers_guess_display_hit = [x + 1, y + 1]
@@ -1368,7 +1369,7 @@ def computers_shots_fired(guess):
             sleep(2)
             return hit
         else:
-            print(f" Direct hit, {user}'s  ship defenses are down")
+            print(f" Direct hit, {user}'s ship defenses are down")
             computer_hit_attempt += 1
             computer_hit = 2
             return hit
@@ -1389,7 +1390,7 @@ def computers_shots_fired(guess):
             sleep(2)
             return hit
         else:
-            print(f" Direct hit, {user}'s  ship defenses are down")
+            print(f" Direct hit, {user}'s ship defenses are down")
             computer_hit_attempt += 1
             computer_hit = 2
             return hit
@@ -1410,7 +1411,7 @@ def computers_shots_fired(guess):
             sleep(2)
             return hit
         else:
-            print(f" Direct hit, {user}'s  ship defenses are down")
+            print(f" Direct hit, {user}'s ship defenses are down")
             computer_hit_attempt += 1
             computer_hit = 2
             return hit
