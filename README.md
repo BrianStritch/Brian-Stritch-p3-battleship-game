@@ -30,16 +30,40 @@ The last screen is visible only when one of the following conditions are met:
 	* [Existing features](#existing-features)
 	* [Features left to implement](#features-left-to-implement)
 * [Testing](#testing)
-* [Validator testing](#validator-testing)
-	* [PEP8 validator results](#pep8-code-validator)
+  * [Validator testing](#validator-testing)
+	  * [PEP8 validator results](#pep8-code-validator)
 * [Unfixed Bugs](#unfixed-bugs)
 * [Deployment](#deployment)
 * [Credits](#credits)
 * [UX](#ux)
 	* [Scope](#scope)
+    * [From why to what](#from-why-to-what)
+      * [What they say they need](#what-they-say-they-want)
+      * [What they actually need](#what-they-actually-need)
+      * [what they don't know they need](#what-they-dont-know-they-need)
+    * [Features and content](#features-and-content)
+      * [Example of scope](#example-of-scope)
 	* [Strategy](#strategy)
+    * [Relevance of content](#relevance-of-content)
+    * [Why is it so special?](#why-is-it-so-special?)
+    * [Why would you want this?](#why-would-you-want-this?)
+    * [What makes a great experience?](#what-makes-a-great-experience?)
+    * [What can a user expect?](#what-can-the-user-expect?)
+      * [Does it offer me what I want?](#does-it-offer-me-what-I-want?)
+      * [As a user I expect to see](#as-a-user-i-expect-to-see)
 	* [Structure](#structure)
+    * [Information Architecture (IA)](#information-architecture-(ia))
+      * [A basic tree layout structure](#a-basic-tree-layout-structure)
+    * [Interaction Design (IXD)](#interaction-design-(ixd))
+      * [Welcome screen](#welcome-screen)
+      * [Rules and Instructions screen](#rules-and-instructions-screen)
+      * [Game screens](#game-screens)
+        * [Difficulty level 1](#game-difficulty-level-1)
+        * [Difficulty level 2](#game-difficulty-level-2)
+        * [Difficulty level 3](#game-difficulty-level-3)
+      * [End of game screen](#end-game-screen)
 	* [Skeleton](#skeleton)
+    * [Wireframe of the game screen](#wireframe-of-the-game-screen)
 
 
 <!-- End table of contents -->
@@ -49,7 +73,7 @@ The last screen is visible only when one of the following conditions are met:
 <a href="https://brian-stritch-p3-battleship.herokuapp.com/" target="_blank">Click Here</a> to access the game.
 
 ## __Features__ 
-1. The user is awaded the opportuntity to enter their name into the console for a personalised experience.
+1. The user is awarded the opportuntity to enter their name into the console for a personalised experience.
 
 2. The user is then offered the choice of three game difficulty levels.
 
@@ -169,6 +193,7 @@ The live link to the game can be found <a href="https://brian-stritch-p3-battles
 - I would like to thank all my family and friends for the help in testing the game and searching for errors and bugs.
 - I would like to credit Geeks for Geeks for information relating to numerous different areas of the game sourced via google search.
 - I have carried out extensive research in relation to many different areas of this game and have obtained information from numerous websites and forums throught the development of this game.
+- I would also like to credit the creators of python tutor as this facility has been a crucial tool in assisting me in determining the logical solutions to some of the issues that arose throughout the development of this program.
 
  ## __UX__
 
@@ -191,7 +216,7 @@ The live link to the game can be found <a href="https://brian-stritch-p3-battles
         -	A challenging logic based startegy game with varying difficulty levels and the ability to record high scores.        
 
   - #### __Features and Content__
-    - __Example__: A user wishes pass time and enjoy an competitive logical strategy game. 
+    - __Example of scope__: A user wishes pass time and enjoy an competitive logical strategy game. 
       - ![scope Diagram](/readme-images/scope.JPG)
     
 
@@ -212,7 +237,7 @@ Future Developments of the game could include the addition of game types to expa
   - #### __Why would you want this?__
     - As this game offers a selection of difficulty levels and allows the computer to fight back and seek and destroy the users battleships, this makes the game competitive and it is a race between the user and the computer as to who will sink the others battleships and win the game.  
 
-  - #### __What makes a great experience__
+  - #### __What makes a great experience?__
     -	The ability enter your name for a personalised experience. 
   	- Having the choice of which difficulty level you want to play. 
     -	The ability to view the current scores, remaining torpedoes, and remaining ships as you play the game. 
@@ -220,7 +245,7 @@ Future Developments of the game could include the addition of game types to expa
     -	The ability to add more game types and difficulty levels in future updates of the game to offer the user more of a selection. 
    
   - #### __What can a user expect?__
-      - __Does it offer me what I want__
+      - __Does it offer me what I want?__
             - Yes, to have the ability to play a competitive logic based strategy game.   
       - __As a user I expect to see__
             - Visually, the game boards indicate the level of difficulty as the higher the difficulty level the larger the game board size, and the users ships are visible however the computers ships remain hidden.
@@ -232,46 +257,46 @@ Future Developments of the game could include the addition of game types to expa
         ![Structure layout](/readme-images/stucture-diagram.JPG)   
   
 
-    - ### __Interaction Design (IXD)__ 
-      - #### __Welocome Screen__
-        - The first area the user will encounter is the welcome message screen, where the user is prompted to enter their name. On entering their name, the user will be displayed a choice of game difficulty levels with three choices, 1. Beginner, 2. Intermediate, 3. Advanced. Once the user selects their preferred game difficulty level the game then progresses to the rules and instructions page.
+  - ### __Interaction Design (IXD)__ 
+    - #### __Welcome Screen__
+      - The first area the user will encounter is the welcome message screen, where the user is prompted to enter their name. On entering their name, the user will be displayed a choice of game difficulty levels with three choices, 1. Beginner, 2. Intermediate, 3. Advanced. Once the user selects their preferred game difficulty level the game then progresses to the rules and instructions page.
 
-          ![Game welcome screen](/readme-images/welcome-screen.JPG) 
+        ![Game welcome screen](/readme-images/welcome-screen.JPG) 
 
-      - #### __Rules and Instructions screen__
-        - The rules and instructions page describes the game and how it should be played and describes the game display areas and information printed in the game area. The user is prompted to press enter to play the game allowing the user to control the progression to the game screen, to allow the user sufficient time to read and understand the game rules and instructions.
+    - #### __Rules and Instructions screen__
+      - The rules and instructions page describes the game and how it should be played and describes the game display areas and information printed in the game area. The user is prompted to press enter to play the game allowing the user to control the progression to the game screen, to allow the user sufficient time to read and understand the game rules and instructions.
 
-          ![Game rules and instructions screen](/readme-images/instructions-and-rules-page.JPG)
+        ![Game rules and instructions screen](/readme-images/instructions-and-rules-page.JPG)
 
-      - #### __Game Screens__
-        - Once the user progresses to the game screen, the relevant game board size is printed in relation to the difficulty level chosen by the user, the users ships are randomly placed and are displayed to the user, and the computers ships are randomly placed and hidden from the user.
-        - The users current score is displayed above the users gameboard, and the computers current score is displayed above the computers game board.
-        - The users and computers remaining ammunition is displayed beneath the relevant game board and the users and computers remaining ships are displayed beneath the relevant game boards.
-        - The user is then prompted to enter the row and column numbers to pinpoint their target destination on the computers game board.
-        - Once the user takes their guess, the users guess is shown to the user to verify the correct input, and the result of their choice is displayed (whether a hit or a miss), and the computer then takes its turn.
-        - Once the computer takes its turn, the computers guess and the results of their choice are shown to the user.
-        - The game continues until one of the following conditions is met:
-          -	All the users ships have been sunk.
-          -	All the computers ships have been sunk.
-          -	The user and computer have no ammunition remaining.
-        - Should the user wish to leave the game an exit keyword has been programmed into the game so at any of the input fields the user can exit the game simply by typing the exit keyword into the terminal. 
-          - __Game difficulty level 1__
-          ![Game level 1 screen](/readme-images/level-1-game.JPG)
-          - __Game difficulty level 2__ 
-          ![Game level 2 screen](/readme-images/level-2-game.JPG)
-          - __Game difficulty level 3__
-          ![Game level 3 screen](/readme-images/level-3-game.JPG) 
+    - #### __Game Screens__
+      - Once the user progresses to the game screen, the relevant game board size is printed in relation to the difficulty level chosen by the user, the users ships are randomly placed and are displayed to the user, and the computers ships are randomly placed and hidden from the user.
+      - The users current score is displayed above the users gameboard, and the computers current score is displayed above the computers game board.
+      - The users and computers remaining ammunition is displayed beneath the relevant game board and the users and computers remaining ships are displayed beneath the relevant game boards.
+      - The user is then prompted to enter the row and column numbers to pinpoint their target destination on the computers game board.
+      - Once the user takes their guess, the users guess is shown to the user to verify the correct input, and the result of their choice is displayed (whether a hit or a miss), and the computer then takes its turn.
+      - Once the computer takes its turn, the computers guess and the results of their choice are shown to the user.
+      - The game continues until one of the following conditions is met:
+        -	All the users ships have been sunk.
+        -	All the computers ships have been sunk.
+        -	The user and computer have no ammunition remaining.
+      - Should the user wish to leave the game an exit keyword has been programmed into the game so at any of the input fields the user can exit the game simply by typing the exit keyword into the terminal. 
+        - __Game difficulty level 1__
+        ![Game level 1 screen](/readme-images/level-1-game.JPG)
+        - __Game difficulty level 2__ 
+        ![Game level 2 screen](/readme-images/level-2-game.JPG)
+        - __Game difficulty level 3__
+        ![Game level 3 screen](/readme-images/level-3-game.JPG) 
 
-      - #### __Welocome Screen__
-        - On completing the game an end screen is displayed where the user is displayed a message indicating who the winner of the game was and the high scores leader board is displayed. Should the users score qualify for a place on the top 5 leader board, the users name and score will appear in the statistics. 
-        - The user is then prompted to press the enter key to restart the game.
-         ![Game End screen](/readme-images/end-game-screen.JPG) 
+    - #### __End game Screen__
+      - On completing the game an end screen is displayed where the user is displayed a message indicating who the winner of the game was and the high scores leader board is displayed. Should the users score qualify for a place on the top 5 leader board, the users name and score will appear in the statistics. 
+      - The user is then prompted to press the enter key to restart the game.
+        ![Game End screen](/readme-images/end-game-screen.JPG) 
 
 
  - ### __Skeleton__
 
     - Below is a simple wireframe created on balsamiq illustrating the game screen deployed on a terminal in heroku.
-      - __The game screen__
+      - __Wireframe of the game screen__
 
         ![Wireframe from Balsamiq](/readme-images/battleship-wireframe.JPG)
      
