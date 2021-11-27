@@ -28,19 +28,13 @@ The last screen is visible only when one of the following conditions are met:
 	* [Languages used](#languages-used)
 	* [Other Technologies](#other-technologies)
 	* [Existing features](#existing-features)
-	  * [Social media](#social-media)	
 	* [Features left to implement](#features-left-to-implement)
 * [Testing](#testing)
 * [Validator testing](#validator-testing)
-	* [W3C HTML Code validator](#w3c-html-code-validator)
-	* [W3C CSS Jigsaw validator](#w3c-css-jigsaw-validator)
-	* [Accessibility Lighthouse](#accessibility-lighthouse)
-  * [JSHint](#jshint)
+	* [PEP8 validator results](#pep8-code-validator)
 * [Unfixed Bugs](#unfixed-bugs)
 * [Deployment](#deployment)
 * [Credits](#credits)
-* [Content](#content)
-* [Media](#media)
 * [UX](#ux)
 	* [Scope](#scope)
 	* [Strategy](#strategy)
@@ -63,21 +57,22 @@ The last screen is visible only when one of the following conditions are met:
 
 4. Once the game starts the game boards are generated and the users ships and computers ships are randomly placed within the game boards. The user can see their ships, however the computers ships remain hidden.
 
-5. The game board and number of ships are determined by the game difficulty chosen by the user at the initial welcome screen, and users that choose difficulty level 1 play on a 5 x 5 game board and have 3 ships each. Users that choose difficulty level 2 play on a 7 x 7 game board with 4 ships each. Users that choose difficulty level 3 play on a 10 x 10 game board wit 4 ships each. The user and the computer get 20 torpedoes each for all game difficulty levels. 
+5. The game board and number of ships are determined by the game difficulty chosen by the user at the initial welcome screen, and users that choose difficulty level 1 play on a 5 x 5 game board and have 3 ships each. Users that choose difficulty level 2 play on a 7 x 7 game board with 4 ships each. Users that choose difficulty level 3 play on a 10 x 10 game board with 4 ships each. The user and the computer get 20 torpedoes each for all game difficulty levels. 
 
 6. The user is asked to guess a row number relevant to the game board size and a column number relevant to the game board size to fire a torpedo to this location on the computers game board.
 
-7. The user is then displayed the result of their location and is informed if the torpedo has struck its taget, or whether it is a miss.
+7. The user is then displayed the result of their choice and is informed if the torpedo has struck its taget, or whether it has missed.
 
-8. The computer then takes its turn randomly choosing a location on the users game board and a message is displayed to inform the user if the computer was succesful at finding their ships or not.
+8. The computer then takes its turn randomly choosing a location on the users game board and a message is displayed to inform the user if the computer was succesful at finding their ships or not. If the Computer hits a ship, a function is triggered to target the adjacent cells in an attempt to seek and destroy the users ships in order to make it a competitive gaming experience where the user gets to experience what it would be like if another human player was targeting their ships.
 
 9. The game will continue until the ships have been sunk or the user and computer have no ammunition remaining.
 
-10. At the end of game screen, a message is displayed to the user notifying them of their score and of the remaining ships still at sea. If the user has been victorious then they are congratulated on their victory, alternatively if the computer is victorious the user is displayed a message notifying them of their loss.
+10. At the end of game screen, a message is displayed to the user notifying them of their score and of the remaining ships still at sea. If the user has been victorious then they are congratulated on their victory, alternatively if the computer is victorious the user is displayed a message notifying them of their loss. A high scores list is then shown to the user showing the top 5 players names and scores.
 
 8. At the end game screen the user can retart the game and is redirected to the welcome screen.
 
 ## __Technologies__
+
 ### __Languages used__
   The Python programming language was used to create the game:
   
@@ -86,126 +81,119 @@ The last screen is visible only when one of the following conditions are met:
 
   1. Balsamiq Wireframes
     * To create the wireframes and mock ups.
+
   2. Gitpod
     * Platform used to develop and test site.
+
   3. Github
     * Platform used to host the repository.
+
   4. Heroku
     * This was used to deploy the live terminal version of the game.
+
   5. Google Sheets
-    * This was used to retain the username and scores for the high scores displayed at the end game screen.
+    * This was used to store the usernames and scores and to return the top 5 players names and scores for the high scores rankings displayed at the end game screen.
 
 ### __Existing Features__
-  - The game has three levels of difficulty
+  - The game has three levels of difficulty.
+
+  - In order to give the user a pleasant gaming experience we implemented a function which clears the terminal after each game turn cycle and clears the terminal after the welcome page, the instructions and rules page, and the end page also.
+
+  - In the intrest of user experience the users game board and computers game boards are printed on the same horizontal axis so that the page does not scroll downwards and appears to refresh after each iteration of the game turn cycle.
+
   - The game has the functionality to randomly place ships on the horizontal or vertical axis.
+
+  - For a more realistic experience the game has the functionality to allow the computer to fire at randomly selected locations until a target is hit and then activates a function to seek and destroy the remaining part of that ship. Once the ship is destroyed the computers guess reverts to a random guess and the game continues.
+
+  - The game has catch statements implemented to stop the user selecting an area outside the game board size.
+
   - The game has the functionality to record high scores and add the user to the leaderboard should they be applicable.
-
-#### __Social Media__
-
-  - I have added links in the footer of the game which allows the user to follow me on github and linked in should they wish to do so. 
 
 
 ### __Features Left to Implement__
 
-- The functionality for the computer to recognise that a ship has been hit and target the surrounding area in order to make the game more realistic as this is how a human would interact with the game should they succesfully hit their opponents ship.
 - The functionality to allow the user to play a battle-space-ship game where the ships are large square objects.
-- The functionality to allow a ship to move around once they have been hit but to stop when sunk.
+
+- The functionality to possibly allow a ship to move location once they have been hit but to stop when sunk.
 
 ## __Testing__ 
 
  - All aspects of the game have been tested and appear to be working as intended with very few errors present. The user should be able to achieve their goal as the game intends, depending on whichever game level they choose to play when they visit. 
 
- - I have tested the site out on Google Chrome and Android, Edge, Safari however it has not been tested on IOS.
+ - I have tested the site out on Google Chrome and Android, Edge, Safari however it has not been tested on IOS. The P3 terminal based project is non responsive in relation to device sizes.
 
  - Community Testing:
-    * Family members testing rigorously and reporting on faults or bugs found and putting forward input to imrove the 
+    * Family members and friends testing rigorously and reporting on faults or bugs found and putting forward input to imrove the gameplay and functionality of the game.
 
 ### __Validator Testing__ 
-##### __W3C HTML Code Validator:__
-  - The code for the html index.html page was entered into the validator and all aspects of the page passed.
-  - No errors or warnings were returned when passing through the official W3 HTML validator.
-     ![Smarty Pants Quiz game HTML validator results](/readme-images/pep8-checker.JPG)
 
+##### __PEP8 Code Validator__
+  - The code for the run.py page was entered into the validator and all aspects of the page passed.
 
-
-#### __Accessibility lighthouse:__
-  - The game site was entered tested using lighthouse in chrome developer tools and passed with 100% in all areas.
-     ![Smarty Pants Quiz game Lighthouse test results](/assets/readme/readme-images/lighthouse-test-results.JPG)
-
-#### __JSHint:__
-  - The code for the script.js file was entered into the JSHint validator and passed.
-  - Some minor warnings were noted relating to functions which were declared within loops referencing outer scoped variables, however this was the intention of declaring said variables, that they could be manipulated by functions to alter the stored values in order to influence the outcome of other functions depending on the values stored when the variables are passed into the functions. Some notifications were prompted relating to unused variables, however the variables which have been noted directly relate to the statements above where the variables are designed to be manipulated by functions in order for the game to operate effectively. No errors were returned when passing through the JSHint validator.
-  
-    ![Smarty Pants Quiz game JSHint results](/assets/readme/readme-images/jshint-results.JPG)
+  - No errors or warnings were returned when passing through the official PEP8 validator.
+     ![Brians Battleship P3 2021 validator results](/readme-images/pep8-checker.JPG)
 
 
 ### __Unfixed Bugs__
 
-While many bugs have been found during the development phase, such as layout issues,
-font size issues, and links not working when committed to GitHub. Numerous bugs were noted when writing the JavaScript file however these bugs have been eradicated and no bugs appear to remain. 
- - During the testing phase of the game it was noted that one such bug was evident, which required a function to be written to delay the next button following the user answering the question, as this would cause the function to execute prior to its predecessor function completing and thus causing the answer buttons of the next question to disappear, leaving the user on a screen with no buttons to progress. 
- - During the course of writing the javascript file numerous small bugs were found and the issues resolved and no further issues appear to be evident in the current version of the game. 
+While many bugs have been found during the development phase, numerous bugs have been rectified however some known bugs remain.
 
-- In relation to the CSS styling of the game application some minor issues were noted with responsiveness on different size devices and a happy medium had to be achieved as I could not get the site to appear uniform on all different types of media devices due to the time constraints of submitting this project and these issues have not been fully addressed and could be addressed in a future update of the game.
+ - One such bug is that intermittently the seek and destroy function may target a cell outside the bounds of the board which causes it to wrap to the next line. This Bug is currently a priority and will be rectified in a future update of the game.
+
+ - During the development of the game numerous bugs came to light and required rectification in order to execute the game as such bugs were resulting in crashes and infinite loops which required the modification of numerous functions to rectify this issue.
+
+ - During the development phase the users guess function was written numerous ways implementing different methods as each method prior to the existing method carried their own bugs and faults. An intermittent bug was evident which occurred seldomly which caused the seek and destroy function to run in an infinite loop and this has been addressed however there are time constraints of the submission of this project and to date the infinite loop appears to be rectified, although as it was seldom occurrence we would be uncertain if this bug is truly irradicated.
+
+ - It was noted while developing this game that the console or terminal was crowded and causing the game screen to scroll downwards and reprint the game boards below the previous game board and print statements, and in an attempt to print the game boards in a cleaner enviornment, the clear function is used to clear the terminal after each turn cycle and it was found that the game scrolled down one line and the clear function only clears the terminal area visible to the user, and thus after each turn cycle the game would print a new game board, leaving the title line repeatedly in the upper lines of the terminal. After discussing this with my mentor we increased the size of the terminal and this issue has been irradicated as a result, however on the standard sized terminal this issue will remain.
+
 
 ## __Deployment__
 
-- The site was deployed to GitHub pages. The steps to deploy are as follows: 
-  - In the GitHub repository, navigate to the Settings tab 
-  - In settings select pages on the menu along left hand side.
-  - Select branch in the source section and change setting to main
-  - Once the master branch has been selected, the page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment. 
+- The site was deployed using Heroku. The steps to deploy are as follows: 
+  - Sign up and login to Heroku. 
+  - On the right side of the screen choose "new", then "create new app".
+  - You follow the prompts giving the app a name and a region and select "create app".
+  - On the main page of Heroku select the settings tab, in settings the following buildpacks required to be installed:
+    - Heroku/Python
+    - Heroku/nodejs
+  - In the settings tab, config vars required inputting such as:
+    - CREDS as the creds.json file from the repository which contains priviledged information.
+    - PORT 8000
+  - In the deploy tab the app needs to be deployed.
+  - Once the master branch has been selected, the page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment.
+  - On recieving the message notifying that the app has been deployed you can then click the "open app" button to view the deployed version of the app. 
 
-The live link can be found <a href="https://brianstritch.github.io/BrianStritch-P2-Quiz-Smarty-Pants/" target="_blank">here</a>.
+The live link to the game can be found <a href="https://brian-stritch-p3-battleship.herokuapp.com/" target="_blank">here</a>.
 
 
 ## __Credits__ 
 - I would like to thank my mentor Spencer Barriball for the guidance throughout the project.
 - I would like to thank all my family and friends for the help in testing the game and searching for errors and bugs.
-
-
-### __Content__
-
-- The questions used for the Peppa Pig quiz game were obtained from an online quiz found at the link below:
-  - https://www.funtrivia.com/en/ForChildren/Peppa-Pig-21189.html.
-- The questions used for the Love/Hate quiz game were obtained from an online quiz found at the link below:
-  - https://www.joe.ie/quiz/quiz-how-well-do-you-remember-lovehate-658499
-- The questions for the Music quiz game were obtained from an android application "Trivial music", available for download for on the Google APP store.
-- The icons in the footer were obtained from [Font Awesome](https://fontawesome.com/)
-- The Modal on the Entry screen was obtained from W3Schools website.
-
-### __Media__
-
-- The images used in the initial game entry screen and game selector screen backgrounds were obtained from Pexels.com and are to the best of my knowledge unlicenced free images.
-- The image used in the Peppa Pig game selector was obtained from an internet search and sourced from Twitter via The Guardian.
-- The image used in the Love/Hate game selector was obtained from the RTE One official website.
-- The image used in the Music game selector was obtained from an internet search and appears across numerous social media platforms and the source of which is unknown. The source that this image was obtained from for this game was from "Online tech tips".
-- The images used in the Peppa Pig game and end screen were obtained from the official Peppa Pig Twitter account.
-- The Images used in the Love/Hate game screen and end screens were obtained from the RTE One official website .
-- The images used in the Music game screen and end screens were obtained from an internet search and the game screen image was obtained from the New Yorker Website and the end screen image was from "Dothill Primary School" and appears to have been drawn by a student.
+- I would like to credit Geeks for Geeks for information relating to numerous different areas of the game sourced via google search.
+- I have carried out extensive research in relation to many different areas of this game and have obtained information from numerous websites and forums throught the development of this game.
 
  ## __UX__
 
 - ### __Scope__
    - #### __From Why to What!__
+
      - ##### __What they say they need:__
-        -	A fun and educational quiz game.
-        -	A quiz with a variety of levels of difficulty.
-        -	A quiz that tracks and displays the users score.
+        -	A fun and challenging, logic based game.
+        -	A game with a variety of levels of difficulty.
+        -	A game that tracks and displays the users score.
+
 
       - ##### __What they actually need:__
-        -	A fun quiz based game that is easy to navigate and enjoyable for the user.
-        -	A quiz game that offers multiple game type choices, to appeal to a multitude of user age groups. 
+        -	A fun but competitive game that is enjoyable for the user.
+        -	A game that offers multiple game difficulty choices, to appeal to a multitude of users. 
 
 
       - ##### __What they don’t know they need:__ 
-        -	A quiz to cater for multiple age groups.
-        -	A Quiz to challenge and entertain the user.
-        -	Links to social media 
-
+        -	A fun but competitive game that is easy to play and offers feedback by way of the seek and destroy function to make the user sense that the computer is operating such as a human player would which is enjoyable for the user..
+        -	A Quiz to challenge and entertain the user.        
 
   - #### __Features and Content__
-    - __Example__: A user wishes pass time and enjoy an entertaining quiz game. 
+    - __Example__: A user wishes to play a challenging logic based game.. 
       - ![scope Diagram](/assets/readme/readme-images/scope.JPG)
     
 
