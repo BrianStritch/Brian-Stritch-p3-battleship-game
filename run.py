@@ -678,6 +678,7 @@ def users_guess(user):
     global computers_last_row
 
     while bullets > 0:
+        print(computers_ships_list)
         print(
             f" {user}'s torpedoes: {bullets}/20            " +
             f"      Computers torpedoes : {computers_bullets}/20"
@@ -1550,11 +1551,13 @@ def high_scores():
     """
     global user
     global users_score
+    global level
 
-    new_row = user, users_score
+    new_row = user, users_score, level
     worksheet_to_update = SHEET.worksheet('players_scores')
     worksheet_to_update.append_row(new_row)
     print('                      Top 5 Highscore Leaderboard :')
+    print('                      Username : Score : Level   ')
     leaderboard = SHEET.worksheet('highscore').get_all_values()
     leaders = leaderboard[0:5]
     for leader in leaders:
