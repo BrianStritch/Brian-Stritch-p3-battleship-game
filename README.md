@@ -38,7 +38,7 @@ The last screen is visible only when one of the following conditions are met:
 * [UX](#ux)
 	* [Scope](#scope)
     * [From why to what](#from-why-to-what)
-      * [What they say they need](#what-they-say-they-want)
+      * [What they say they need](#what-they-say-they-need)
       * [What they actually need](#what-they-actually-need)
       * [what they don't know they need](#what-they-dont-know-they-need)
     * [Features and content](#features-and-content)
@@ -53,7 +53,7 @@ The last screen is visible only when one of the following conditions are met:
       * [As a user I expect to see](#as-a-user-i-expect-to-see)
 	* [Structure](#structure)
     * [Information Architecture (IA)](#information-architecture-(ia))
-      * [A basic tree layout structure](#a-basic-tree-layout-structure)
+      * [A basic tree layout structure](#a-basic-tree-structure-layout)
     * [Interaction Design (IXD)](#interaction-design-(ixd))
       * [Welcome screen](#welcome-screen)
       * [Rules and Instructions screen](#rules-and-instructions-screen)
@@ -200,23 +200,23 @@ The live link to the game can be found <a href="https://brian-stritch-p3-battles
 - ### __Scope__
    - #### __From Why to What!__
 
-     - ##### __What they say they need:__
+     - ##### __What they say they need__
         -	A fun and challenging, logic based game.
         -	A game with a variety of levels of difficulty.
         -	A game that tracks and displays the users score.
 
 
-      - ##### __What they actually need:__
+      - ##### __What they actually need__
         -	A fun but competitive game that is enjoyable for the user.
         -	A game that offers multiple game difficulty choices, to appeal to a multitude of users. 
 
 
-      - ##### __What they don’t know they need:__ 
+      - ##### __What they don’t know they need__ 
         -	A fun but competitive game that is easy to play and offers feedback by way of the seek and destroy function to make the user sense that the computer is operating such as a human player would which is enjoyable for the user.
         -	A challenging logic based startegy game with varying difficulty levels and the ability to record high scores.        
 
   - #### __Features and Content__
-    - __Example of scope__: A user wishes pass time and enjoy an competitive logical strategy game. 
+    - #### __Example of scope__: A user wishes pass time and enjoy an competitive logical strategy game. 
       - ![scope Diagram](/readme-images/scope.JPG)
     
 
@@ -253,7 +253,7 @@ Future Developments of the game could include the addition of game types to expa
 
 - ### __Structure__   
     #### __Information Architecture (IA)__ 
-     - #### A basic tree structure layout .     
+     - #### __A basic tree structure layout__     
         ![Structure layout](/readme-images/stucture-diagram.JPG)   
   
 
