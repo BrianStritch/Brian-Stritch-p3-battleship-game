@@ -245,9 +245,9 @@ Future Developments of the game could include the addition of game types to expa
     -	The ability to add more game types and difficulty levels in future updates of the game to offer the user more of a selection. 
    
   - #### __What can a user expect?__
-      - __Does it offer me what I want?__
+      - #### __Does it offer me what I want?__
             - Yes, to have the ability to play a competitive logic based strategy game.   
-      - __As a user I expect to see__
+      - #### __As a user I expect to see__
             - Visually, the game boards indicate the level of difficulty as the higher the difficulty level the larger the game board size, and the users ships are visible however the computers ships remain hidden.
       
 
@@ -280,12 +280,12 @@ Future Developments of the game could include the addition of game types to expa
         -	All the computers ships have been sunk.
         -	The user and computer have no ammunition remaining.
       - Should the user wish to leave the game an exit keyword has been programmed into the game so at any of the input fields the user can exit the game simply by typing the exit keyword into the terminal. 
-        - __Game difficulty level 1__
-        ![Game level 1 screen](/readme-images/level-1-game.JPG)
-        - __Game difficulty level 2__ 
-        ![Game level 2 screen](/readme-images/level-2-game.JPG)
-        - __Game difficulty level 3__
-        ![Game level 3 screen](/readme-images/level-3-game.JPG) 
+        - #### __Game difficulty level 1__
+          ![Game level 1 screen](/readme-images/level-1-game.JPG)
+        - #### __Game difficulty level 2__ 
+          ![Game level 2 screen](/readme-images/level-2-game.JPG)
+        - #### __Game difficulty level 3__
+          ![Game level 3 screen](/readme-images/level-3-game.JPG) 
 
     - #### __End game Screen__
       - On completing the game an end screen is displayed where the user is displayed a message indicating who the winner of the game was and the high scores leader board is displayed. Should the users score qualify for a place on the top 5 leader board, the users name and score will appear in the statistics. 
@@ -296,7 +296,7 @@ Future Developments of the game could include the addition of game types to expa
  - ### __Skeleton__
 
     - Below is a simple wireframe created on balsamiq illustrating the game screen deployed on a terminal in heroku.
-      - __Wireframe of the game screen__
+      - #### __Wireframe of the game screen__
 
         ![Wireframe from Balsamiq](/readme-images/battleship-wireframe.JPG)
      
