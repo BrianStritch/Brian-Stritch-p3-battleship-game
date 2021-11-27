@@ -138,13 +138,11 @@ The last screen is visible only when one of the following conditions are met:
 
 While many bugs have been found during the development phase, numerous bugs have been rectified however some known bugs remain.
 
- - One such bug is that intermittently the seek and destroy function may target a cell outside the bounds of the board which causes it to wrap to the next line. This Bug is currently a priority and will be rectified in a future update of the game.
+ - During the development of the game numerous bugs came to light which required rectification in order for the game to work, as such bugs were resulting in crashes and infinite loops which required the modification of numerous functions to rectify this issue. The crashes were intermittent and have been addressed and this issue may be resolved, however due to time constraints we have tested the game to the best of our ability in the timeframe available and this issue has not since come to light. Should this issue arise in the future, this will be made a priority and will be rectified in a future update of this game.
 
- - During the development of the game numerous bugs came to light and required rectification in order to execute the game as such bugs were resulting in crashes and infinite loops which required the modification of numerous functions to rectify this issue.
+ - During the development phase the users guess function was written numerous ways implementing different methods as each method prior to the current method carried their own bugs and faults. An intermittent bug was evident which occurred very seldomly which caused the seek and destroy function to run in an infinite loop and this has been addressed however there are time constraints of the submission of this project and to date the infinite loop appears to be rectified, although as it was a very intermittent occurrence we would be uncertain if this bug is truly irradicated until further testing has been completed.
 
- - During the development phase the users guess function was written numerous ways implementing different methods as each method prior to the existing method carried their own bugs and faults. An intermittent bug was evident which occurred seldomly which caused the seek and destroy function to run in an infinite loop and this has been addressed however there are time constraints of the submission of this project and to date the infinite loop appears to be rectified, although as it was seldom occurrence we would be uncertain if this bug is truly irradicated.
-
- - It was noted while developing this game that the console or terminal was crowded and causing the game screen to scroll downwards and reprint the game boards below the previous game board and print statements, and in an attempt to print the game boards in a cleaner enviornment, the clear function is used to clear the terminal after each turn cycle and it was found that the game scrolled down one line and the clear function only clears the terminal area visible to the user, and thus after each turn cycle the game would print a new game board, leaving the title line repeatedly in the upper lines of the terminal. After discussing this with my mentor we increased the size of the terminal and this issue has been irradicated as a result, however on the standard sized terminal this issue will remain.
+ - It was noted while developing this game that the console or terminal was crowded and causing the game screen to scroll downwards and reprint the game boards below the previous game board and print statements, and in an attempt to print the game boards in a cleaner enviornment, the clear function has been implemented to clear the terminal after each turn cycle and it was found that with all the required content that the game page scrolled down by one line and the clear function only clears the terminal area visible to the user, and thus after each turn cycle the game would print a new game board, leaving the title line repeatedly in the upper lines of the terminal. After discussing this with my mentor we increased the size of the terminal and this issue has been rectified as a result, however on the standard sized terminal this issue will remain.
 
 
 ## __Deployment__
@@ -189,89 +187,95 @@ The live link to the game can be found <a href="https://brian-stritch-p3-battles
 
 
       - ##### __What they don’t know they need:__ 
-        -	A fun but competitive game that is easy to play and offers feedback by way of the seek and destroy function to make the user sense that the computer is operating such as a human player would which is enjoyable for the user..
-        -	A Quiz to challenge and entertain the user.        
+        -	A fun but competitive game that is easy to play and offers feedback by way of the seek and destroy function to make the user sense that the computer is operating such as a human player would which is enjoyable for the user.
+        -	A challenging logic based startegy game with varying difficulty levels and the ability to record high scores.        
 
   - #### __Features and Content__
-    - __Example__: A user wishes to play a challenging logic based game.. 
-      - ![scope Diagram](/assets/readme/readme-images/scope.JPG)
+    - __Example__: A user wishes pass time and enjoy an competitive logical strategy game. 
+      - ![scope Diagram](/readme-images/scope.JPG)
     
 
 - ### __Strategy__
-    -	To create an entertaining quiz game for the user.
-    - The ability to select different game types depending on interests and age.
-    - The aim is to offer an entertaining and informative quiz game that caters for a multitude of user types.
-    - To offer an enticing Peppa Pig quiz game for young children with an interest in Peppa Pig.
-    - To offer an interesting quiz game based on the hit RTE crime drama Love/Hate for adolescents and adults with an interest in   the Love/Hate crime drama.
-    - To offer an enticing Music trivia quiz game for all ages of users with an interest in Music.
-    - To provide the users with facts relating to the relevant questions asked and the correct answers for these questions.
+    -	To create a competitive strategy game for the user.
+    -	The aim is to offer the user a game that caters for a multitude of user difficulty levels.
+    -	To allow the computer to play defensively once a torpedo strikes its target and then targets the surrounding cells in order to sink the users ship, which brings an AI feel or a sense of human interaction to the computers decisive actions.
+    -	To allow the user to input their name for a personalised experience and to add the users name and score to the high score’s leader board, should their score qualify.
+
 
   - #### __Relevance of Content__
-      - The content will be relevant, as the game types offered to the user are directly related to the game types. The game will be easy to navigate, it will be click and go to where you want to get to. The majority of the game will be structured on the one page with the content required being showed and the unused content hidden, until required by the user or at differing intervals of the relevant game types.
+      - The content is relevant as the user can choose an area of the map to target and hope to be successful in sinking the computers ships.
 
   - #### __Why is it special?__    
-      - This quiz game is special in that it offers an easy-to-use platform which is easy to navigate through and is both entertaining and educational.
-  Future Developments of the game could include the addition of game types to expand the platform. 
+      - This quiz game is special in that it offers an AI like behaviour for the computer should any of its randomly selected target locations successfully hit their target.
+Future Developments of the game could include the addition of game types to expand the platform.  i.e : Space Battleships
+ 
   - #### __Why would you want this?__
-    - As the game content is limited the user may grow tired of the available questions or the content available and the addition of new content in future updates will help to keep the content relevant to the user and may keep the user interacting with the game. 
+    - As this game offers a selection of difficulty levels and allows the computer to fight back and seek and destroy the users battleships, this makes the game competitive and it is a race between the user and the computer as to who will sink the others battleships and win the game.  
 
   - #### __What makes a great experience__
-    -	The ability to view all your favourite games in the one place. 
-    -	Having the personal choice of which game you want to play. 
-    -	The ability to view the current scores as you play the game. 
-    -	Having the correct answer highlighting and an informative message displaying content relative data pertaining to the questions asked. 
-    -	The ability to add more game types in future updates of the game to offer the user more content and keep the quiz game relevant to the user. 
-  
+    -	The ability enter your name for a personalised experience. 
+  	- Having the choice of which difficulty level you want to play. 
+    -	The ability to view the current scores, remaining torpedoes, and remaining ships as you play the game. 
+  	- The ability to see which cells have been targeted and successful as marked with “@”, the unsuccessful torpedoes fired marked with “X”, and the available cells remaining marked with “ . “ which allows the user to differentiate between the types of cell markings. 
+    -	The ability to add more game types and difficulty levels in future updates of the game to offer the user more of a selection. 
+   
   - #### __What can a user expect?__
       - __Does it offer me what I want__
-            - Yes, to have the ability to view all your favourite games on offer.  
+            - Yes, to have the ability to play a competitive logic based strategy game.   
       - __As a user I expect to see__
-            - Visually, the game screen backgrounds are decorated with images relating to the current game selection.
-      - __Can I contact somebody?__ 
-            - Yes, there are social media links found in the footer to contact the developer. 
-      - __What can I learn?__ 
-            - Each question has an informative message displayed relating to its correct answer. 
+            - Visually, the game boards indicate the level of difficulty as the higher the difficulty level the larger the game board size, and the users ships are visible however the computers ships remain hidden.
+      
 
-
-- ### __Structure__ 
+- ### __Structure__   
+    #### __Information Architecture (IA)__ 
+     - #### A basic tree structure layout .     
+        ![Structure layout](/readme-images/stucture-diagram.JPG)   
   
-  #### __Information Architecture (IA)__ 
-    ##### A basic tree structure layout . 
-     ![Structure layout](/assets/readme/readme-images/structure.JPG)
 
-    - __Interaction Design (IXD)__ 
-      - The first area the user will encounter is the quiz Entry screen, where an enter button and rules button are located at the lower central area of the page. On clicking the enter button the user will be displayed a choice of game types. On clicking the rules button, a modal is displayed containing the rules of the game.
-      - The game selection screen displays large images of the game types and a button to select the game type is located below each image. 
-      - Once the user selects which game type they wish to play, the relevant game background and styles are applied and a display box which housed the question box and answer buttons is displayed in the central area of the page. A start button is displayed for the user to initiate the game start function to display a question and the four possible answers relating to the question.   
-      - On clicking the selected answer the correct answer button changes to green and the incorrect answer buttons change to red to give the user an immediate indication of the truth of their answer choice, and the game displays an informative message to the user relating to the question asked and the correct answer. The answer buttons then disappear to reveal the next button to take the user to the next question. 
-      - A correct and incorrect answer tally is displayed in the lower right and left areas of the screen respectively which increments the answer tally depending on whether the user answers correctly or incorrectly.
-      - Should the user wish to leave the game an exit button is located on the lower central area of the screen which redirects the user to the entry screen where the user can begin their navigation through the game again.
-      - On completing the quiz an end screen is displayed with an alternative background image and displays a message to the user displaying the correct score out of 10.
-      - The user can then decide whether they wish to restart the current game or exit to the game selectors screen to choose a different game.
-      - The buttons throughout the game feature a hover feature so the user can instantly see their current selection prior to clicking the selected button.
-      - Each social media link also has a hover effect so the user knows the link is active and it will take the user to the relevant platform requested. 
+    - ### __Interaction Design (IXD)__ 
+      - #### __Welocome Screen__
+        - The first area the user will encounter is the welcome message screen, where the user is prompted to enter their name. On entering their name, the user will be displayed a choice of game difficulty levels with three choices, 1. Beginner, 2. Intermediate, 3. Advanced. Once the user selects their preferred game difficulty level the game then progresses to the rules and instructions page.
 
-  
- 
+          ![Game welcome screen](/readme-images/welcome-screen.JPG) 
+
+      - #### __Rules and Instructions screen__
+        - The rules and instructions page describes the game and how it should be played and describes the game display areas and information printed in the game area. The user is prompted to press enter to play the game allowing the user to control the progression to the game screen, to allow the user sufficient time to read and understand the game rules and instructions.
+
+          ![Game rules and instructions screen](/readme-images/instructions-and-rules-page.JPG)
+
+      - #### __Game Screens__
+        - Once the user progresses to the game screen, the relevant game board size is printed in relation to the difficulty level chosen by the user, the users ships are randomly placed and are displayed to the user, and the computers ships are randomly placed and hidden from the user.
+        - The users current score is displayed above the users gameboard, and the computers current score is displayed above the computers game board.
+        - The users and computers remaining ammunition is displayed beneath the relevant game board and the users and computers remaining ships are displayed beneath the relevant game boards.
+        - The user is then prompted to enter the row and column numbers to pinpoint their target destination on the computers game board.
+        - Once the user takes their guess, the users guess is shown to the user to verify the correct input, and the result of their choice is displayed (whether a hit or a miss), and the computer then takes its turn.
+        - Once the computer takes its turn, the computers guess and the results of their choice are shown to the user.
+        - The game continues until one of the following conditions is met:
+          -	All the users ships have been sunk.
+          -	All the computers ships have been sunk.
+          -	The user and computer have no ammunition remaining.
+        - Should the user wish to leave the game an exit keyword has been programmed into the game so at any of the input fields the user can exit the game simply by typing the exit keyword into the terminal. 
+          - __Game difficulty level 1__
+          ![Game level 1 screen](/readme-images/level-1-game.JPG)
+          - __Game difficulty level 2__ 
+          ![Game level 2 screen](/readme-images/level-2-game.JPG)
+          - __Game difficulty level 3__
+          ![Game level 3 screen](/readme-images/level-3-game.JPG) 
+
+      - #### __Welocome Screen__
+        - On completing the game an end screen is displayed where the user is displayed a message indicating who the winner of the game was and the high scores leader board is displayed. Should the users score qualify for a place on the top 5 leader board, the users name and score will appear in the statistics. 
+        - The user is then prompted to press the enter key to restart the game.
+         ![Game End screen](/readme-images/end-game-screen.JPG) 
+
+
  - ### __Skeleton__
 
-    - Below is a set of wireframes created on balsamiq illustrating the Entry screen, game selection screen, Peppa pig game screen, Peppa Pig game end screen, Love/Hate game screen, Love/Hate game end screen, Music game screen, and Music game end screen.
-      - The Initial Game Entry screen
-         ![Entry Screen Wireframe from Balsamiq](/assets/readme/wireframe/entry-screen.JPG)
-      - The Game selection screen
-         ![Selectors screen Wireframe from Balsamiq](/assets/readme/wireframe/selectors-screen.JPG)
-      - The Peppa Pig Game Screen
-         ![Peppa Pig Game Screen Wireframe from Balsamiq](/assets/readme/wireframe/peppa-game-screen.JPG)
-      - The Peppa Pig Game End Screen
-         ![Peppa Pig End Game Screen Wireframe from Balsamiq](/assets/readme/wireframe/peppa-game-end-screen.JPG)
-      - The Love/Hate Game Screen
-         ![Love/Hate Game Screen Wireframe from Balsamiq](/assets/readme/wireframe/love-hate-game-screen.JPG)
-      - The Love/Hate Game End Screen
-         ![Love/Hate Game End Screen Wireframe from Balsamiq](/assets/readme/wireframe/love-hate-game-end-screen.JPG)
-      - The Music Game Screen
-         ![Music Game Screen Wireframe from Balsamiq](/assets/readme/wireframe/music-game-screen.JPG)
-      - The Music Game End Screen
-         ![Music Game Screen Wireframe from Balsamiq](/assets/readme/wireframe/music-game-end-screen.JPG)
+    - Below is a simple wireframe created on balsamiq illustrating the game screen deployed on a terminal in heroku.
+      - __The game screen__
+
+        ![Wireframe from Balsamiq](/readme-images/battleship-wireframe.JPG)
+     
+      
  
 
 

@@ -29,7 +29,6 @@ Global variables required for use in multiple game functions
 
 user = ''
 level = ''
-spaces = ('    ')
 users_score = 0
 computers_score = 0
 game_board = []
@@ -223,13 +222,12 @@ def init_game_boards(user):
 def print_game_board(user):
     """
     Function to print gameboard to console after the
-    positions have been assigned for the users and computers ships.the function
-    also prints the two game boards inline for the user to visually see
-    both boards simultaniously throughout the game.
+    positions have been assigned for the users and computers ships.
+    The function also prints the two game boards inline for the user
+    to visually see both boards simultaniously throughout the game.
     """
     global users_score
     global computers_score
-    global spaces
     if level == '1':
         column_nums = (
             '                 Columns:' +
@@ -351,7 +349,7 @@ def print_game_board(user):
 def random_row(game_board):
     """
     Function to return random row position within the game board
-    to position ships
+    to position the ships and for use in computers selections
     """
     return randint(1, len(game_board[0]) - 1)
 
@@ -359,7 +357,7 @@ def random_row(game_board):
 def random_col(game_board):
     """
     Function to return random column position within the game board
-    to position ships
+    to position ships the ships and for use in computers selections
     """
     return randint(1, len(game_board[0]) - 1)
 
@@ -426,10 +424,16 @@ def pick_ship_coordinates(a_game_board):
     global computers_ships_list
 
     def ship_row_func(a_game_board):
+        """
+        function to generate random row number for assigning ship locations
+        """
         ship_row1 = random_row(a_game_board)
         return ship_row1
 
     def ship_col_func(a_game_board):
+        """
+        function to generate random col number for assigning ship locations
+        """
         ship_col1 = random_col(a_game_board)
         return ship_col1
 
@@ -547,6 +551,8 @@ def place_ship(char, a_game_board):
     computers ship list relevant to each game board,
     and direction depending on value stored in random
     direction variable.
+    direction 1 = vertical orientation
+    direction 2 = horizontal orientation
     """
     global level
     global ships_list
@@ -567,7 +573,6 @@ def place_ship(char, a_game_board):
                         if ship and ship_ and ship2_ not in ships_list:
                             direction = random_orientation()
                             if direction == 1:
-                                # north - south direction
                                 a_game_board[ship_row - 1][
                                     ship_col - 1
                                     ] = '|$|'
@@ -579,7 +584,6 @@ def place_ship(char, a_game_board):
                                 return ship, ship2_
 
                             elif direction == 2:
-                                # east - west direction
                                 a_game_board[ship_row - 1][
                                     ship_col - 1
                                     ] = char
@@ -598,7 +602,6 @@ def place_ship(char, a_game_board):
                                 computers_ships_list:
                             direction = random_orientation()
                             if direction == 1:
-                                # north - south direction
                                 a_game_board[ship_row - 1][
                                     ship_col - 1
                                     ] = ' . '
@@ -610,7 +613,6 @@ def place_ship(char, a_game_board):
                                 return ship, ship2_
 
                             elif direction == 2:
-                                # east - west direction
                                 a_game_board[ship_row - 1][
                                     ship_col - 1
                                     ] = ' . '
@@ -624,13 +626,14 @@ def place_ship(char, a_game_board):
 
 def location_of_ship(ship, place):
     """
-    Function to append the users and computers
-    ship locations to a variable for the purpose
+    Function to store the users and computers
+    ship locations to variables for the purpose
     of checking the ships positions in relation
-    to the users guess. The use of global variables
-    allows for the other functions in the program
-    to access the variables once the data has been
-    appended to the variables.
+    to the users and computers guesses. The use
+    of global variables allows for the other
+    functions in the program to access and manipulate
+    the variables once the data has been
+    stored to the variables.
     """
     ships = list(place)
     global ship_A
@@ -942,8 +945,8 @@ def users_guess(user):
 
 def check_num_input(num_input):
     """
-    Function to verify that the user input an
-    integer as a value for targeting the computer
+    Function to verify that the user input is an
+    integer as this value is used for targeting the computer
     and displays a message to the user displaying
     the character they input if not an integer
     """
@@ -966,6 +969,8 @@ def computers_guess():
     and to check guess against the players ship locations
     to determine result. Additional functionality to
      behave like AI if shots fired on target.
+     computer_hit 1 = random guess function
+     computer_hit 2 = seek and destroy function to target adjacent cells
     """
 
     global computer_hit_attempt
@@ -1125,11 +1130,10 @@ def computers_guess():
         computer_random_guess()
 
     elif computer_hit == 2:
-
         def seek_and_destroy():
             """
             function to act like AI personality
-            and seek adjacent columns to destroy
+            and seek adjacent rows and columns to destroy
             users ships
             """
             global computer_hit_attempt
@@ -1463,7 +1467,7 @@ def print_board_char(hit, guess_row, guess_col):
     """
     Function to increment scores and append the
     hit or miss locations to the relevant game
-    boards, dependant on the data provided when
+    boards location, dependant on the data provided when
     called.
     """
     global users_score
@@ -1552,7 +1556,7 @@ def high_scores():
     """
     global user
     global users_score
-    global level    
+    global level
 
     new_row = user, users_score, level
     worksheet_to_update = SHEET.worksheet('players_scores')
