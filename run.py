@@ -1152,7 +1152,7 @@ def computers_guess():
                 while True:
                     if '1' not in computers_last_row and \
                             hit_row1 not in computers_used_guess \
-                            and row > 0 and row <= 4:
+                            and row > 1 and row <= 4:
                         computer_guess_hit = [row - 1, col]
                         computers_last_row.append('1')
                         break
@@ -1166,7 +1166,7 @@ def computers_guess():
 
                     if '3' not in computers_last_row and \
                             hit_col1 not in computers_used_guess \
-                            and col > 0 and col <= 4:
+                            and col > 1 and col <= 4:
                         computer_guess_hit = [row, col - 1]
                         computers_last_row.append('3')
                         break
@@ -1185,7 +1185,7 @@ def computers_guess():
                 while True:
                     if '1' not in computers_last_row and \
                             hit_row1 not in computers_used_guess \
-                            and row > 0 and row <= 6:
+                            and row > 1 and row <= 6:
                         computer_guess_hit = [row - 1, col]
                         computers_last_row.append('1')
                         break
@@ -1199,7 +1199,7 @@ def computers_guess():
 
                     if '3' not in computers_last_row and \
                             hit_col1 not in computers_used_guess \
-                            and col > 0 and col <= 6:
+                            and col > 1 and col <= 6:
                         computer_guess_hit = [row, col - 1]
                         computers_last_row.append('3')
                         break
@@ -1218,7 +1218,7 @@ def computers_guess():
                 while True:
                     if '1' not in computers_last_row and \
                             hit_row1 not in computers_used_guess \
-                            and row > 0 and row <= 9:
+                            and row > 1 and row <= 9:
                         computer_guess_hit = [row - 1, col]
                         computers_last_row.append('1')
                         break
@@ -1232,7 +1232,7 @@ def computers_guess():
 
                     if '3' not in computers_last_row and \
                             hit_col1 not in computers_used_guess \
-                            and col > 0 and col <= 9:
+                            and col > 1 and col <= 9:
                         computer_guess_hit = [row, col - 1]
                         computers_last_row.append('3')
                         break
