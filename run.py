@@ -29,6 +29,7 @@ Global variables required for use in multiple game functions
 
 user = ''
 level = ''
+spaces = ('    ')
 users_score = 0
 computers_score = 0
 game_board = []
@@ -228,6 +229,7 @@ def print_game_board(user):
     """
     global users_score
     global computers_score
+    global spaces
     if level == '1':
         column_nums = (
             '                 Columns:' +
@@ -678,7 +680,6 @@ def users_guess(user):
     global computers_last_row
 
     while bullets > 0:
-        print(computers_ships_list)
         print(
             f" {user}'s torpedoes: {bullets}/20            " +
             f"      Computers torpedoes : {computers_bullets}/20"
@@ -1551,7 +1552,7 @@ def high_scores():
     """
     global user
     global users_score
-    global level
+    global level    
 
     new_row = user, users_score, level
     worksheet_to_update = SHEET.worksheet('players_scores')
